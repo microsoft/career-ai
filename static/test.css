@@ -1,0 +1,22 @@
+label, input, textarea {
+    display: block;
+}
+
+.input-group {
+    margin-bottom: 24px;
+}
+
+label {
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+textarea {
+    width: 400px;
+    height: 200px;
+    resize: none;
+}
+
+input {
+    width: 400px;
+}
