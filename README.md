@@ -1,21 +1,13 @@
 # Project
 
-1. python3 -m venv env
-2. On Mac/Linux: source env/bin/activate
-On Windows: env\Scripts\activate.bat
-Install the required packages: pip install -r requirements.txt
+## Getting started
 
-
-
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
-
-As the maintainer of this project, please make a few updates:
-
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+1. `python3 -m venv env` to create virtual environment
+2. Activate the virtual environment 
+   - On Mac/Linux: `source env/bin/activate`
+   - On Windows: `env\Scripts\activate.bat`
+3. Install the dependencies by running `python3 -m pip install -r requirements.txt`
+4. Start the app by running `python3 app.py`
 
 ## Contributing
 

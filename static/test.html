@@ -1,0 +1,59 @@
+<html>
+<head>
+    <link rel="stylesheet" href="/test.css"/>
+</head>
+<body>
+<form id="form">
+    <div class="input-group">
+        <label>Enter GPT instance name:</label>
+        <input type="text" name="account"/>
+    </div>
+    <div class="input-group">
+        <label>Enter GPT model name:</label>
+        <input type="text" name="model"/>
+    </div>
+    <div class="input-group">
+        <label>Enter API key:</label>
+        <input type="text" name="apikey"/>
+    </div>
+
+    <div id="response"></div>
+
+    <div class="input-group">
+        <label>Enter prompt:</label>
+        <textarea name="prompt" id="prompt"></textarea>
+    </div>
+
+
+    <button type="button" id="submit">Submit</button>
+</form>
+
+<script>
+    document.getElementById('submit').addEventListener('click', () => {
+        const payload = {};
+
+        const formData = new FormData(document.getElementById('form'));
+        Array.from(formData.entries()).forEach(value => {
+            payload[value[0]] = value[1];
+        })
+
+        fetch('/ask', {
+            method: 'post',
+            body: JSON.stringify(payload),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => response.text()).then((text) => {
+            document.getElementById('response').innerHTML = `${text}`;
+
+            const promptInput = document.getElementById('prompt');
+            promptInput.value = '';
+            setTimeout(() => promptInput.focus(), 100);
+        }).catch(console.log)
+
+    });
+
+</script>
+</body>
+</html>
