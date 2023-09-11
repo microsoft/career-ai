@@ -1,5 +1,12 @@
 # Project
 
+1. python3 -m venv env
+2. On Mac/Linux: source env/bin/activate
+On Windows: env\Scripts\activate.bat
+Install the required packages: pip install -r requirements.txt
+
+
+
 > This repo has been populated by an initial template to help get you started. Please
 > make sure to update the content to build a great experience for community-building.
 
