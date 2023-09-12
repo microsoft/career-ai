@@ -23,7 +23,10 @@ def build_model():
         message_history.append_system_message(conversation_id, payload['system-prompt'])
     else:
         conversation_id = payload['conversationId']
-        prompt = payload['prompt'].replace("{0}", payload['user-response'])
+        if payload['prompt'] == "":
+            prompt = payload['user-response']
+        else:
+            prompt = payload['prompt'].replace("{0}", payload['user-response'])
         message_history.append_user_message(conversation_id, prompt)
 
     try:
