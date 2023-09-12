@@ -31,7 +31,7 @@ class OpenAI():
         )
 
         json_obj = json.loads(response.text)
-        if response.status_code is not 200:
+        if response.status_code != 200:
             raise Exception(json_obj['message'])
 
         message = json_obj['choices'][0]['message']['content']
