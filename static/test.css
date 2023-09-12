@@ -20,3 +20,8 @@ textarea {
 input {
     width: 400px;
 }
+
+#response {
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
