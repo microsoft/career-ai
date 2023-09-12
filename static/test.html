@@ -17,19 +17,21 @@
         <input type="text" name="apikey"/>
     </div>
 
-    <div id="response"></div>
 
     <div class="input-group">
         <label>Enter prompt:</label>
         <textarea name="prompt" id="prompt"></textarea>
     </div>
 
+    <input id="conversationId" name="conversationId" type="hidden"/>
+
+    <div id="response"></div>
 
     <button type="button" id="submit">Submit</button>
 </form>
 
 <script>
-    document.getElementById('submit').addEventListener('click', () => {
+    document.getElementById('submit').addEventListener('click', async () => {
         const payload = {};
 
         const formData = new FormData(document.getElementById('form'));
@@ -37,22 +39,32 @@
             payload[value[0]] = value[1];
         })
 
-        fetch('/ask', {
+        const response = await fetch('/ask', {
             method: 'post',
             body: JSON.stringify(payload),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
-        }).then((response) => response.text()).then((text) => {
-            document.getElementById('response').innerHTML = `${text}`;
+        });
+
+        if (response.ok) {
+            const json = await response.json();
+            document.getElementById('conversationId').value = json.conversationId;
+            document.getElementById('response').innerHTML = json.response;
 
             const promptInput = document.getElementById('prompt');
             promptInput.value = '';
             setTimeout(() => promptInput.focus(), 100);
-        }).catch(console.log)
+
+            return;
+        }
+
+        const responseText = await response.text();
+        document.getElementById('response').innerHTML = responseText;
 
     });
+
 
 </script>
 </body>
