@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Nova+Mono&family=Seaweed+Script&display=swap');
+
+body {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+button {
+    padding: 0;
+    border: none;
+    background: none;
+    font-family: 'Nova Mono', monospace;
+}
+
+footer{
+    background-color: black;
+    padding: 20px;
+    margin-top: 2.5%;
+}
+
+#canvas{
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:-1;
+}
+
+h1{
+    font-family: 'Major Mono Display', monospace;
+    font-size: 40pt;
+    padding: 40px 0 0 0;
+    z-index: 2;
+}
+
+.center-adjacent{
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center{
+    width: 700px;
+    height: 500px;
+    border-radius: 25px;
+    background: rgba(192, 192, 192, 0.37);
+    margin: 2% auto;
+    z-index: 1;
+    display: flex;
+    border: 4px solid #757575;    
+}
+
+
+
+p{
+    z-index: 2;
+    opacity: 100%;
+    padding: 5%;
+}
+
+.sample {
+	font-size:4em;
+	text-align:center;
+	line-height:1em;
+	font-weight:bold;
+	color: transparent;
+	background: repeating-linear-gradient(0deg, #757575 0.1em, #9E9E9E 0.2em, #E8E8E8 0.3em, #9E9E9E 0.4em, #757575 0.5em); 
+	-webkit-background-clip: text;
+}
+
+.career-prompt{
+    font-family: 'Nova Mono', monospace;
+    font-size: 18pt;
+}
+
+.submit-button{
+    width: 100px;
+    height: 30px;
+    margin-left: 10px;
+    background-color: rgb(94, 152, 181, 0.80);
+    border-radius: 15%;
+}
+
+#prompt {
+    float: left;
+    margin-left: 5%;
+    height: 30px;
+    width: 400px
+
+}
+
+
+
+
+
+

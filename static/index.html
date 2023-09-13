@@ -1,7 +1,37 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<canvas id="canvas"></canvas>
 <head>
-    <body>
-Hello, World!
-</body>
+    <meta charset="UTF-8">
+    <title>Career Craft</title>
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="app.js"></script>
+    <link rel="shortcut icon" href="./images/CareerCraft.png">
+
 </head>
+<body>   
+    <div class="center-adjacent"> 
+        <h1 class="sample">Career Craft</h1>
+        <div class="center" id="prompt-center">        
+            <div class="input-group">
+                <p class="career-prompt">Hi Adventurer! What career are we exploring today?</p>
+                <input type="text" id="prompt" name="prompt"></input>
+                <button class="submit-button" onclick="toggle(this);postCareer(prompt)">Lets Go!</button>
+            </div>
+        </div>
+        <div class="center" id="game-center" style="display: none">
+            <p id="chatGPTResp"></p>
+            <button id="option1" onclick="postButton(1)">Option 1</button>
+            <button id="option2" onclick="postButton(2)">Option 2</button>
+            <button id="option3" onclick="postButton(3)">Option 3</button>
+            <button class="submit-button" onclick="toggle(this)">Want to try a Different Career?</button>
+        </div>
+        <button onclick="toggleTTS()">Turn on Speech to Text</button>
+    </div>
+    <footer>
+        <img src="./images/CareerCraftLogo1.png" alt="Career Craft logo">
+    </footer>
+</body>
+
 </html>
