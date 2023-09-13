@@ -59,7 +59,6 @@ def static_file(path):
 def parse_gpt_response(response):
     
     splitted_body = re.split('(\*\*.*?\*\*)', response)
-    print(splitted_body)
     outcome_idx = splitted_body.index("**Outcome:**")+1
     scenario_idx = splitted_body.index("**Scenario:**")+1
     options_idx = splitted_body.index("**Options:**")+1
@@ -67,10 +66,6 @@ def parse_gpt_response(response):
     outcome_str = splitted_body[outcome_idx]
     scenario_str = splitted_body[scenario_idx]
     options_str = splitted_body[options_idx]
-
-    print("Outcome: " + outcome_str)
-    print("Scenario: " + scenario_str)
-    print("Options: " + options_str)
 
     splitted_options = re.split('([1-9]\.)', options_str)
 
