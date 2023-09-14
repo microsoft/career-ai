@@ -54,18 +54,23 @@ let postCareer = async () => {
     // Now you can work with the response data
     console.log('Response from the API:', data);
 
-    conversationId = data['conversationId']
+    conversationId = data['conversationId'];
 
-    console.log(conversationId)
+    console.log(conversationId);
 
     // options picked up here
-    optionButton1.textContent = "option1 from chatgpt"
-    optionButton2.textContent = "option2 from chatgpt"
-    optionButton3.textContent = "option3 from chatgpt"
+    /*optionButton1.textContent = "option1 from chatgpt";
+    optionButton2.textContent = "option2 from chatgpt";
+    optionButton3.textContent = "option3 from chatgpt";*/
 
-    console.log(optionButton1)
-
+    //updateParagraph(response_json, outcomeParagraph, "outcome")
+    updateParagraph(response_json, "outcomeParagraph", "outcome")
+    updateParagraph(response_json, "scenarioParagraph", "scenario")
+    updateOption(response_json, "option1Text", 0);
+    updateOption(response_json, "option2Text", 1);
+    updateOption(response_json, "option3Text", 2);
     // You can return the data or do further processing here
+
     return data;
   } catch (error) {
     console.error('Error posting career data:', error);
@@ -75,12 +80,40 @@ let postCareer = async () => {
 
 let postButton = optionNum => {
   //post logic here
+  console.log("Option " + optionNum + " selected")
+  //Set user_response = optionNum
 }
 
 let toggleTTS = () => {
   //TTS logic here
   TTsEnabled = True
 }
+
+//This is the json_object we need to emulate with the backend parser
+var response_json = {
+  "outcome": "You have chosen to pursue a career as a Luchador, a professional wrestler in the Mexican wrestling tradition. Throughout your journey, you will face various challenges that will help you develop essential life skills, such as discipline, physical fitness, teamwork, and showmanship. Get ready to step into the ring and embark on an exciting career!",
+  "scenario": "You arrive at the wrestling gym for your first day of training. The gym is filled with other aspiring luchadores, each eager to prove themselves. The head trainer, El Maestro, calls everyone together and begins the session.",
+  "options": [
+    "1. Ask El Tigre for more guidance on how to perform the move correctly.", 
+    "2. Watch other luchadores practicing the move and try to imitate their technique.", 
+    "3. Dive right in and attempt the move without any additional assistance."
+  ]
+}
+
+function updateParagraph(response_json, paragraphID, mkey){
+  
+  var optionText = document.getElementById(paragraphID);
+  optionText.textContent = mkey.toUpperCase() + ":\n" + response_json[mkey];
+}
+
+function updateOption(response_json, optionid, index){
+  var optionText = document.getElementById(optionid);
+  //console.log(response_json.options[index]);
+  var opText = response_json.options[index].split(index+1)[1].substring(1);
+  optionText.textContent = opText;
+}
+
+
 
 
 //For particle effect
