@@ -20,7 +20,7 @@ def home():
 def build_model():
     
     payload = json.loads(request.data)
-    print(payload)
+    #print(payload)
     conversation_id = None
     if payload['conversationId'] == "":
         conversation_id = str(uuid4())
@@ -38,8 +38,8 @@ def build_model():
         response = OpenAI(Config.instance, Config.model, Config.apiKey).complete(messages)
         message_history.append_assistant_message(conversation_id, response)
 
-        if "**Outcome:**" in response or "**Scenario:**" in response or "**Options**" in response:
-            parse_gpt_response(response)
+        #parsed_response = parse_gpt_response(response)
+        print(response)
 
         return {
             'conversationId': conversation_id,
@@ -59,7 +59,42 @@ def static_file(path):
 # **Outcome: this is the outcome** and when it does
 # logic goes out of whack. 
 def parse_gpt_response(response):
+
+     # Define regular expressions for matching the different markdown formats
+    outcome_pattern = r'\*\*Outcome:\*\*\s*(.*?)\.|Outcome:\s*(.*?)\.|\*\*Outcome:\*\*\s*(.*?)$'
+    scenario_pattern = r'\*\*Scenario:\*\*\s*(.*?)\.|Scenario:\s*(.*?)\.|\*\*Scenario:\*\*\s*(.*?)$'
+    options_pattern = r'\*\*Options:\*\*\s*(.*?)\.|Options:\s*(.*?)\.|\*\*Options:\*\*\s*(.*?)$'
+
+    # Initialize variables to store the extracted information
+    outcome = None
+    scenario = None
+    options = []
+
+    # Match and extract outcome, scenario, and options
+    outcome_match = re.search(outcome_pattern, text, re.IGNORECASE)
+    if outcome_match:
+        outcome = outcome_match.group(1) or outcome_match.group(2) or outcome_match.group(3)
+
+    scenario_match = re.search(scenario_pattern, text, re.IGNORECASE)
+    if scenario_match:
+        scenario = scenario_match.group(1) or scenario_match.group(2) or scenario_match.group(3)
+
+    options_match = re.search(options_pattern, text, re.IGNORECASE)
+    if options_match:
+        options_text = options_match.group(1) or options_match.group(2) or options_match.group(3)
+        options = [option.strip() for option in options_text.split(',')]
+
+    # Create a dictionary to store the extracted information
+    result = {
+        'Outcome': outcome,
+        'Scenario': scenario,
+        'Options': options
+    }
+
+    # Convert the dictionary to a JSON string and return it
+    return json.dumps(result, indent=4)
     
+    '''
     splitted_body = re.split('(\*\*.*?\*\*)', response)
     outcome_idx = splitted_body.index("**Outcome:**")+1
     scenario_idx = splitted_body.index("**Scenario:**")+1
@@ -79,6 +114,7 @@ def parse_gpt_response(response):
     json_body = {"outcome": outcome_str,"scenario": scenario_str, "options":options }
     
     return json_body
+'''
 
 
 if __name__ == '__main__':

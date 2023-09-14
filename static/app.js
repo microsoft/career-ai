@@ -56,6 +56,15 @@ function askAI(profession) {
 let postButton = optionNum => {
     //post logic here
     console.log("PostButton " + optionNum);
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/ask', true);
+    xhr.setRequestHeader('Content-Type','application/json;charset=UTF-8');
+    xhr.onreadystatechange = function () {
+    if(xhr.readyState === 4 && xhr.status ===200){
+      const json = JSON.parse(xhr.responseText);
+      console.log(xhr.responseText);
+    }
+  };
 }
 
 let toggleTTS = () => {
@@ -188,6 +197,7 @@ function askFirstPrompt(profession){
 + " Each of your responses will be broken into three parts: Outcome, Scenario, and Options." 
 +"For the scenario responses, provide three multiple-choice options around how the player can react or respond to the scenario or experience that you provided. The player will then choose an option and you will provide an in-depth narrative that describes what will happen next along with the next scenario and three new multiple-choice options that the player can select from."
 +"Each game will be 10 scenarios long with a recap at the end that gives an overview of lessons learned.";
+mprompt = "return your response broken down in three sections: Outcome, Scenario, and Options, in markdown syntax"
 mresponse = ""
 const xhr = new XMLHttpRequest();
   xhr.open('POST', '/ask', true);
@@ -196,11 +206,13 @@ const xhr = new XMLHttpRequest();
     if(xhr.readyState === 4 && xhr.status ===200){
       const json = JSON.parse(xhr.responseText);
       mresponse = json.response;
-      console.log(mresponse);
+      console.log(xhr);
+      var respy = xhr["response"];
+      console.log(JSON.parse(respy).conversationId)
       updateParsable(mresponse)
     }
   };
-  const data = JSON.stringify({'system-prompt': system_prompt, 'user-response': '', 'prompt': '', 'conversationId': ''});
+  const data = JSON.stringify({'system-prompt': system_prompt, 'user-response': '', 'prompt': mprompt, 'conversationId': ''});
   xhr.send(data);
 
    
