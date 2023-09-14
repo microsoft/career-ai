@@ -17,15 +17,53 @@ let toggle = button => {
 
 //send post requests
 let postCareer = prompt => {
-    //post logic here
+  console.log("postcareer")
+    // Get the input element by its ID
+    var inputElement = document.getElementById("prompt");
+    
+    // Get the value entered in the input field
+    var inputValue = inputElement.value;
+    
+    // Get the paragraph element by its ID
+    var paragraph = document.getElementById("chatGPTResp");
+    
+    // Update the paragraph's content with the input value
+    paragraph.textContent = "You chose the career of a " + inputValue + "!";
+    askFirstPrompt(inputValue);
+    //askAI(inputValue);
+
 }
+
+function askAI(profession) {
+  console.log("Attempting to Ask AI for the " + profession + " career");
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/ask', true);
+  xhr.setRequestHeader('Content-Type','application/json;charset=UTF-8');
+  xhr.onreadystatechange = function () {
+    if(xhr.readyState === 4 && xhr.status ===200){
+      const json = JSON.parse(xhr.responseText);
+      console.log(json.response);
+    }
+  };
+
+  const data = JSON.stringify({'profession: ': profession});
+  xhr.send(data);
+  
+}
+
+
 
 let postButton = optionNum => {
     //post logic here
+    console.log("PostButton " + optionNum);
 }
 
 let toggleTTS = () => {
     //TTS logic here
+}
+
+function refreshPage() {
+  location.reload();
 }
 
 
@@ -58,7 +96,7 @@ var Dot = function(x, y, dx, dy) {
 function updtMouse(e) {
   mx = e.x;
   my = e.y;
-  console.log(mx + " " + my);
+  //console.log(mx + " " + my);
 }
 
 function init() {
@@ -138,6 +176,45 @@ function update() {
   }
   requestAnimationFrame(update);
 }
+
+function askFirstPrompt(profession){
+  var system_prompt = "Assume the role of a game with extensive knowledge on career experiences, "
+ + "interactive fiction writing, and narrating life experiences through stories while the user plays the role of the player. Your task is to help a person that has limited learning skills with how to navigate a career by helping them gain useful skillsets through different scenarios. "
+ +" Within your narrated stories, provide suitable names for characters, locations, groups and organizations, events, and items that are connected to the career that the player chooses."
+ +" The game will begin with the player providing a career of "
+ + profession +
+ +" and you will then lead the game by providing various scenarios or experiences that they will experience within that career or career field.";
++" you will provide one scenario per chat and each scenario teaches the player a skill that they will need within the chosen career. Some experiences can include, but are not limited to, role responsibilities within the chosen career, difficult conversations, financial decisions, and other work experiences. "
++ " Each of your responses will be broken into three parts: Outcome, Scenario, and Options." 
++"For the scenario responses, provide three multiple-choice options around how the player can react or respond to the scenario or experience that you provided. The player will then choose an option and you will provide an in-depth narrative that describes what will happen next along with the next scenario and three new multiple-choice options that the player can select from."
++"Each game will be 10 scenarios long with a recap at the end that gives an overview of lessons learned.";
+mresponse = ""
+const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/ask', true);
+  xhr.setRequestHeader('Content-Type','application/json;charset=UTF-8');
+  xhr.onreadystatechange = function () {
+    if(xhr.readyState === 4 && xhr.status ===200){
+      const json = JSON.parse(xhr.responseText);
+      mresponse = json.response;
+      console.log(mresponse);
+      updateParsable(mresponse)
+    }
+  };
+  const data = JSON.stringify({'system-prompt': system_prompt, 'user-response': '', 'prompt': '', 'conversationId': ''});
+  xhr.send(data);
+
+   
+
+}
+
+function updateParsable(mresponse){
+  // Get the paragraph element by its ID
+  var parsable = document.getElementById("parsable");
+    
+  // Update the paragraph's content with the input value
+  parsable.textContent = mresponse
+}
+
 
 init();
 

@@ -18,7 +18,9 @@ def home():
 
 @app.route('/ask', methods=['POST'])
 def build_model():
+    
     payload = json.loads(request.data)
+    print(payload)
     conversation_id = None
     if payload['conversationId'] == "":
         conversation_id = str(uuid4())
