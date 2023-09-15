@@ -150,7 +150,6 @@ var Dot = function (x, y, dx, dy) {
 function updtMouse(e) {
   mx = e.x;
   my = e.y;
-
 }
 
 function init() {
