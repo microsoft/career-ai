@@ -10,5 +10,11 @@ class OpenAI2():
         for i in range(attempts):
             allResponses = openai.ChatCompletion.create(model = self.model, messages = messageContext, n = responses).choices
             for response in allResponses:
-                if all([word in response.message.content for word in requiredWords]):
-                    return response.message.content
+                content = response.message.content
+                content_dict = dict()
+                try:
+                    content_dict = json.loads(content)
+                except:
+                    continue
+                if all([word in content for word in requiredWords]):
+                    return content_dict
