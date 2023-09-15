@@ -18,8 +18,8 @@
         <div class="center" id="prompt-center">
             <div class="input-group">
                 <p class="career-prompt">Hi Adventurer! What career are we exploring today?</p>
-                <input type="text" id="career" name="career"></input>
-                <button class="submit-button" onclick="toggle(this);postCareer(career)">Lets Go!</button>
+                <input type="text" id="prompt" name="prompt"></input>
+                <button class="submit-button" onclick="toggle(this);postCareer(prompt)">Lets Go!</button>
             </div>
         </div>          
         <div class="center center-scenario" id="game-center" style="display: none">
@@ -62,7 +62,7 @@
                 <div></div>
             </div>
         </div>
-        <button id="TTS" onclick="toggle(this)" style="display: none">Want to try a Different Career?</button>
+        <button id="TTS" onclick="refreshPage()" style="display: none">Want to try a Different Career?</button>
         <!-- <button class="TTS" onclick="toggleTTS()">Turn on Text to Speech</button>-->
     </div>
     <footer>

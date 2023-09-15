@@ -60,7 +60,7 @@ let toggle = button => {
 
 //send post requests
 let postCareer = async () => {
-  var careerInput = document.getElementById("career");
+  var careerInput = document.getElementById("prompt");
   console.log("start")
   console.log(careerInput)
   try {
