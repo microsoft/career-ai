@@ -56,7 +56,7 @@ let toggle = button => {
   } else {
     btnElement.style.display = "none";
   }
-}
+
 
 //send post requests
 let postCareer = async () => {
