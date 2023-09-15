@@ -7,9 +7,9 @@
 <h1>Career AI Test Page</h1>
 
 <form id="form">
-    <div class="input-group" id="system-prompt-container">
+    <div class="input-group" id="system_prompt-container">
         <label>System prompt:</label>
-        <textarea name="system-prompt" id="system-prompt" placeholder=""></textarea>
+        <textarea name="system_prompt" id="system_prompt" placeholder=""></textarea>
         <div class="hint">
             Instruct or set the behavior of the assistant.
         </div>
@@ -19,7 +19,7 @@
     <div id="response-container" hidden>
         <div class="input-group">
             <label>User response:</label>
-            <textarea name="user-response" id="user-response" placeholder=""></textarea>
+            <textarea name="user_response" id="user_response" placeholder=""></textarea>
             <div class="hint">
                 User's raw response
             </div>
@@ -72,14 +72,14 @@
                 list += `<li><b>${p.role}</b>: ${p.content}</li>`
             });
 
-            const promptInput = document.getElementById('user-response');
+            const promptInput = document.getElementById('user_response');
             promptInput.value = ``;
             setTimeout(() => promptInput.focus(), 100);
 
             document.getElementById('error').innerHTML = ''
             document.getElementById('response').innerHTML = `<ul>${list}</ul>`
 
-            document.getElementById('system-prompt-container').setAttribute('hidden', true);
+            document.getElementById('system_prompt-container').setAttribute('hidden', true);
             document.getElementById('response-container').removeAttribute('hidden', false);
 
             return;
