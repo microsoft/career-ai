@@ -70,7 +70,6 @@ def build_model():
         message_history.append_system_message(conversation_id, payload['system_prompt'])
         if not(payload['user_response'] == ""):
             message_history.append_user_message(conversation_id, user_response(payload))
-
     else:
         conversation_id = payload['conversationId']
         message_history.append_user_message(conversation_id, user_response(payload))
