@@ -26,6 +26,44 @@ def user_response(payload):
 
     return prompt
 
+def find_valid_response(choices):
+    print(len(choices))
+    for idx in range(len(choices)):
+        choice = choices[idx]["message"]["content"]
+        try:
+           choice_dict = json.loads(choice)
+           return choice_dict
+        except:
+
+            print(f"choice {idx} did not work")
+            return
+        
+    return None
+    
+
+def talk_to_openai(conversation_id,number_of_responses=1):
+    try:
+        messages = message_history.get_messages(conversation_id)
+        valid_response = None
+        while valid_response==None:
+        
+            choices = OpenAI(Config.instance, Config.model, Config.apiKey).complete(messages, number_of_responses=number_of_responses)
+            print(choices)
+            print(len(choices))
+            valid_response = json.dumps(find_valid_response(choices))
+            
+        message_history.append_assistant_message(conversation_id, valid_response)
+
+        return {
+            'conversationId': conversation_id,
+            'response': valid_response,
+            'messages': message_history.get_messages(conversation_id)
+        }
+    except Exception as ex:
+        return str(ex), 500
+    
+
+    
 
 
 @app.route('/ask', methods=['POST'])
@@ -37,23 +75,15 @@ def build_model():
         message_history.append_system_message(conversation_id, payload['system_prompt'])
         if not(payload['user_response'] == ""):
             message_history.append_user_message(conversation_id, user_response(payload))
+
+
     else:
         conversation_id = payload['conversationId']
         message_history.append_user_message(conversation_id, user_response(payload))
 
-    try:
-        messages = message_history.get_messages(conversation_id)
-        response = OpenAI(Config.instance, Config.model, Config.apiKey).complete(messages)
-        message_history.append_assistant_message(conversation_id, response)
+    json_response = talk_to_openai(conversation_id,10)
 
-        return {
-            'conversationId': conversation_id,
-            'response': response,
-            'messages': message_history.get_messages(conversation_id)
-        }
-    except Exception as ex:
-        return str(ex), 500
-
+    
 
 @app.route('/<path:path>')
 def static_file(path):
