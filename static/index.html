@@ -21,20 +21,45 @@
                 <input type="text" id="career" name="career"></input>
                 <button class="submit-button" onclick="toggle(this);postCareer(career)">Lets Go!</button>
             </div>
-        </div>
-        <div class="center" id="game-center" style="display: none">
+        </div>          
+        <div class="center center-scenario" id="game-center" style="display: none">
             <div class="scrollbar" id="style-15">
                 <div class="force-overflow"></div>
                 <h2>Outcome:</h2>
                 <p id="outcome"></p>
                 <h2>Scenario:</h2>
                 <p id="scenario"></p>
-
-                <div class="game-options">
-                    <button class="optionBtn" id="option1" onclick="postButton(1)">Option 1</button>
-                    <button class="optionBtn" id="option2" onclick="postButton(2)">Option 2</button>
-                    <button class="optionBtn" id="option3" onclick="postButton(3)">Option 3</button>
-                </div>
+                <div class="game-options" id="game-div">
+                <button class="optionBtn" id="option1" onclick="postButton(1)">Option 1</button>
+                <button class="optionBtn" id="option2" onclick="postButton(2)">Option 2</button>
+                <button class="optionBtn" id="option3" onclick="postButton(3)">Option 3</button>      
+                </div>                
+            </div>
+        </div>
+        <div class="boxes center" id="boxes" style="display: none">
+            <div class="box">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="box">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="box">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="box">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
         </div>
         <button id="TTS" onclick="toggle(this)" style="display: none">Want to try a Different Career?</button>

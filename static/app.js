@@ -5,11 +5,42 @@ let conversationId = ""
 let TTsEnabled = false
 //Toggle prompt and game divs
 let toggle = button => {
-  let element = document.getElementById("prompt-center");
-  if (element.style.display === "none") {
-    element.style.display = "block";
-  } else {
-    element.style.display = "none";
+    let element = document.getElementById("prompt-center");
+    if (element.style.display === "none") {
+        element.style.display = "block";
+    } else {
+        element.style.display = "none";
+    }
+
+    let btnElement = document.getElementById("TTS");
+    if (btnElement.style.display === "none") {
+        btnElement.style.display = "block";
+    } else {
+        btnElement.style.display = "none";
+    }
+
+    let gameElement = document.getElementById("boxes");
+    if (gameElement.style.display === "none") {
+        gameElement.style.display = "block";
+    } else {
+        gameElement.style.display = "none";
+    }
+  }
+
+  let toggleDoneLoading = () => {
+    let gameElement = document.getElementById("game-center");
+    if (gameElement.style.display === "none") {
+        gameElement.style.display = "block";
+    } else {
+        gameElement.style.display = "none";
+    }
+
+    let loadingElement = document.getElementById("boxes");
+    if (loadingElement.style.display === "none") {
+        loadingElement.style.display = "block";
+    } else {
+        loadingElement.style.display = "none";
+    }
   }
 
   let gameElement = document.getElementById("game-center");
@@ -158,7 +189,7 @@ function updateOption(response_json, optionid, index) {
 
 
 
-//For particle effect
+//For background particle effect
 var cnvs = document.getElementById("canvas");
 cnvs.width = window.innerWidth;
 cnvs.height = window.innerHeight;
@@ -270,3 +301,4 @@ function update() {
 init();
 
 requestAnimationFrame(update);
+
