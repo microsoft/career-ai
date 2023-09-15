@@ -11,12 +11,27 @@ let toggle = button => {
   } else {
     element.style.display = "none";
   }
+
   let gameElement = document.getElementById("game-center");
   if (gameElement.style.display === "none") {
     gameElement.style.display = "block";
   } else {
     gameElement.style.display = "none";
   }
+
+  let btnElement = document.getElementById("TTS");
+  if (btnElement.style.display === "none") {
+    btnElement.style.display = "block";
+  } else {
+    btnElement.style.display = "none";
+  }
+}
+let gameElement = document.getElementById("game-center");
+if (gameElement.style.display === "none") {
+  gameElement.style.display = "block";
+} else {
+  gameElement.style.display = "none";
+}
 }
 
 //send post requests
@@ -96,13 +111,13 @@ var response_json = {
   ]
 }
 
-function updateParagraph(response_json, paragraphID, mkey){
-  
+function updateParagraph(response_json, paragraphID, mkey) {
+
   var optionText = document.getElementById(paragraphID);
   optionText.textContent = mkey.toUpperCase() + ":\n" + response_json[mkey];
 }
 
-function updateOption(response_json, optionid, index){
+function updateOption(response_json, optionid, index) {
   var optionText = document.getElementById(optionid);
   //console.log(response_json.options[index]);
   var opText = response_json.options[index];
@@ -194,7 +209,7 @@ function update() {
     // draw its line to mouse
     let d = Math.sqrt((x - mx) * (x - mx) + (y - my) * (y - my));
     if (d < mouse_ol) {
-      c.strokeStyle = `rgba(100, 180, 255, ${max_ms_opac * (mouse_ol - d) / mouse_ol})`;
+      c.strokeStyle = `rgba(25, 145, 29, ${max_ms_opac * (mouse_ol - d) / mouse_ol})`;
       c.lineWidth = 2;
       c.beginPath();
       c.moveTo(x, y);
@@ -209,7 +224,7 @@ function update() {
       let y1 = dots[j].y;
       let d = Math.sqrt((x1 - x) * (x1 - x) + (y1 - y) * (y1 - y));
       if (d < dots_ol) {
-        c.strokeStyle = `rgba(157, 210, 255, ${max_dots_opac * (dots_ol - d) / dots_ol})`;
+        c.strokeStyle = `rgba(176, 141, 87, ${max_dots_opac * (dots_ol - d) / dots_ol})`;
         c.lineWidth = 1;
         c.beginPath();
         c.moveTo(x1, y1);
