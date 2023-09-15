@@ -129,6 +129,12 @@ p{
     font-size: 18pt;
 }
 
+.career-text{
+    font-family: 'Nova Mono', monospace;
+    font-size: 10pt;
+    padding: 2%
+}
+
 .submit-button{
     width: 100px;
     height: 35px;

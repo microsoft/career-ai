@@ -10,7 +10,7 @@ class OpenAI():
         self.deployment_name = deployment_name
         self.key = key
 
-    def complete(self, messages, temperature=0.7, top_p=0.95, frequency_penalty=0, presence_penalty=0, max_tokens=2048,
+    def complete(self, messages, temperature=0.7, top_p=0.95, frequency_penalty=0, presence_penalty=0, max_tokens=2048, number_of_responses=5,
                  stop=None):
         response = requests.request(
             'post',
@@ -26,13 +26,15 @@ class OpenAI():
                 "frequency_penalty": frequency_penalty,
                 "presence_penalty": presence_penalty,
                 "max_tokens": max_tokens,
-                "stop": stop
+                "stop": stop,
+                "n":number_of_responses
             })
         )
 
         json_obj = json.loads(response.text)
-        if response.status_code is not 200:
+        if response.status_code != 200:
             raise Exception(json_obj['message'])
 
-        message = json_obj['choices'][0]['message']['content']
-        return message
+        # choices = json_obj['choices'][0]['message']['content']
+        choices = json_obj['choices']
+        return choices

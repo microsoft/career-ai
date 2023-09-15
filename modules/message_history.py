@@ -2,10 +2,10 @@ class MessageHistory():
     history = {}
 
     def get_messages(self, conversation_id):
-        if conversation_id in self.history:
-            return self.history[conversation_id]
+        if not (conversation_id in self.history):
+            self.__save_messages__(conversation_id, [])
 
-        return []
+        return self.history[conversation_id]
 
     def append_user_message(self, conversation_id, message):
         messages = self.get_messages(conversation_id)

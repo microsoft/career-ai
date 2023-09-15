@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <canvas id="canvas"></canvas>
+
 <head>
     <meta charset="UTF-8">
     <title>Career Craft</title>
@@ -10,21 +11,24 @@
     <link rel="shortcut icon" href="./images/CareerCraft.png">
 
 </head>
-<body>   
-    <div class="center-adjacent"> 
+
+<body>
+    <div class="center-adjacent">
         <h1 class="sample">Career Craft</h1>
-        <div class="center" id="prompt-center">        
+        <div class="center" id="prompt-center">
             <div class="input-group">
                 <p class="career-prompt">Hi Adventurer! What career are we exploring today?</p>
-                <input type="text" id="prompt" name="prompt"></input>
-                <button class="submit-button" onclick="toggle(this);postCareer(prompt)">Lets Go!</button>
+                <input type="text" id="career" name="career"></input>
+                <button class="submit-button" onclick="toggle(this);postCareer(career)">Lets Go!</button>
             </div>
         </div>          
         <div class="center center-scenario" id="game-center" style="display: none">
             <div class="scrollbar" id="style-15">
                 <div class="force-overflow"></div>
-                <p id="chatGPTResp">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam vestibulum morbi blandit cursus risus at ultrices mi tempus. Amet massa vitae tortor condimentum lacinia quis. Libero justo laoreet sit amet cursus sit amet. Quam quisque id diam vel quam elementum. Pharetra convallis posuere morbi leo urna. Pharetra diam sit amet nisl suscipit adipiscing. Blandit massa enim nec dui nunc mattis. Blandit massa enim nec dui. Fames ac turpis egestas maecenas. Risus at ultrices mi tempus. Volutpat maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam vestibulum morbi blandit cursus risus at ultrices mi tempus. Amet massa vitae tortor condimentum lacinia quis. Libero justo laoreet sit amet cursus sit amet. Quam quisque id diam vel quam elementum. Pharetra convallis posuere morbi leo urna. Pharetra diam sit amet nisl suscipit adipiscing. Blandit massa enim nec dui nunc mattis. Blandit massa enim nec dui. Fames ac turpis egestas maecenas. Risus at ultrices mi tempus. Volutpat maecenas volutpat blandit aliquam etiam erat velit scelerisque in.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam vestibulum morbi blandit cursus risus at ultrices mi tempus. Amet massa vitae tortor condimentum lacinia quis. Libero justo laoreet sit amet cursus sit amet. Quam quisque id diam vel quam elementum. Pharetra convallis posuere morbi leo urna. Pharetra diam sit amet nisl suscipit adipiscing. Blandit massa enim nec dui nunc mattis. Blandit massa enim nec dui. Fames ac turpis egestas maecenas. Risus at ultrices mi tempus. Volutpat maecenas volutpat blandit aliquam etiam erat velit scelerisque in.</p>
-
+                <h2>Outcome:</h2>
+                <p id="outcome"></p>
+                <h2>Scenario:</h2>
+                <p id="scenario"></p>
                 <div class="game-options" id="game-div">
                 <button class="optionBtn" id="option1" onclick="postButton(1)">Option 1</button>
                 <button class="optionBtn" id="option2" onclick="postButton(2)">Option 2</button>
@@ -59,7 +63,7 @@
             </div>
         </div>
         <button id="TTS" onclick="toggle(this)" style="display: none">Want to try a Different Career?</button>
-       <!-- <button class="TTS" onclick="toggleTTS()">Turn on Text to Speech</button>-->
+        <!-- <button class="TTS" onclick="toggleTTS()">Turn on Text to Speech</button>-->
     </div>
     <footer>
         <div class="logo">

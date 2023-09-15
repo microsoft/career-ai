@@ -3,31 +3,46 @@
     <link rel="stylesheet" href="/test.css"/>
 </head>
 <body>
+
+<h1>Career AI Test Page</h1>
+
 <form id="form">
-    <div class="input-group">
-        <label>Enter GPT instance name:</label>
-        <input type="text" name="account"/>
-    </div>
-    <div class="input-group">
-        <label>Enter GPT model name:</label>
-        <input type="text" name="model"/>
-    </div>
-    <div class="input-group">
-        <label>Enter API key:</label>
-        <input type="text" name="apikey"/>
+    <div class="input-group" id="system_prompt-container">
+        <label>System prompt:</label>
+        <textarea name="system_prompt" id="system_prompt" placeholder=""></textarea>
+        <div class="hint">
+            Instruct or set the behavior of the assistant.
+        </div>
     </div>
 
 
-    <div class="input-group">
-        <label>Enter prompt:</label>
-        <textarea name="prompt" id="prompt"></textarea>
+    <div id="response-container" hidden>
+        <div class="input-group">
+            <label>User response:</label>
+            <textarea name="user_response" id="user_response" placeholder=""></textarea>
+            <div class="hint">
+                User's raw response
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Enter prompt:</label>
+            <textarea name="prompt" id="prompt"></textarea>
+            <div class="hint">
+                Use this for prompt engineering. If user has entered "Hello" and this field is provided as "{0}, world",
+                {0} will be replaced with user's raw response, making it "Hello, World" when sent to OpenAI
+            </div>
+        </div>
+
     </div>
 
     <input id="conversationId" name="conversationId" type="hidden"/>
 
-    <div id="response"></div>
+    <ul id="error"></ul>
 
     <button type="button" id="submit">Submit</button>
+
+    <ul id="response"></ul>
 </form>
 
 <script>
@@ -51,17 +66,27 @@
         if (response.ok) {
             const json = await response.json();
             document.getElementById('conversationId').value = json.conversationId;
-            document.getElementById('response').innerHTML = json.response;
 
-            const promptInput = document.getElementById('prompt');
-            promptInput.value = '';
+            let list = ''
+            json.messages.forEach(p => {
+                list += `<li><b>${p.role}</b>: ${p.content}</li>`
+            });
+
+            const promptInput = document.getElementById('user_response');
+            promptInput.value = ``;
             setTimeout(() => promptInput.focus(), 100);
+
+            document.getElementById('error').innerHTML = ''
+            document.getElementById('response').innerHTML = `<ul>${list}</ul>`
+
+            document.getElementById('system_prompt-container').setAttribute('hidden', true);
+            document.getElementById('response-container').removeAttribute('hidden', false);
 
             return;
         }
 
         const responseText = await response.text();
-        document.getElementById('response').innerHTML = responseText;
+        document.getElementById('error').innerHTML = responseText;
 
     });
 
