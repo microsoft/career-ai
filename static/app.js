@@ -11,11 +11,19 @@ let toggle = button => {
   } else {
     element.style.display = "none";
   }
+
   let gameElement = document.getElementById("game-center");
   if (gameElement.style.display === "none") {
     gameElement.style.display = "block";
   } else {
     gameElement.style.display = "none";
+  }
+
+  let btnElement = document.getElementById("TTS");
+  if (btnElement.style.display === "none") {
+    btnElement.style.display = "block";
+  } else {
+    btnElement.style.display = "none";
   }
 }
 
@@ -27,7 +35,7 @@ let postCareer = async () => {
   try {
 
     let body = {
-      conversationId: conversationId, system_prompt: preprompt, user_response: careerInput.value, prompt: "{0} display your response in json syntax for outcome, scenario, and options, where options is an array of strings"
+      conversationId: conversationId, system_prompt: preprompt, user_response: careerInput.value, prompt: "{0} display your response in a stringified json for outcome, scenario, and options, where options is an array of strings"
     }
 
     // Make an HTTP POST request to the API
@@ -56,11 +64,12 @@ let postCareer = async () => {
     console.log("ConversationID: " + conversationId);
 
     //updateParagraph(response_json, outcomeParagraph, "outcome")
-    updateParagraph(JSON.parse(data.response), "outcomeParagraph", "outcome")
-    updateParagraph(JSON.parse(data.response), "scenarioParagraph", "scenario")
-    updateOption(JSON.parse(data.response), "option1Text", 0);
-    updateOption(JSON.parse(data.response), "option2Text", 1);
-    updateOption(JSON.parse(data.response), "option3Text", 2);
+    updateParagraph(JSON.parse(data.response), "outcome", "outcome")
+    updateParagraph(JSON.parse(data.response), "scenario", "scenario")
+    updateOption(JSON.parse(data.response), "option1", 0);
+    updateOption(JSON.parse(data.response), "option2", 1);
+    updateOption(JSON.parse(data.response), "option3", 2);
+
     // You can return the data or do further processing here
 
     return data;
@@ -70,40 +79,10 @@ let postCareer = async () => {
   }
 }
 
-let postButton = async(optionNum) => {
+let postButton = optionNum => {
   //post logic here
   console.log("Option " + optionNum + " selected")
   //Set user_response = optionNum
-  try {
-    let body = {
-      conversationId: conversationId, 
-      system_prompt: preprompt, 
-      user_response: optionNum, 
-      prompt: "{0} display your response in json syntax for outcome, scenario, and options, where options is an array of strings"
-    }
-
-    // Make an HTTP POST request to the API
-    const response = await fetch('http://127.0.0.1:8080/ask', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
-
-    // Check if the response status is OK (200)
-    if (!response.ok) {
-      throw new Error('Failed to post career data to the API');
-    }
-
-    // Parse the response data as JSON
-    const data = await response.json();
-    console.log(data)
-  }
-  catch (error) {
-
-  }
-  
 }
 
 let toggleTTS = () => {
@@ -126,13 +105,13 @@ var response_json = {
   ]
 }
 
-function updateParagraph(response_json, paragraphID, mkey){
-  
+function updateParagraph(response_json, paragraphID, mkey) {
+
   var optionText = document.getElementById(paragraphID);
-  optionText.textContent = mkey.toUpperCase() + ":\n" + response_json[mkey];
+  optionText.textContent = response_json[mkey];
 }
 
-function updateOption(response_json, optionid, index){
+function updateOption(response_json, optionid, index) {
   var optionText = document.getElementById(optionid);
   //console.log(response_json.options[index]);
   var opText = response_json.options[index];
@@ -171,7 +150,6 @@ var Dot = function (x, y, dx, dy) {
 function updtMouse(e) {
   mx = e.x;
   my = e.y;
-
 }
 
 function init() {
@@ -224,7 +202,7 @@ function update() {
     // draw its line to mouse
     let d = Math.sqrt((x - mx) * (x - mx) + (y - my) * (y - my));
     if (d < mouse_ol) {
-      c.strokeStyle = `rgba(100, 180, 255, ${max_ms_opac * (mouse_ol - d) / mouse_ol})`;
+      c.strokeStyle = `rgba(25, 145, 29, ${max_ms_opac * (mouse_ol - d) / mouse_ol})`;
       c.lineWidth = 2;
       c.beginPath();
       c.moveTo(x, y);
@@ -239,7 +217,7 @@ function update() {
       let y1 = dots[j].y;
       let d = Math.sqrt((x1 - x) * (x1 - x) + (y1 - y) * (y1 - y));
       if (d < dots_ol) {
-        c.strokeStyle = `rgba(157, 210, 255, ${max_dots_opac * (dots_ol - d) / dots_ol})`;
+        c.strokeStyle = `rgba(176, 141, 87, ${max_dots_opac * (dots_ol - d) / dots_ol})`;
         c.lineWidth = 1;
         c.beginPath();
         c.moveTo(x1, y1);

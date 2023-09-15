@@ -1,5 +1,4 @@
 flask
 requests
-azure-cognitiveservices-speech
 flask-cors
 
