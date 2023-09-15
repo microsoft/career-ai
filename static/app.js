@@ -26,13 +26,6 @@ let toggle = button => {
     btnElement.style.display = "none";
   }
 }
-let gameElement = document.getElementById("game-center");
-if (gameElement.style.display === "none") {
-  gameElement.style.display = "block";
-} else {
-  gameElement.style.display = "none";
-}
-}
 
 //send post requests
 let postCareer = async () => {
@@ -71,11 +64,12 @@ let postCareer = async () => {
     console.log("ConversationID: " + conversationId);
 
     //updateParagraph(response_json, outcomeParagraph, "outcome")
-    updateParagraph(JSON.parse(data.response), "outcomeParagraph", "outcome")
-    updateParagraph(JSON.parse(data.response), "scenarioParagraph", "scenario")
-    updateOption(JSON.parse(data.response), "option1Text", 0);
-    updateOption(JSON.parse(data.response), "option2Text", 1);
-    updateOption(JSON.parse(data.response), "option3Text", 2);
+    updateParagraph(JSON.parse(data.response), "outcome", "outcome")
+    updateParagraph(JSON.parse(data.response), "scenario", "scenario")
+    updateOption(JSON.parse(data.response), "option1", 0);
+    updateOption(JSON.parse(data.response), "option2", 1);
+    updateOption(JSON.parse(data.response), "option3", 2);
+
     // You can return the data or do further processing here
 
     return data;
@@ -114,7 +108,7 @@ var response_json = {
 function updateParagraph(response_json, paragraphID, mkey) {
 
   var optionText = document.getElementById(paragraphID);
-  optionText.textContent = mkey.toUpperCase() + ":\n" + response_json[mkey];
+  optionText.textContent = response_json[mkey];
 }
 
 function updateOption(response_json, optionid, index) {

@@ -71,7 +71,6 @@ def build_model():
         if not(payload['user_response'] == ""):
             message_history.append_user_message(conversation_id, user_response(payload))
 
-
     else:
         conversation_id = payload['conversationId']
         message_history.append_user_message(conversation_id, user_response(payload))
