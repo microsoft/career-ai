@@ -27,7 +27,7 @@ let postCareer = async () => {
   try {
 
     let body = {
-      conversationId: conversationId, system_prompt: preprompt, user_response: careerInput.value, prompt: "{0} display your response in json syntax for outcome, scenario, and options, where options is an array of strings"
+      conversationId: conversationId, system_prompt: preprompt, user_response: careerInput.value, prompt: "{0} display your response in a stringified json for outcome, scenario, and options, where options is an array of strings"
     }
 
     // Make an HTTP POST request to the API

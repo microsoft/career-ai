@@ -27,43 +27,38 @@ def user_response(payload):
     return prompt
 
 def find_valid_response(choices):
-    print(len(choices))
-    for idx in range(len(choices)):
-        choice = choices[idx]["message"]["content"]
+    for choice in choices:        
         try:
-           choice_dict = json.loads(choice)
+           content = choice["message"]["content"]
+           choice_dict = json.loads(content)
            return choice_dict
         except:
-
-            print(f"choice {idx} did not work")
-            return
-        
+            print("choice did not work")
     return None
     
 
 def talk_to_openai(conversation_id,number_of_responses=1):
     try:
         messages = message_history.get_messages(conversation_id)
-        valid_response = None
-        while valid_response==None:
+        valid_response_dict = None
+        while valid_response_dict is None:
         
             choices = OpenAI(Config.instance, Config.model, Config.apiKey).complete(messages, number_of_responses=number_of_responses)
-            print(choices)
-            print(len(choices))
-            valid_response = json.dumps(find_valid_response(choices))
-            
-        message_history.append_assistant_message(conversation_id, valid_response)
+            valid_response_dict = find_valid_response(choices)
+
+        valid_response_json = json.dumps(valid_response_dict)
+
+        message_history.append_assistant_message(conversation_id, (valid_response_json))
 
         return {
             'conversationId': conversation_id,
-            'response': valid_response,
+            'response': (valid_response_json),
             'messages': message_history.get_messages(conversation_id)
         }
+    
     except Exception as ex:
         return str(ex), 500
-    
-
-    
+  
 
 
 @app.route('/ask', methods=['POST'])
@@ -82,6 +77,8 @@ def build_model():
         message_history.append_user_message(conversation_id, user_response(payload))
 
     json_response = talk_to_openai(conversation_id,10)
+
+    return json_response
 
     
 

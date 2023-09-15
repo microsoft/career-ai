@@ -37,5 +37,4 @@ class OpenAI():
 
         # choices = json_obj['choices'][0]['message']['content']
         choices = json_obj['choices']
-        print(len(choices))
         return choices
