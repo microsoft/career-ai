@@ -142,8 +142,10 @@ let postButton = async(optionNum) => {
 
     // Parse the response data as JSON
     const data = await response.json();
-    console.log("Option selectd" + data)
+    // Parse the response data as JSON
 
+    // Now you can work with the response data
+    console.log('Response from the API:', data);
      //updateParagraph(response_json, outcomeParagraph, "outcome")
      updateParagraph(JSON.parse(data.response), "outcome", "outcome")
      updateParagraph(JSON.parse(data.response), "scenario", "scenario")
