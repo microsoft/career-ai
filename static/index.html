@@ -19,7 +19,7 @@
             <div class="input-group">
                 <p class="career-prompt">Hi Adventurer! What career are we exploring today?</p>
                 <input type="text" id="career" name="career"></input>
-                <button class="submit-button" onclick="toggle(this);postCareer()">Lets Go!</button>
+                <button class="submit-button" onclick="toggle(this);postCareer(career)">Lets Go!</button>
             </div>
         </div>          
         <div class="center center-scenario" id="game-center" style="display: none">
@@ -32,7 +32,7 @@
                 <div class="game-options" id="game-div">
                 <button class="optionBtn" id="option1" onclick="postButton(1)">Option 1</button>
                 <button class="optionBtn" id="option2" onclick="postButton(2)">Option 2</button>
-                <button class="optionBtn" id="option3" onclick="postButton(3)">Option 3</button>      
+                <button class="optionBtn" id="option3" onclick="postButton(3)">Option 3</button>
                 </div>                
             </div>
         </div>

@@ -43,19 +43,19 @@ let toggle = button => {
     }
   }
 
-  let gameElement = document.getElementById("game-center");
-  if (gameElement.style.display === "none") {
-    gameElement.style.display = "block";
-  } else {
-    gameElement.style.display = "none";
-  }
+// let gameElement = document.getElementById("game-center");
+// if (gameElement.style.display === "none") {
+//   gameElement.style.display = "block";
+// } else {
+//   gameElement.style.display = "none";
+// }
 
-  let btnElement = document.getElementById("TTS");
-  if (btnElement.style.display === "none") {
-    btnElement.style.display = "block";
-  } else {
-    btnElement.style.display = "none";
-  }
+// let btnElement = document.getElementById("TTS");
+// if (btnElement.style.display === "none") {
+//   btnElement.style.display = "block";
+// } else {
+//   btnElement.style.display = "none";
+// }
 
 
 //send post requests
@@ -102,6 +102,7 @@ let postCareer = async () => {
     updateOption(JSON.parse(data.response), "option3", 2);
 
     // You can return the data or do further processing here
+
     toggleDoneLoading()
 
     return data;
@@ -149,6 +150,7 @@ let postButton = async(optionNum) => {
      updateOption(JSON.parse(data.response), "option3", 2);
 
     toggleDoneLoading()
+
 
   } catch (error) {
     console.error('Error posting career data:', error);
