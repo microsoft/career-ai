@@ -79,10 +79,47 @@ let postCareer = async () => {
   }
 }
 
-let postButton = optionNum => {
+let postButton = async(optionNum) => {
   //post logic here
   console.log("Option " + optionNum + " selected")
   //Set user_response = optionNum
+  try {
+    let body = {
+      conversationId: conversationId, 
+      system_prompt: '', 
+      user_response: optionNum.toString(), 
+      prompt: "{0} display your response in a stringified json for outcome, scenario, and options, where options is an array of strings"
+    }
+
+    // Make an HTTP POST request to the API
+    const response = await fetch('http://127.0.0.1:8080/ask', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    // Check if the response status is OK (200)
+    if (!response.ok) {
+      throw new Error('Failed to post career data to the API');
+    }
+
+    // Parse the response data as JSON
+    const data = await response.json();
+    console.log("Option selectd" + data)
+
+     //updateParagraph(response_json, outcomeParagraph, "outcome")
+     updateParagraph(JSON.parse(data.response), "outcome", "outcome")
+     updateParagraph(JSON.parse(data.response), "scenario", "scenario")
+     updateOption(JSON.parse(data.response), "option1", 0);
+     updateOption(JSON.parse(data.response), "option2", 1);
+     updateOption(JSON.parse(data.response), "option3", 2);
+
+  } catch (error) {
+    console.error('Error posting career data:', error);
+    throw error;
+  }
 }
 
 let toggleTTS = () => {
