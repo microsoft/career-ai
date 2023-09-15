@@ -7,6 +7,22 @@ let toggle = button => {
         element.style.display = "none";
     }
 
+    let btnElement = document.getElementById("TTS");
+    if (btnElement.style.display === "none") {
+        btnElement.style.display = "block";
+    } else {
+        btnElement.style.display = "none";
+    }
+
+    let gameElement = document.getElementById("boxes");
+    if (gameElement.style.display === "none") {
+        gameElement.style.display = "block";
+    } else {
+        gameElement.style.display = "none";
+    }
+  }
+
+  let toggleDoneLoading = () => {
     let gameElement = document.getElementById("game-center");
     if (gameElement.style.display === "none") {
         gameElement.style.display = "block";
@@ -14,11 +30,11 @@ let toggle = button => {
         gameElement.style.display = "none";
     }
 
-    let btnElement = document.getElementById("TTS");
-    if (btnElement.style.display === "none") {
-        btnElement.style.display = "block";
+    let loadingElement = document.getElementById("boxes");
+    if (loadingElement.style.display === "none") {
+        loadingElement.style.display = "block";
     } else {
-        btnElement.style.display = "none";
+        loadingElement.style.display = "none";
     }
   }
 
@@ -36,7 +52,7 @@ let toggleTTS = () => {
 }
 
 
-//For particle effect
+//For background particle effect
 var cnvs = document.getElementById("canvas");
 cnvs.width = window.innerWidth;
 cnvs.height = window.innerHeight;
@@ -149,3 +165,4 @@ function update() {
 init();
 
 requestAnimationFrame(update);
+
