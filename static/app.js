@@ -65,7 +65,7 @@ var Dot = function(x, y, dx, dy) {
 function updtMouse(e) {
   mx = e.x;
   my = e.y;
-  console.log(mx + " " + my);
+  //console.log(mx + " " + my);
 }
 
 function init() {
