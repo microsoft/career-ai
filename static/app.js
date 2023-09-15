@@ -22,15 +22,12 @@ let toggle = button => {
 //send post requests
 let postCareer = async () => {
   var careerInput = document.getElementById("career");
-  var optionButton1 = document.getElementById("option1");
-  var optionButton2 = document.getElementById("option2");
-  var optionButton3 = document.getElementById("option3");
   console.log("start")
   console.log(careerInput)
   try {
 
     let body = {
-      conversationId: conversationId, system_prompt: preprompt, user_response: careerInput.value, prompt: "{0} display your response in markdown syntax for outcome, scenario, and options"
+      conversationId: conversationId, system_prompt: preprompt, user_response: careerInput.value, prompt: "{0} display your response in json syntax for outcome, scenario, and options, where options is an array of strings"
     }
 
     // Make an HTTP POST request to the API
@@ -56,19 +53,14 @@ let postCareer = async () => {
 
     conversationId = data['conversationId'];
 
-    console.log(conversationId);
-
-    // options picked up here
-    /*optionButton1.textContent = "option1 from chatgpt";
-    optionButton2.textContent = "option2 from chatgpt";
-    optionButton3.textContent = "option3 from chatgpt";*/
+    console.log("ConversationID: " + conversationId);
 
     //updateParagraph(response_json, outcomeParagraph, "outcome")
-    updateParagraph(response_json, "outcomeParagraph", "outcome")
-    updateParagraph(response_json, "scenarioParagraph", "scenario")
-    updateOption(response_json, "option1Text", 0);
-    updateOption(response_json, "option2Text", 1);
-    updateOption(response_json, "option3Text", 2);
+    updateParagraph(JSON.parse(data.response), "outcomeParagraph", "outcome")
+    updateParagraph(JSON.parse(data.response), "scenarioParagraph", "scenario")
+    updateOption(JSON.parse(data.response), "option1Text", 0);
+    updateOption(JSON.parse(data.response), "option2Text", 1);
+    updateOption(JSON.parse(data.response), "option3Text", 2);
     // You can return the data or do further processing here
 
     return data;
@@ -89,14 +81,18 @@ let toggleTTS = () => {
   TTsEnabled = True
 }
 
+function refreshPage() {
+  location.reload();
+}
+
 //This is the json_object we need to emulate with the backend parser
 var response_json = {
-  "outcome": "You have chosen to pursue a career as a Luchador, a professional wrestler in the Mexican wrestling tradition. Throughout your journey, you will face various challenges that will help you develop essential life skills, such as discipline, physical fitness, teamwork, and showmanship. Get ready to step into the ring and embark on an exciting career!",
-  "scenario": "You arrive at the wrestling gym for your first day of training. The gym is filled with other aspiring luchadores, each eager to prove themselves. The head trainer, El Maestro, calls everyone together and begins the session.",
+  "outcome": "success",
+  "scenario": "You have chosen to pursue a career as a Graphic Designer. Your first scenario involves creating a logo design for a local coffee shop. They want a design that reflects their brand and captures the essence of their coffee. How do you approach this task?",
   "options": [
-    "1. Ask El Tigre for more guidance on how to perform the move correctly.", 
-    "2. Watch other luchadores practicing the move and try to imitate their technique.", 
-    "3. Dive right in and attempt the move without any additional assistance."
+    "Research the coffee shop's brand and target audience before starting the design.",
+    "Start designing without any prior research.",
+    "Ask the coffee shop owner for more information about their preferences and vision."
   ]
 }
 
@@ -109,7 +105,7 @@ function updateParagraph(response_json, paragraphID, mkey){
 function updateOption(response_json, optionid, index){
   var optionText = document.getElementById(optionid);
   //console.log(response_json.options[index]);
-  var opText = response_json.options[index].split(index+1)[1].substring(1);
+  var opText = response_json.options[index];
   optionText.textContent = opText;
 }
 

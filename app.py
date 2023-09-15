@@ -45,6 +45,7 @@ def build_model():
         messages = message_history.get_messages(conversation_id)
         response = OpenAI(Config.instance, Config.model, Config.apiKey).complete(messages)
         message_history.append_assistant_message(conversation_id, response)
+        print(response)
 
         return {
             'conversationId': conversation_id,
