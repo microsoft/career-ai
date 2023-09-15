@@ -113,6 +113,8 @@ let postCareer = async () => {
 }
 
 let postButton = async(optionNum) => {
+  toggleDoneLoading()
+
   //post logic here
   console.log("Option " + optionNum + " selected")
   //Set user_response = optionNum
