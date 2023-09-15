@@ -102,6 +102,7 @@ let postCareer = async () => {
     updateOption(JSON.parse(data.response), "option3", 2);
 
     // You can return the data or do further processing here
+    toggleDoneLoading()
 
     return data;
   } catch (error) {
@@ -146,6 +147,8 @@ let postButton = async(optionNum) => {
      updateOption(JSON.parse(data.response), "option1", 0);
      updateOption(JSON.parse(data.response), "option2", 1);
      updateOption(JSON.parse(data.response), "option3", 2);
+
+    toggleDoneLoading()
 
   } catch (error) {
     console.error('Error posting career data:', error);
