@@ -57,10 +57,10 @@ footer{
     height:100px;
     width:100%;
     background-color: black;
-    /*padding: 20px;
+    padding: 20px;
     margin-top: 2.5%;
     display: flex;
-    justify-content: space-between;*/
+    justify-content: right;
 }
 
 #canvas{
@@ -83,7 +83,10 @@ h2{
     z-index: 2;
     opacity: 100%;
     font-size: 16pt;
-    padding: 2%;
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 0%;
     font-family: 'Chakra Petch', sans-serif;
     font-weight: bold;
 }
@@ -105,7 +108,9 @@ h2{
     z-index: 1;
     display: flex;
     border: 2px solid #B08D57; 
-    overflow: auto;   
+    overflow: auto;  
+    overflow-x: hidden;
+    overflow-y: hidden; 
 }
 
 .center-scenario{
@@ -117,7 +122,7 @@ h2{
 p{
     z-index: 2;
     opacity: 100%;
-    padding: 5%;
+    padding: 2.5%;
     font-size: 16pt;
     font-family: 'Chakra Petch', sans-serif;
     font-weight: 300;
@@ -174,17 +179,15 @@ p{
 
 .game-options {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
 .optionBtn {
-    margin-top: 4%;
-    margin-left: 4%;
-    margin-right: 4%;
-    padding: 2px;
-    margin-bottom: 8%;
-    width: 150px;
+    margin-bottom: 3%;
+    padding: 4px;
+    width: 600px;
     height: 45px
 }
 

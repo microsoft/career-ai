@@ -32,9 +32,13 @@ class OpenAI():
         )
 
         json_obj = json.loads(response.text)
+
         if response.status_code != 200:
+            print("found error inside call")
+            print(json_obj)
             raise Exception(json_obj['message'])
 
         # choices = json_obj['choices'][0]['message']['content']
         choices = json_obj['choices']
+        print(len(choices))
         return choices

@@ -1,5 +1,7 @@
 let preprompt = "Assume the role of a game with extensive knowledge on career experiences, essential life skills, interactive fiction writing, and narrating life experiences through stories while I play the role of the player. Your task is to help me, a person with mental disabilities, by helping me gain useful career skillsets and essential life skills through different scenarios by creating an interactive story. Within your narrated stories, provide suitable names for characters, locations, groups and organizations, events, and items that are connected to the career that the player chooses. The game will begin with me providing a career of my choosing that I would like to pursue and you will then lead the game by providing various scenarios or experiences that I will experience within that career or career field.\nOnce I have provided my career title, you will provide one scenario per chat and each scenario teaches me a skill that I will need within the chosen career or an essential life skill. Some experiences can include, but are not limited to, role responsibilities within the chosen career, difficult conversations, financial literacy, and other work experiences.\nFor the scenario responses, provide three multiple-choice options around how I can react or respond to the scenario or experience that you provided. I will then choose one of the provided options and you will then provide an in-depth narrative that describes what will happen next in the story along with the next scenario and three new multiple-choice options that I can select from. Each game will be 10 scenarios long with a recap at the end that gives an overview of lessons learned."
 let conversationId = ""
+let promptTemplate = "User response: {0}\nNote: display your response in a stringify json for outcome, scenario, and options, where options is an array of strings"
+
 
 
 let TTsEnabled = false
@@ -43,30 +45,30 @@ let toggle = button => {
     }
   }
 
-  let gameElement = document.getElementById("game-center");
-  if (gameElement.style.display === "none") {
-    gameElement.style.display = "block";
-  } else {
-    gameElement.style.display = "none";
-  }
+// let gameElement = document.getElementById("game-center");
+// if (gameElement.style.display === "none") {
+//   gameElement.style.display = "block";
+// } else {
+//   gameElement.style.display = "none";
+// }
 
-  let btnElement = document.getElementById("TTS");
-  if (btnElement.style.display === "none") {
-    btnElement.style.display = "block";
-  } else {
-    btnElement.style.display = "none";
-  }
-}
+// let btnElement = document.getElementById("TTS");
+// if (btnElement.style.display === "none") {
+//   btnElement.style.display = "block";
+// } else {
+//   btnElement.style.display = "none";
+// }
+
 
 //send post requests
 let postCareer = async () => {
-  var careerInput = document.getElementById("career");
+  var careerInput = document.getElementById("prompt");
   console.log("start")
   console.log(careerInput)
   try {
 
     let body = {
-      conversationId: conversationId, system_prompt: preprompt, user_response: careerInput.value, prompt: "{0} display your response in a stringified json for outcome, scenario, and options, where options is an array of strings"
+      conversationId: conversationId, system_prompt: preprompt, user_response: careerInput.value, prompt: promptTemplate
     }
 
     // Make an HTTP POST request to the API
@@ -102,6 +104,7 @@ let postCareer = async () => {
     updateOption(JSON.parse(data.response), "option3", 2);
 
     // You can return the data or do further processing here
+
     toggleDoneLoading()
 
     return data;
@@ -112,6 +115,8 @@ let postCareer = async () => {
 }
 
 let postButton = async(optionNum) => {
+  toggleDoneLoading()
+
   //post logic here
   console.log("Option " + optionNum + " selected")
   //Set user_response = optionNum
@@ -120,7 +125,7 @@ let postButton = async(optionNum) => {
       conversationId: conversationId, 
       system_prompt: '', 
       user_response: optionNum.toString(), 
-      prompt: "{0} display your response in a stringified json for outcome, scenario, and options, where options is an array of strings"
+      prompt: promptTemplate
     }
 
     // Make an HTTP POST request to the API
@@ -139,8 +144,10 @@ let postButton = async(optionNum) => {
 
     // Parse the response data as JSON
     const data = await response.json();
-    console.log("Option selectd" + data)
+    // Parse the response data as JSON
 
+    // Now you can work with the response data
+    console.log('Response from the API:', data);
      //updateParagraph(response_json, outcomeParagraph, "outcome")
      updateParagraph(JSON.parse(data.response), "outcome", "outcome")
      updateParagraph(JSON.parse(data.response), "scenario", "scenario")
@@ -149,6 +156,7 @@ let postButton = async(optionNum) => {
      updateOption(JSON.parse(data.response), "option3", 2);
 
     toggleDoneLoading()
+
 
   } catch (error) {
     console.error('Error posting career data:', error);
@@ -166,15 +174,15 @@ function refreshPage() {
 }
 
 //This is the json_object we need to emulate with the backend parser
-var response_json = {
-  "outcome": "success",
-  "scenario": "You have chosen to pursue a career as a Graphic Designer. Your first scenario involves creating a logo design for a local coffee shop. They want a design that reflects their brand and captures the essence of their coffee. How do you approach this task?",
-  "options": [
-    "Research the coffee shop's brand and target audience before starting the design.",
-    "Start designing without any prior research.",
-    "Ask the coffee shop owner for more information about their preferences and vision."
-  ]
-}
+// var response_json = {
+//   "outcome": "success",
+//   "scenario": "You have chosen to pursue a career as a Graphic Designer. Your first scenario involves creating a logo design for a local coffee shop. They want a design that reflects their brand and captures the essence of their coffee. How do you approach this task?",
+//   "options": [
+//     "Research the coffee shop's brand and target audience before starting the design.",
+//     "Start designing without any prior research.",
+//     "Ask the coffee shop owner for more information about their preferences and vision."
+//   ]
+// }
 
 function updateParagraph(response_json, paragraphID, mkey) {
 

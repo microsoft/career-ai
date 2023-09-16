@@ -4,6 +4,9 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
     <title>Career Craft</title>
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="index.css">
@@ -18,8 +21,8 @@
         <div class="center" id="prompt-center">
             <div class="input-group">
                 <p class="career-prompt">Hi Adventurer! What career are we exploring today?</p>
-                <input type="text" id="career" name="career"></input>
-                <button class="submit-button" onclick="toggle(this);postCareer(career)">Lets Go!</button>
+                <input type="text" id="prompt" name="prompt"></input>
+                <button class="submit-button" onclick="toggle(this);postCareer(prompt)">Lets Go!</button>
             </div>
         </div>          
         <div class="center center-scenario" id="game-center" style="display: none">
@@ -32,7 +35,7 @@
                 <div class="game-options" id="game-div">
                 <button class="optionBtn" id="option1" onclick="postButton(1)">Option 1</button>
                 <button class="optionBtn" id="option2" onclick="postButton(2)">Option 2</button>
-                <button class="optionBtn" id="option3" onclick="postButton(3)">Option 3</button>      
+                <button class="optionBtn" id="option3" onclick="postButton(3)">Option 3</button>
                 </div>                
             </div>
         </div>
@@ -62,7 +65,7 @@
                 <div></div>
             </div>
         </div>
-        <button id="TTS" onclick="toggle(this)" style="display: none">Want to try a Different Career?</button>
+        <button id="TTS" onclick="refreshPage()" style="display: none">Want to try a Different Career?</button>
         <!-- <button class="TTS" onclick="toggleTTS()">Turn on Text to Speech</button>-->
     </div>
     <footer>
