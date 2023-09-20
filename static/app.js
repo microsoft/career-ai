@@ -7,43 +7,43 @@ let promptTemplate = "User response: {0}\nNote: display your response in a strin
 let TTsEnabled = false
 //Toggle prompt and game divs
 let toggle = button => {
-    let element = document.getElementById("prompt-center");
-    if (element.style.display === "none") {
-        element.style.display = "block";
-    } else {
-        element.style.display = "none";
-    }
-
-    let btnElement = document.getElementById("TTS");
-    if (btnElement.style.display === "none") {
-        btnElement.style.display = "block";
-    } else {
-        btnElement.style.display = "none";
-    }
-
-    let gameElement = document.getElementById("boxes");
-    if (gameElement.style.display === "none") {
-        gameElement.style.display = "block";
-    } else {
-        gameElement.style.display = "none";
-    }
+  let element = document.getElementById("prompt-center");
+  if (element.style.display === "none") {
+    element.style.display = "block";
+  } else {
+    element.style.display = "none";
   }
 
-  let toggleDoneLoading = () => {
-    let gameElement = document.getElementById("game-center");
-    if (gameElement.style.display === "none") {
-        gameElement.style.display = "block";
-    } else {
-        gameElement.style.display = "none";
-    }
-
-    let loadingElement = document.getElementById("boxes");
-    if (loadingElement.style.display === "none") {
-        loadingElement.style.display = "block";
-    } else {
-        loadingElement.style.display = "none";
-    }
+  let btnElement = document.getElementById("TTS");
+  if (btnElement.style.display === "none") {
+    btnElement.style.display = "block";
+  } else {
+    btnElement.style.display = "none";
   }
+
+  let gameElement = document.getElementById("boxes");
+  if (gameElement.style.display === "none") {
+    gameElement.style.display = "block";
+  } else {
+    gameElement.style.display = "none";
+  }
+}
+
+let toggleDoneLoading = () => {
+  let gameElement = document.getElementById("game-center");
+  if (gameElement.style.display === "none") {
+    gameElement.style.display = "block";
+  } else {
+    gameElement.style.display = "none";
+  }
+
+  let loadingElement = document.getElementById("boxes");
+  if (loadingElement.style.display === "none") {
+    loadingElement.style.display = "block";
+  } else {
+    loadingElement.style.display = "none";
+  }
+}
 
 // let gameElement = document.getElementById("game-center");
 // if (gameElement.style.display === "none") {
@@ -72,7 +72,7 @@ let postCareer = async () => {
     }
 
     // Make an HTTP POST request to the API
-    const response = await fetch('http://127.0.0.1:8080/ask', {
+    const response = await fetch('/ask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ let postCareer = async () => {
   }
 }
 
-let postButton = async(optionNum) => {
+let postButton = async (optionNum) => {
   toggleDoneLoading()
 
   //post logic here
@@ -122,14 +122,14 @@ let postButton = async(optionNum) => {
   //Set user_response = optionNum
   try {
     let body = {
-      conversationId: conversationId, 
-      system_prompt: '', 
-      user_response: optionNum.toString(), 
+      conversationId: conversationId,
+      system_prompt: '',
+      user_response: optionNum.toString(),
       prompt: promptTemplate
     }
 
     // Make an HTTP POST request to the API
-    const response = await fetch('http://127.0.0.1:8080/ask', {
+    const response = await fetch('/ask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -148,12 +148,12 @@ let postButton = async(optionNum) => {
 
     // Now you can work with the response data
     console.log('Response from the API:', data);
-     //updateParagraph(response_json, outcomeParagraph, "outcome")
-     updateParagraph(JSON.parse(data.response), "outcome", "outcome")
-     updateParagraph(JSON.parse(data.response), "scenario", "scenario")
-     updateOption(JSON.parse(data.response), "option1", 0);
-     updateOption(JSON.parse(data.response), "option2", 1);
-     updateOption(JSON.parse(data.response), "option3", 2);
+    //updateParagraph(response_json, outcomeParagraph, "outcome")
+    updateParagraph(JSON.parse(data.response), "outcome", "outcome")
+    updateParagraph(JSON.parse(data.response), "scenario", "scenario")
+    updateOption(JSON.parse(data.response), "option1", 0);
+    updateOption(JSON.parse(data.response), "option2", 1);
+    updateOption(JSON.parse(data.response), "option3", 2);
 
     toggleDoneLoading()
 
