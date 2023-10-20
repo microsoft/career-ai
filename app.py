@@ -1,7 +1,7 @@
 from flask import Flask, send_from_directory, request
 from flask_cors import CORS, cross_origin
 
-from modules.open_ai import OpenAI
+from modules.open_ai2 import OpenAI2
 from modules.message_history import MessageHistory
 import json
 from uuid import uuid4
@@ -47,10 +47,11 @@ def talk_to_openai(conversation_id,number_of_responses=1):
             print("looking for valid response")
             try:
                 print("calling openai")
-                choices = OpenAI(Config.instance, Config.model, Config.apiKey).complete(messages, number_of_responses=number_of_responses)
+                #choices = OpenAI(Config.instance, Config.model, Config.apiKey).complete(messages, number_of_responses=number_of_responses)
+                choices = OpenAI2(Config.apiKey).chat(messages)
                 valid_response_dict = find_valid_response(choices)
             except:
-                print("clling open ai did not work waiting 5 seconds and calling again")
+                print("calling open ai did not work waiting 5 seconds and calling again")
                 time.sleep(5)
 
 
