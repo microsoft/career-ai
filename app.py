@@ -32,7 +32,7 @@ def find_valid_response(choices):
         try:
            content = choice["message"]["content"]
            choice_dict = json.loads(content)
-           print(choice_dict)
+           #print(choice_dict)
            return choice_dict
         except Exception as ex:
             print("choice did not work")
@@ -48,7 +48,7 @@ def talk_to_openai(conversation_id,number_of_responses=1):
             try:
                 print("calling openai")
                 #choices = OpenAI(Config.instance, Config.model, Config.apiKey).complete(messages, number_of_responses=number_of_responses)
-                choices = OpenAI2(Config.apiKey).chat(messages)
+                choices = OpenAI2(Config.apiKey).chat(messages, responses = number_of_responses)
                 valid_response_dict = find_valid_response(choices)
             except:
                 print("calling open ai did not work waiting 5 seconds and calling again")
@@ -61,7 +61,7 @@ def talk_to_openai(conversation_id,number_of_responses=1):
         message_history.append_assistant_message(conversation_id, valid_response_json)
         print("returning message")
 
-        print(message_history.get_messages(conversation_id))
+        #print(message_history.get_messages(conversation_id))
         return {
             'conversationId': conversation_id,
             'response': valid_response_json,

@@ -19,6 +19,6 @@ class OpenAI2():
                     continue
                 if all([word in content for word in requiredWords]):
                     #return content_dict
-                    print(allResponses)
+                    #print(allResponses)
                     return allResponses
                     
