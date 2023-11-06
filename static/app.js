@@ -72,7 +72,7 @@ let postCareer = async () => {
     }
 
     // Make an HTTP POST request to the API
-    const response = await fetch('http://127.0.0.1:8080/ask', {
+    const response = await fetch('/ask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -122,14 +122,14 @@ let postButton = async(optionNum) => {
   //Set user_response = optionNum
   try {
     let body = {
-      conversationId: conversationId, 
-      system_prompt: '', 
-      user_response: optionNum.toString(), 
+      conversationId: conversationId,
+      system_prompt: '',
+      user_response: optionNum.toString(),
       prompt: promptTemplate
     }
 
     // Make an HTTP POST request to the API
-    const response = await fetch('http://127.0.0.1:8080/ask', {
+    const response = await fetch('/ask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
