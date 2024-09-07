@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<canvas id="canvas"></canvas>
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv='cache-control' content='no-cache'>
     <meta http-equiv='expires' content='0'>
     <meta http-equiv='pragma' content='no-cache'>
@@ -11,66 +11,153 @@
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="index.css">
     <script src="app.js"></script>
-    <link rel="shortcut icon" href="./images/CareerCraft.png">
-
+    <link rel="shortcut icon" href="./images/CareerCraft_logo_icon.png">
 </head>
 
 <body>
-    <div class="center-adjacent">
-        <h1 class="sample">Career Craft</h1>
-        <div class="center" id="prompt-center">
-            <div class="input-group">
-                <p class="career-prompt">Hi Adventurer! What career are we exploring today?</p>
-                <input type="text" id="prompt" name="prompt"></input>
-                <button class="submit-button" onclick="toggle(this);postCareer(prompt)">Lets Go!</button>
+    <div class="container">
+        <aside class="left-sidebar">
+            <div class="sidebar-item">
+                <img src="./images/Sidebar_CC_Logo.png" alt="CareerCraft Logo" class="sidebar-logo">
             </div>
-        </div>          
-        <div class="center center-scenario" id="game-center" style="display: none">
-            <div class="scrollbar" id="style-15">
-                <div class="force-overflow"></div>
-                <h2>Outcome:</h2>
-                <p id="outcome"></p>
-                <h2>Scenario:</h2>
-                <p id="scenario"></p>
-                <div class="game-options" id="game-div">
-                <button class="optionBtn" id="option1" onclick="postButton(1)">Option 1</button>
-                <button class="optionBtn" id="option2" onclick="postButton(2)">Option 2</button>
-                <button class="optionBtn" id="option3" onclick="postButton(3)">Option 3</button>
-                </div>                
+            <div class="sidebar-item">
+                <img src="./images/account_icon.png" alt="Account Icon" class="sidebar-icon">
+                <span class="sidebar-title">Account</span>
             </div>
-        </div>
-        <div class="boxes center" id="boxes" style="display: none">
-            <div class="box">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+            <div class="sidebar-item">
+                <img src="./images/resources_icon.png" alt="Resources Icon" class="sidebar-icon">
+                <span class="sidebar-title">Resources</span>
             </div>
-            <div class="box">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+            <div class="sidebar-item">
+                <img src="./images/jobs_icon.png" alt="Jobs Icon" class="sidebar-icon">
+                <span class="sidebar-title">Jobs</span>
             </div>
-            <div class="box">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+            <div class="sidebar-item">
+                <img src="./images/partners_icon.png" alt="Partners Icon" class="sidebar-icon">
+                <span class="sidebar-title">Partners</span>
             </div>
-            <div class="box">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+        </aside>
+        <main class="main-content">
+            <div class="content-section">
+
+                <dotlottie-player class="loading-container" id="loading-container"
+                    src="https://lottie.host/e14a2166-83dd-4dc0-b234-4b1ac247a6ee/GU7ZkjhQJL.json"
+                    background="transparent" speed="1" style="display: none" loop autoplay>
+                </dotlottie-player>
+
+                <div id="prompt-center">
+                    <h2 class="standard-margin p-1 m-1" id="typing-effect"></h2>
+                    <div class="standard-margin center-adjacent">
+                        <div class="inline-button-container">
+                            <input class="standard-margin m-1 p-1" title="user input" type="text" id="prompt"
+                                name="prompt">
+                            <button class="font-button text-align-left button" title="talk button" id="speechButton"
+                                onclick="toggleSpeechRecognition()">Talk</button>
+                        </div>
+                        <button class="lets-go-button button" title="submit button"
+                            onclick="toggle(this);postCareer(prompt)">Lets Go!</button>
+                    </div>
+                </div>
+
+                <div class="dialog-box center-scenario" id="game-center" style="display: none">
+                    <h1 class="career-choice" id="displayedPrompt"></h1>
+                    <button class="small-text text-align-center font-button" id="openModalBtn">See details</button>
+                    <div id="detailsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+                        <div class="modal-content">
+                            <button id="closeModalBtn" aria-label="Close" class="close">&times;</button>
+                            <h2 id="displayedPrompt"></h2>
+                            <p>Here, we will place information about the <em id="displayedPrompt"></em> career.</p>
+                            <button id="gotItBtn">Got it!</button>
+                        </div>
+                    </div>
+                    <div class="scrollbar" id="style-15">
+                        <div class="inline-button-container">
+                            <h2 class="pb-1">Outcome:</h2>
+                            <button onclick="readAloud('outcome')"><img class="sound-icon font-button"
+                                    src="./images/sound.png"></button>
+                        </div>
+                        <p id="outcome"></p>
+                        <div class="inline-button-container">
+                            <h2 class="pb-1">Scenario:</h2>
+                            <button onclick="readAloud('scenario')"><img class="sound-icon font-button"
+                                    src="./images/sound.png"></button>
+                        </div>
+                        <p id="scenario"></p>
+                        <div class="game-options pl-1 pt-1" id="game-div">
+                            <div class="inline-button-container pt-1">
+                                <button class="font-button text-align-left button" id="option1"
+                                    onclick="postButton(1)">Option 1</button>
+                                <button onclick="readAloud('option1')"><img class="sound-icon font-button"
+                                        src="./images/sound.png"></button>
+                                <!-- <button onclick="readAloud('option1')">🔊</button> -->
+                            </div>
+                            <div class="inline-button-container pt-1">
+                                <button class="font-button text-align-left button" id="option2"
+                                    onclick="postButton(2)">Option 2</button>
+                                <button onclick="readAloud('option2')"><img class="sound-icon font-button"
+                                        src="./images/sound.png"></button>
+                                <!-- <button onclick="readAloud('option2')">🔊</button> -->
+                            </div>
+                            <div class="inline-button-container pt-1">
+                                <button class="font-button text-align-left button" id="option3"
+                                    onclick="postButton(3)">Option 3</button>
+                                <button onclick="readAloud('option3')"><img class="sound-icon font-button"
+                                        src="./images/sound.png"></button>
+                                <!-- <button onclick="readAloud('option3')">🔊</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <button id="TTS" onclick="refreshPage()" style="display: none">Want to try a Different Career?</button>
-        <!-- <button class="TTS" onclick="toggleTTS()">Turn on Text to Speech</button>-->
+        </main>
+        <aside class="right-sidebar">
+            <!-- <label class="switch" title="light/dark mode toggle">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider round"></span>
+            </label> -->
+            <div class="bottom">
+                <button class="font-button text-align-left button" id="RestartSearch" onclick="refreshPage()"
+                    style="display: none">Want
+                    to
+                    try a
+                    Different Career?
+                    <p class="small-text">Click here to start again</p>
+                </button>
+            </div>
+        </aside>
     </div>
     <footer>
-        <img src="./images/CareerCraftLogo1.png" alt="Career Craft logo">
+        <div class="footer-images">
+            <img src="./images/Microsoft.png" alt="Left Footer Image. Microsoft Logo." class="footer-image margin-left">
+            <img src="./images/CareerCraft_logo_white_no_border_with_slogan_large.png"
+                alt="Right Footer Image. Career Craft Logo." class="footer-image margin-right">
+        </div>
     </footer>
+    <script>
+        const sentence = "Hi Adventurer! What career are we exploring today?";
+        const typingSpeed = 50; // Adjust typing speed (milliseconds); the lower the number, the faster the typing
+
+        let index = 0;
+        function typeSentence() {
+            if (index < sentence.length) {
+                document.getElementById("typing-effect").innerHTML += sentence.charAt(index);
+                index++;
+                setTimeout(typeSentence, typingSpeed);
+            }
+        }
+
+        window.onload = function () {
+            typeSentence();
+            document.getElementById('prompt').addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    toggle(this);
+                    postCareer(prompt);
+                }
+            });
+        };
+    </script>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 </body>
 
 </html>

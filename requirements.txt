@@ -2,3 +2,5 @@ flask
 requests
 flask-cors
 openai
+speechRecognition
+python-dotenv
