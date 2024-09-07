@@ -7,7 +7,7 @@ class OpenAI:
         self.model = model
         self.key = key
 
-    def chat(self, messages, temperature=0.7, top_p=0.95, frequency_penalty=0, presence_penalty=0, max_tokens=2048, number_of_responses=5, stop=None):
+    def chat(self, messages, temperature=0.7, top_p=0.95, frequency_penalty=0, presence_penalty=0, max_tokens=2048, number_of_responses=1, stop=None):
         try:
             response = requests.post(
                 self.instance,
