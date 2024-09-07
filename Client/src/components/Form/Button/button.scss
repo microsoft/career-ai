@@ -1,0 +1,24 @@
+@mixin base-button-style {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.primary-button {
+  @include base-button-style;
+
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  color: white;
+}
+
+.default-button {
+  @include base-button-style;
+
+  background-color: white;
+  border: 1px solid #007bff;
+}
