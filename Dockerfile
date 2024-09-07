@@ -5,6 +5,6 @@ EXPOSE 8080
 
 COPY . .
 
-RUN python -m pip install -r requirements.txt
+RUN python -m pip install -r Server/requirements.txt
 
-ENTRYPOINT ["python", "app.py"]
+ENTRYPOINT ["python", "Server/app.py"]
