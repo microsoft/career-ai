@@ -1,6 +1,7 @@
 from uuid import uuid4
 from time import time
 
+
 class CareerGame:
     def __init__(self, game_prompts, message_history, open_ai, telemetry):
         self.game_prompts = game_prompts
@@ -8,18 +9,27 @@ class CareerGame:
         self.open_ai = open_ai
         self.telemetry = telemetry
 
+    def update_prompts(self, game_prompts):
+        self.game_prompts = game_prompts
+
+    def get_current_prompts(self):
+        return self.game_prompts
+
     def start_game(self, career_choice):
         conversation_id = str(uuid4())
         self.telemetry.info("NewGameStarted", {
-            "conversationId": conversation_id 
+            "conversationId": conversation_id
         })
-        self.message_history.append_system_message(conversation_id, self.game_prompts["preGamePrompt"])
-        self.message_history.append_user_message(conversation_id, self.game_prompts["userResponsePrompt"].format(career_choice))
+        self.message_history.append_system_message(
+            conversation_id, self.game_prompts["preGamePrompt"])
+        self.message_history.append_user_message(
+            conversation_id, self.game_prompts["userResponsePrompt"].format(career_choice))
 
         return self.__process_game__(conversation_id)
 
     def continue_game(self, conversation_id, user_choice):
-        self.message_history.append_user_message(conversation_id, self.game_prompts["userResponsePrompt"].format(user_choice))
+        self.message_history.append_user_message(
+            conversation_id, self.game_prompts["userResponsePrompt"].format(user_choice))
 
         return self.__process_game__(conversation_id)
 
@@ -43,10 +53,10 @@ class CareerGame:
                 })
                 time.sleep(5)
 
-        self.message_history.append_assistant_message(conversation_id, response)
+        self.message_history.append_assistant_message(
+            conversation_id, response)
 
         return {
             conversation_id,
             response,
         }
-        

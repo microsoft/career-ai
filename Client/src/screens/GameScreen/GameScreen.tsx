@@ -1,14 +1,15 @@
 import React from "react";
-import { ScreenType } from "../../models/ScreenType";
 import { IAppContext } from "../../models/IAppContext";
 import { AppContext } from "../../context/AppContext";
 import { DefaultButton } from "../../components/Form/Button/DefaultButton";
+import { useNavigate } from "react-router-dom";
 
 export function GameScreen(): React.ReactElement {
-  const { go, gameScenarios } = React.useContext<IAppContext>(AppContext);
+  const navigate = useNavigate();
+  const { gameScenarios } = React.useContext<IAppContext>(AppContext);
 
   const handleEndButtonClicked = () => {
-    go(ScreenType.ResultScreen);
+    navigate(`/career-game/something/results`);
   };
 
   return (
@@ -20,7 +21,9 @@ export function GameScreen(): React.ReactElement {
         <code>{JSON.stringify(gameScenarios, null, 4)}</code>
       </pre>
 
-      <DefaultButton onClick={handleEndButtonClicked}>End</DefaultButton>
+      <DefaultButton onClick={handleEndButtonClicked} title="End game">
+        End
+      </DefaultButton>
     </div>
   );
 }

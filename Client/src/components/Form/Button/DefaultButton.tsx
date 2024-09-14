@@ -8,7 +8,7 @@ export function DefaultButton(
   const { onClick, children } = props;
 
   return (
-    <button className="default-button" onClick={onClick}>
+    <button className="default-button button" onClick={onClick}>
       {children}
     </button>
   );

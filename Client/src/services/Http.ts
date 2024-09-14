@@ -1,3 +1,5 @@
+import { Telemetry } from "./Telemetry";
+
 export type HttpResponse<T> = {
   ok: boolean;
   data: T | null;
@@ -13,7 +15,10 @@ export class Http {
     default_header = { "Content-Type": "application/json" }
   ) {
     this.base_url = base_url;
-    this.default_header = default_header;
+    this.default_header = {
+      ...default_header,
+      "x-correlation-id": Telemetry.getInstance().getCorrelationId(),
+    };
   }
 
   public static getInstance(): Http {

@@ -8,23 +8,29 @@ from modules.career_game import CareerGame
 from modules.telemetry import Telemetry
 from modules.open_ai2 import OpenAI2
 
+
 def build_system():
     app = Flask(__name__)
     Config.load_configs(app)
-    if not(app.config["is_production"]):
+    if not (app.config["is_production"]):
         CORS(app)
 
-    return app, Telemetry(app.config["appInsightsConnectionString"], __name__)
+    return app, Telemetry(app.config["appInsightsConnectionString"],
+                          "CareerCraftAPI",
+                          custom_props={"production": app.config["is_production"]})
+
 
 def build_game(app, telemetry):
     message_history = MessageHistory()
-    open_ai = OpenAI2(app.config["openAIKey"], app.config["openAIModel"], telemetry)
+    open_ai = OpenAI2(app.config["openAIKey"],
+                      app.config["openAIModel"], telemetry)
     game_prompts = {
         "preGamePrompt": app.config["preGamePrompt"],
         "userResponsePrompt": app.config["userResponsePrompt"],
     }
 
     return CareerGame(game_prompts, message_history, open_ai, telemetry)
+
 
 if __name__ == '__main__':
     app, telemetry = build_system()

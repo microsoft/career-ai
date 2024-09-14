@@ -4,7 +4,7 @@ import { IAppContext } from "../models/IAppContext";
 import { AppContext } from "../context/AppContext";
 
 export function usePageTracking() {
-  const { currentScreen } = React.useContext<IAppContext>(AppContext);
+  // const { currentScreen } = React.useContext<IAppContext>(AppContext);
 
   React.useEffect(() => {
     const telemetry = Telemetry.getInstance();
@@ -13,5 +13,5 @@ export function usePageTracking() {
     return () => {
       //   telemetry.stopTrackPageView(window.location.pathname);
     };
-  }, [currentScreen]);
+  }, []);
 }
