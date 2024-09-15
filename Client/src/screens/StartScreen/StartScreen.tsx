@@ -3,12 +3,13 @@ import { IAppContext } from "../../models/IAppContext";
 import { AppContext } from "../../context/AppContext";
 import { PrimaryButton } from "../../components/Form/Button";
 import { Http } from "../../services/Http";
-import { ScreenType } from "../../models/ScreenType";
 import { GameScenarios } from "../../models/GameResponse";
+import { useNavigate } from "react-router-dom";
 
 export function StartScreen(): React.ReactElement {
-  const { go, setGameScenarios } = React.useContext<IAppContext>(AppContext);
+  const { setGameScenarios } = React.useContext<IAppContext>(AppContext);
   const [title, setTitle] = React.useState<string>("");
+  const navigate = useNavigate();
 
   const handleStartButtonClicked = async () => {
     const response = await Http.getInstance().post<GameScenarios>(
@@ -20,7 +21,7 @@ export function StartScreen(): React.ReactElement {
 
     if (response.ok) {
       setGameScenarios(response.data);
-      go(ScreenType.GameScreen);
+      navigate(`/career-game/something`);
     }
   };
 
@@ -37,7 +38,7 @@ export function StartScreen(): React.ReactElement {
         }}
       />
 
-      <PrimaryButton onClick={handleStartButtonClicked}>
+      <PrimaryButton onClick={handleStartButtonClicked} title="Start game">
         Start Game
       </PrimaryButton>
     </div>

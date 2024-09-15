@@ -1,5 +1,6 @@
 import React from "react";
 import "./Nav.scss";
+import { Link } from "react-router-dom";
 
 export function Nav(): React.ReactElement {
   return (
@@ -7,7 +8,10 @@ export function Nav(): React.ReactElement {
       <nav>
         <ul>
           <li>
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/admin">Admin</Link>
           </li>
         </ul>
       </nav>
