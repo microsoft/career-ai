@@ -1,15 +1,10 @@
 import React from "react";
 import "./button.scss";
 import { ButtonProps } from "./button.types";
+import { BaseButton } from "./BaseButton";
 
 export function PrimaryButton(
   props: React.PropsWithChildren<ButtonProps>
 ): React.ReactElement {
-  const { onClick, children } = props;
-
-  return (
-    <button className="primary-button button" onClick={onClick}>
-      {children}
-    </button>
-  );
+  return <BaseButton {...props} classNames="primary-button button" />;
 }

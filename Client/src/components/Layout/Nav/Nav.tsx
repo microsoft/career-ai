@@ -8,10 +8,14 @@ export function Nav(): React.ReactElement {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" title="Go to CareerCraft home page">
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/admin">Admin</Link>
+            <Link to="/admin" title="Go to CareerCraft admin page">
+              Admin
+            </Link>
           </li>
         </ul>
       </nav>

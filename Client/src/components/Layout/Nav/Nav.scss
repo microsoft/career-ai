@@ -1,6 +1,12 @@
+@import "../../../variables.scss";
+
 .nav-root {
   width: 400px;
   padding: 20px;
   height: 100%;
-  border-right: 1px solid #e0e0e0;
+  border-right: 1px solid $border-color-light;
+
+  @media (prefers-color-scheme: dark) {
+    border-right: 1px solid $border-color-dark;
+  }
 }

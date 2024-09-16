@@ -3,8 +3,11 @@ import { IAppContext } from "../../models/IAppContext";
 import { AppContext } from "../../context/AppContext";
 import { DefaultButton } from "../../components/Form/Button/DefaultButton";
 import { useNavigate } from "react-router-dom";
+import { usePageTracking } from "../../hooks/usePageTracking";
 
 export function GameScreen(): React.ReactElement {
+  usePageTracking("GameScreen");
+
   const navigate = useNavigate();
   const { gameScenarios } = React.useContext<IAppContext>(AppContext);
 
@@ -21,9 +24,11 @@ export function GameScreen(): React.ReactElement {
         <code>{JSON.stringify(gameScenarios, null, 4)}</code>
       </pre>
 
-      <DefaultButton onClick={handleEndButtonClicked} title="End game">
-        End
-      </DefaultButton>
+      <DefaultButton
+        onClick={handleEndButtonClicked}
+        title="End game"
+        label="End"
+      />
     </div>
   );
 }

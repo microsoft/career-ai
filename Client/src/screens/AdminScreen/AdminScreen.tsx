@@ -5,9 +5,13 @@ import { H1 } from "../../components/Typography";
 import { ButtonBar } from "../../components/Form/Button/ButtonBar";
 import { PrimaryButton } from "../../components/Form/Button";
 import { DefaultButton } from "../../components/Form/Button/DefaultButton";
+import { usePageTracking } from "../../hooks/usePageTracking";
+import { Spinner } from "../../components/Spinner";
 
 export function AdminScreen(): React.ReactElement {
-  const [prompt, setPrompt, savePrompts, reloadPrompts] = usePrompts();
+  usePageTracking("AdminScreen");
+  const [prompt, setPrompt, savePrompts, reloadPrompts, isLoading] =
+    usePrompts();
 
   const handlePromptUpdated = (name: string, value: string) => {
     setPrompt({ ...prompt, [name]: value });
@@ -39,13 +43,16 @@ export function AdminScreen(): React.ReactElement {
           onClick={() => {
             savePrompts(prompt);
           }}
-        >
-          Save
-        </PrimaryButton>
-        <DefaultButton title="Reset prompts" onClick={reloadPrompts}>
-          Reset
-        </DefaultButton>
+          label="Save"
+        />
+        <DefaultButton
+          title="Reset prompts"
+          onClick={reloadPrompts}
+          label="Reset"
+        />
       </ButtonBar>
+
+      <Spinner show={isLoading} />
     </>
   );
 }
