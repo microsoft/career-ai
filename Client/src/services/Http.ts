@@ -23,7 +23,9 @@ export class Http {
 
   public static getInstance(): Http {
     if (!Http.instance) {
-      Http.instance = new Http(process.env.REACT_APP_API_BASE || "/");
+      Http.instance = new Http(
+        process.env.REACT_APP_API_BASE || window.document.location.origin
+      );
     }
 
     return Http.instance;
