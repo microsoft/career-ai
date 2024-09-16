@@ -7,7 +7,7 @@ class Config:
     @staticmethod
     def load_configs(app):
         app.config["keyvault_uri"] = os.getenv(
-            "keyvault_uri",  "https://keyvault-careercraft.vault.azure.net/")
+            "keyvault_uri",  "https://careercraft-keyvault.vault.azure.net/")
         app.config["is_production"] = os.getenv(
             "environment",  "NonProd") == "Prod"
 
