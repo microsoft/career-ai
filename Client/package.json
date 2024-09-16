@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "BUILD_PATH='../Server/static/bundles' react-scripts build"
+    "build": "BUILD_PATH='../Server/client' react-scripts build"
   },
   "eslintConfig": {
     "extends": [

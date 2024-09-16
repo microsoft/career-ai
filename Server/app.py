@@ -10,7 +10,7 @@ from modules.open_ai2 import OpenAI2
 
 
 def build_system():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='client', static_url_path='/client')
     Config.load_configs(app)
     if not (app.config["is_production"]):
         CORS(app)
@@ -36,7 +36,7 @@ if __name__ == '__main__':
     app, telemetry = build_system()
     career_game = build_game(app, telemetry)
 
-    Routes.register_system_routes(app, telemetry)
     Routes.register_game_routes(app, career_game, telemetry)
+    Routes.register_system_routes(app, telemetry)
 
     app.run(port=8080, host="0.0.0.0")

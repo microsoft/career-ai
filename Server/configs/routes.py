@@ -24,13 +24,31 @@ class Routes:
 
             return response
 
-        @app.route('/')
-        def home():
-            return send_from_directory(directory="./static", path="index.html")
-
+        # Catch-all route for client-side routing
+        @app.route('/', defaults={'path': ''})
         @app.route('/<path:path>')
-        def static_file(path):
-            return send_from_directory('static', path)
+        def catch_all(path):
+            print(path)
+            if path != '' and (path.startswith('static/') or '.' in path):
+                return send_from_directory('client', path)
+            return send_from_directory(directory="./client", path='index.html')
+
+        # @app.route('/')
+        # def home():
+        #     print("index", request.url)
+        #     return send_from_directory(directory="./static", path="index.html")
+
+        # @app.route('/<path:path>')
+        # def static_file(path):
+        #     print(path)
+
+        #     return send_from_directory('static', path)
+
+        # @app.route('/static/<path:path>')
+        # def static_file_2(path):
+        #     print(path)
+
+        #     return send_from_directory('static', path)
 
     @staticmethod
     def register_game_routes(app, initial_career_game, telemetry):
