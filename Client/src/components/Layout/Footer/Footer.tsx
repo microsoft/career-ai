@@ -5,11 +5,7 @@ export function Footer(): React.ReactElement {
   return (
     <footer className="footer">
       <div>
-        <img
-          src="Microsoft.png"
-          alt="Microsoft logo"
-          className="footer-logo"
-        />
+        <img src="slogan.png" alt="CareerCraft logo" className="ms-nav-logo" />
       </div>
     </footer>
   );
