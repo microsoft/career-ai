@@ -6,12 +6,12 @@ export function Header(): React.ReactElement {
     <header className="header-root">
       <a href="/" title="Go to CareerCraft home page" className="brand-link">
         <div className="brand">
-          <img
+          {/* <img
             src="Flat_logo_linear.png"
             // src="CareerCraft_logo_white_no_border_with_slogan_large.png"
             alt="CareerCraft logo"
             className="header-logo"
-          />
+          /> */}
         </div>
       </a>
     </header>

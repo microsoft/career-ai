@@ -8,10 +8,10 @@
   padding-left: 20px;
   padding-right: 20px;
   margin-top: 10px;
-  border-bottom: 1px solid $border-color-light;
+  border-bottom: none;
 
   @media (prefers-color-scheme: dark) {
-    border-bottom: 1px solid $border-color-dark;
+    border-bottom: non;
   }
 }
 
@@ -31,9 +31,3 @@
   }
 }
 
-.header-logo {
-  max-height: 50px;
-  // height: 30px;
-  width: auto;
-  margin-right: 10px;
-}
