@@ -17,7 +17,6 @@ export function StartScreen(): React.ReactElement {
   const [isSaving, setSaving] = React.useState<boolean>(false);
   const { setGameScenarios } = React.useContext<IAppContext>(AppContext);
   const [title, setTitle] = React.useState<string>("");
-  const [displayedText, setDisplayedText] = React.useState<string>("");
   const navigate = useNavigate();
 
   const handleStartButtonClicked = async (): Promise<void> => {
