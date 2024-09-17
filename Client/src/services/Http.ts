@@ -9,6 +9,7 @@ export class Http {
   private static instance: Http;
   private readonly base_url: string;
   private readonly default_header: { [key: string]: string };
+  private readonly telemetry: Telemetry;
 
   private constructor(
     base_url: string,
@@ -19,6 +20,7 @@ export class Http {
       ...default_header,
       "x-correlation-id": Telemetry.getInstance().getCorrelationId(),
     };
+    this.telemetry = Telemetry.getInstance();
   }
 
   public static getInstance(): Http {

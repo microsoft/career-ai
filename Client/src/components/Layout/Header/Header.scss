@@ -1,14 +1,31 @@
+@import "../../../variables.scss";
+
 .header-root {
-    height: 50px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-bottom: 1px solid #e0e0e0;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 1px solid $border-color-light;
+
+  @media (prefers-color-scheme: dark) {
+    border-bottom: 1px solid $border-color-dark;
+  }
+}
+
+.brand-link {
+  text-decoration: none;
+  color: default;
 }
 
 .brand {
-    font-size: 1.125em;  
-    font-weight: 600;
+  font-size: 1.125em;
+  font-weight: 600;
+
+  color: $font-text-light;
+
+  @media (prefers-color-scheme: dark) {
+    color: $font-text-dark;
+  }
 }

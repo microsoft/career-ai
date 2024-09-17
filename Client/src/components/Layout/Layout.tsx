@@ -4,7 +4,6 @@ import { Nav } from "./Nav";
 import { SkipToMain } from "./SkipToMain";
 import "./Layout.scss";
 import { Header } from "./Header";
-import { usePageTracking } from "../../hooks/usePageTracking";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -12,8 +11,6 @@ export type LayoutProps = {
 
 export function Layout(props: LayoutProps): React.ReactElement {
   const { children } = props;
-
-  usePageTracking();
 
   return (
     <>
@@ -24,7 +21,7 @@ export function Layout(props: LayoutProps): React.ReactElement {
       <div className="content-container">
         <Nav />
         <div className="main-container">
-          <main className="main" id="main">
+          <main className="main" id="main" tabIndex={-1}>
             {children}
           </main>
           <div className="footer-container">

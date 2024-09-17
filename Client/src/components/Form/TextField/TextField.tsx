@@ -14,9 +14,12 @@ export function TextField(props: TextFieldProps): React.ReactElement {
     return (
       <div className="text-field-container">
         {props.label && (
-          <label className="text-field-label">{props.label}</label>
+          <label htmlFor={props.name} className="text-field-label">
+            {props.label}
+          </label>
         )}
         <textarea
+          name={props.name}
           className="text-area"
           onChange={(e) => {
             props.onChange(props.name, e.currentTarget.value);
@@ -29,8 +32,13 @@ export function TextField(props: TextFieldProps): React.ReactElement {
 
   return (
     <div className="text-field-container">
-      {props.label && <label className="text-field-label">{props.label}</label>}
+      {props.label && (
+        <label htmlFor={props.name} className="text-field-label">
+          {props.label}
+        </label>
+      )}
       <input
+        name={props.name}
         type="text"
         className="text-field"
         onChange={(e) => {

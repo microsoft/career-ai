@@ -1,17 +1,13 @@
 import React from "react";
-// import { Telemetry } from "../services/Telemetry";
-// import { IAppContext } from "../models/IAppContext";
-// import { AppContext } from "../context/AppContext";
+import { Telemetry } from "../services/Telemetry";
 
-export function usePageTracking() {
-  // const { currentScreen } = React.useContext<IAppContext>(AppContext);
-
+export function usePageTracking(pageName: string) {
   React.useEffect(() => {
-    // const telemetry = Telemetry.getInstance();
-    // telemetry.trackPageView(window.location.pathname);
+    const telemetry = Telemetry.getInstance();
+    telemetry.startTrackPage(pageName);
 
     return () => {
-      //   telemetry.stopTrackPageView(window.location.pathname);
+      telemetry.stopTrackPage(pageName);
     };
-  }, []);
+  }, [pageName]);
 }

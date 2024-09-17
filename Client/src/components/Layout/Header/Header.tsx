@@ -4,7 +4,9 @@ import "./Header.scss";
 export function Header(): React.ReactElement {
   return (
     <header className="header-root">
-      <div className="brand">Header area if needed</div>
+      <a href="/" title="Go to CareerCraft home page" className="brand-link">
+        <div className="brand">CareerCraft</div>
+      </a>
     </header>
   );
 }
