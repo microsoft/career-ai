@@ -7,6 +7,7 @@ export type TextFieldProps = {
   value: string | number;
   multiline?: boolean;
   label?: string;
+  placeholder?: string;
 };
 
 export function TextField(props: TextFieldProps): React.ReactElement {
@@ -25,6 +26,7 @@ export function TextField(props: TextFieldProps): React.ReactElement {
             props.onChange(props.name, e.currentTarget.value);
           }}
           value={props.value}
+          placeholder={props.placeholder || ""}
         />
       </div>
     );
@@ -45,6 +47,7 @@ export function TextField(props: TextFieldProps): React.ReactElement {
           props.onChange(props.name, e.currentTarget.value);
         }}
         value={props.value}
+        placeholder={props.placeholder || ""}
       />
     </div>
   );

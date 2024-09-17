@@ -3,9 +3,18 @@
 .footer {
   height: 50px;
   padding: 20px;
+  margin-bottom: 20px;
   border-top: 1px solid $border-color-light;
 
   @media (prefers-color-scheme: dark) {
     border-top: 1px solid $border-color-dark;
   }
+}
+
+.footer-logo {
+  max-height: 30px;
+  // height: 30px;
+  width: auto;
+  margin-right: 10px;
+  // margin-bottom: 20px;
 }
