@@ -58,11 +58,6 @@ class CareerGame:
                 if open_ai_response is None:
                     continue
 
-                if type(open_ai_response) == str and open_ai_response.startswith("```") and open_ai_response.endswith("```"):
-                    open_ai_response = open_ai_response.strip(
-                        "```json").strip()
-                    open_ai_response = json.loads(open_ai_response)
-
                 self.message_history.append_assistant_message(
                     conversation_id, open_ai_response)
 

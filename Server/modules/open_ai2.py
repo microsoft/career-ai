@@ -19,13 +19,15 @@ class OpenAI2():
                 ).choices
                 for response in allResponses:
                     content = response.message['content']
-                    content_dict = dict()
                     try:
-                        content_dict = json.loads(content)
+                        if type(content) == str and content.startswith("```") and content.endswith("```"):
+                            content = content.strip(
+                            "```json").strip()
+                        content = json.loads(content)
                     except json.JSONDecodeError:
                         continue
                     if all(word in content for word in requiredWords):
-                        return content_dict
+                        return content
             except openai.error.OpenAIError as e:
                 print(e=f"Attempt {i+1} failed with error: {e}")
                 continue
