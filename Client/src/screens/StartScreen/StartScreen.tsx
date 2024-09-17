@@ -35,7 +35,7 @@ export function StartScreen(): React.ReactElement {
     setSaving(false);
   };
   return (
-    <div>
+    <div className="start-screen-center">
       <H1>Start Screen</H1>
 
       <TextField
