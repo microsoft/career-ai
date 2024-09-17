@@ -1,6 +1,7 @@
 import openai
 import json
 
+
 class OpenAI2():
     def __init__(self, key, model, telemetry):
         self.model = model
@@ -8,13 +9,13 @@ class OpenAI2():
 
         openai.api_key = key
 
-    def chat(self, messageContext = "", requiredWords = [], number_of_responses = 1, attempts = 3):
+    def chat(self, messageContext="", requiredWords=[], number_of_responses=1, attempts=3):
         for i in range(attempts):
             try:
                 allResponses = openai.ChatCompletion.create(
-                    model = self.model, 
-                    messages = messageContext, 
-                    n = number_of_responses
+                    model=self.model,
+                    messages=messageContext,
+                    n=number_of_responses
                 ).choices
                 for response in allResponses:
                     content = response.message['content']

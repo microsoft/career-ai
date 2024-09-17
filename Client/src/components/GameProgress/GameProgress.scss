@@ -1,0 +1,28 @@
+@import "../../variables.scss";
+
+.progress-bar-container {
+  width: 100%;
+  background-color: $border-color-light;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  margin: 10px 0;
+  height: 25px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: $primary-color;
+  transition: width 0.3s ease-in-out;
+}
+
+.progress-bar-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-weight: bold;
+  color: $font-text-light;
+}
