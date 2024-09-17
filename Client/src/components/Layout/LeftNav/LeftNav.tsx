@@ -5,12 +5,15 @@ import { Link } from "react-router-dom";
 export function LeftNav(): React.ReactElement {
   return (
     <aside className="nav-root">
-      <nav>
+      <Link to="/" title="Go to CareerCraft Home page" className="brand">
         <img
-          src="Flat_logo_linear.png"
-          alt="CareerCraft logo"
-          className="nav-logo"
+            src="Flat_logo_linear.png"
+            alt="CareerCraft logo"
+            className="nav-logo"
         />
+      </Link>
+
+      <nav>
         <ul>
           <li className="left-nav-items">
             <Link to="/" title="Go to CareerCraft About Us page">

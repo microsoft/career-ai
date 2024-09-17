@@ -12,9 +12,9 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<StartScreen />} />
-        <Route path="/career-game/:conversation-id" element={<GameScreen />} />
+        <Route path="/career-game" element={<GameScreen />} />
         <Route
-          path="/career-game/:conversation-id/results"
+          path="/career-game/results"
           element={<ResultScreen />}
         />
         <Route path="/admin" element={<AdminScreen />} />
