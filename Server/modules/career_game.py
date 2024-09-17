@@ -1,6 +1,7 @@
 from uuid import uuid4
 from time import time
 import logging
+import json
 
 
 class CareerGame:
@@ -52,8 +53,15 @@ class CareerGame:
             try:
                 # This seems to sometimes generate 10 scenarios or 1.... need to make the result consistent
                 open_ai_response = self.open_ai.chat(messages)
+                print(open_ai_response)
 
-                return open_ai_response
+                if open_ai_response.startswith("```") and open_ai_response.endswith("```"):
+                    open_ai_response = open_ai_response.strip("```json").strip()
+                
+                content_dict = json.loads(open_ai_response)
+                print(content_dict)
+                
+                return content_dict
             except Exception as e:
                 self.telemetry.debug("RetryingOpenAIChat", {
                     "conversationId": conversation_id,

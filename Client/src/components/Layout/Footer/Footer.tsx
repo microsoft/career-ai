@@ -4,7 +4,13 @@ import "./Footer.scss";
 export function Footer(): React.ReactElement {
   return (
     <footer className="footer">
-      <div>Footer area if needed</div>
+      <div>
+        <img
+          src="Microsoft.png"
+          alt="Microsoft logo"
+          className="footer-logo"
+        />
+      </div>
     </footer>
   );
 }
