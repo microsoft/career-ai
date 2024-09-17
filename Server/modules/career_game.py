@@ -1,34 +1,41 @@
 from uuid import uuid4
 from time import time
+import logging
 import json
 
 
 class CareerGame:
-    def __init__(self, game_prompts, message_history, open_ai, telemetry):
+    def __init__(self, game_prompts, message_history, open_ai, telemetry,logger):
         self.game_prompts = game_prompts
         self.message_history = message_history
         self.open_ai = open_ai
         self.telemetry = telemetry
+        self.logger = logger
 
     def update_prompts(self, game_prompts):
+        self.logger.debug("Updating game prompts to: {}".format(game_prompts))
         self.game_prompts = game_prompts
 
     def get_current_prompts(self):
         return self.game_prompts
 
     def start_game(self, career_choice):
+        self.logger.debug("Starting new game with career choice: {}".format(career_choice))
         conversation_id = str(uuid4())
-        self.telemetry.info("NewGameStarted", {
+        self.telemetry.debug("NewGameStarted", {
             "conversationId": conversation_id
         })
         self.message_history.append_system_message(
             conversation_id, self.game_prompts["preGamePrompt"])
         self.message_history.append_user_message(
             conversation_id, self.game_prompts["userResponsePrompt"].format(career_choice))
+        
+        self.logger.debug("message history: {}".format(self.message_history))
 
         return self.__process_game__(conversation_id)
 
     def continue_game(self, conversation_id, user_choice):
+        self.logger.debug("Continuing game with user choice: {}".format(user_choice))
         self.message_history.append_user_message(
             conversation_id, self.game_prompts["userResponsePrompt"].format(user_choice))
 
@@ -39,6 +46,7 @@ class CareerGame:
 
     def __process_game__(self, conversation_id):
         messages = self.message_history.get_messages(conversation_id)
+        self.logger.debug("Processing game with messages: {}".format(messages))
         response = None
 
         while response is None:
@@ -55,7 +63,7 @@ class CareerGame:
                 
                 return content_dict
             except Exception as e:
-                self.telemetry.info("RetryingOpenAIChat", {
+                self.telemetry.debug("RetryingOpenAIChat", {
                     "conversationId": conversation_id,
                     "error": str(e)
                 })
