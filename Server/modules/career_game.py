@@ -5,7 +5,7 @@ import json
 
 
 class CareerGame:
-    def __init__(self, game_prompts, message_history, open_ai, telemetry,logger):
+    def __init__(self, game_prompts, message_history, open_ai, telemetry, logger):
         self.game_prompts = game_prompts
         self.message_history = message_history
         self.open_ai = open_ai
@@ -20,22 +20,24 @@ class CareerGame:
         return self.game_prompts
 
     def start_game(self, career_choice):
-        self.logger.debug("Starting new game with career choice: {}".format(career_choice))
+        self.logger.debug(
+            "Starting new game with career choice: {}".format(career_choice))
         conversation_id = str(uuid4())
-        self.telemetry.debug("NewGameStarted", {
+        self.logger.debug("NewGameStarted", {
             "conversationId": conversation_id
         })
         self.message_history.append_system_message(
             conversation_id, self.game_prompts["preGamePrompt"])
         self.message_history.append_user_message(
             conversation_id, self.game_prompts["userResponsePrompt"].format(career_choice))
-        
+
         self.logger.debug("message history: {}".format(self.message_history))
 
         return self.__process_game__(conversation_id)
 
     def continue_game(self, conversation_id, user_choice):
-        self.logger.debug("Continuing game with user choice: {}".format(user_choice))
+        self.logger.debug(
+            "Continuing game with user choice: {}".format(user_choice))
         self.message_history.append_user_message(
             conversation_id, self.game_prompts["userResponsePrompt"].format(user_choice))
 
@@ -53,26 +55,26 @@ class CareerGame:
             try:
                 # This seems to sometimes generate 10 scenarios or 1.... need to make the result consistent
                 open_ai_response = self.open_ai.chat(messages)
-                print(open_ai_response)
+                if open_ai_response is None:
+                    continue
 
-                if open_ai_response.startswith("```") and open_ai_response.endswith("```"):
-                    open_ai_response = open_ai_response.strip("```json").strip()
-                
-                content_dict = json.loads(open_ai_response)
-                print(content_dict)
-                
-                return content_dict
+                if type(open_ai_response) == str and open_ai_response.startswith("```") and open_ai_response.endswith("```"):
+                    open_ai_response = open_ai_response.strip(
+                        "```json").strip()
+                    open_ai_response = json.loads(open_ai_response)
+
+                self.message_history.append_assistant_message(
+                    conversation_id, open_ai_response)
+
+                response = open_ai_response
+
             except Exception as e:
+                # Can we give it a max retries?
+
                 self.telemetry.debug("RetryingOpenAIChat", {
                     "conversationId": conversation_id,
                     "error": str(e)
                 })
                 time.sleep(5)
 
-        self.message_history.append_assistant_message(
-            conversation_id, response)
-
-        return {
-            conversation_id,
-            response,
-        }
+        return response
