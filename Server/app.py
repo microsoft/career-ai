@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
+import logging
 
 from configs.config import Config
 from configs.routes import Routes
@@ -29,7 +30,7 @@ def build_game(app, telemetry):
         "userResponsePrompt": app.config["userResponsePrompt"],
     }
 
-    return CareerGame(game_prompts, message_history, open_ai, telemetry)
+    return CareerGame(game_prompts=game_prompts, message_history=message_history, open_ai=open_ai, telemetry=telemetry, logger=app.logger)
 
 
 if __name__ == '__main__':
@@ -39,4 +40,8 @@ if __name__ == '__main__':
     Routes.register_game_routes(app, career_game, telemetry)
     Routes.register_system_routes(app, telemetry)
 
-    app.run(port=8080, host="0.0.0.0")
+    logging.basicConfig(level=logging.DEBUG, # Change this to logging.INFO for production
+                    format='%(asctime)s %(levelname)s: %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S')
+
+    app.run(port=8080, host="0.0.0.0",debug=True)
