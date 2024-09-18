@@ -57,15 +57,14 @@ class CareerGame:
 
     def __process_game__(self, conversation_id):
         messages = self.message_history.get_messages(conversation_id)
-        # self.logger.debug("Processing game with messages: {}".format(messages))
         response = None
 
         while response is None:
             try:
-                # This seems to sometimes generate 10 scenarios or 1.... need to make the result consistent
                 open_ai_response = self.open_ai.make_request(
-                    messages, response_model=Rounds, retries=3
+                    messages, response_model=Rounds, retries=1
                 )
+                print("open_ai_response: ", open_ai_response)
                 if open_ai_response is None:
                     continue
 
@@ -86,6 +85,28 @@ class CareerGame:
 
         return {"conversationId": conversation_id, "round": response}
 
+    def validate(self, user_choice):
+        messages = [
+            {"role": "system", "content": "You are a helpful assistant."},
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "validate if the following career choice is valid: "
+                        + user_choice,
+                    }
+                ],
+            },
+        ]
+        open_ai_response = self.open_ai.make_request(
+            messages=messages, response_model=ValidCareerChoice, retries=3
+        )
+        response = json.loads(open_ai_response.model_dump_json())
+        print(f"response: {response}")
+
+        return response
+
 
 class Rounds(BaseModel):
     outcome: str = Field(
@@ -94,4 +115,10 @@ class Rounds(BaseModel):
     scenario: str = Field(description="The scenario that the user is in.")
     options: list[str] = Field(
         description="The 3 options the user has to choose from. Do not include list formatting just add the string."
+    )
+
+
+class ValidCareerChoice(BaseModel):
+    isValid: bool = Field(
+        description="Whether the career choice is valid or not. NSFW content is not valid."
     )
