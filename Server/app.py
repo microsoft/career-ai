@@ -22,8 +22,9 @@ def build_system():
 
 def build_game(app, telemetry):
     message_history = MessageHistory()
+    scenarios = 10 #This value would be tied to the users selection from the UI, set to 10 for now
     open_ai = OpenAI2(app.config["openAIKey"],
-                      app.config["openAIModel"], telemetry)
+                      app.config["openAIModel"], telemetry, scenarios)
     game_prompts = {
         "preGamePrompt": app.config["preGamePrompt"],
         "userResponsePrompt": app.config["userResponsePrompt"],
