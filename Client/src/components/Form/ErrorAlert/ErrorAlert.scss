@@ -1,0 +1,15 @@
+@import "../../../variables.scss";
+
+.error-alert-root {
+    background-color: $error-color;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.error-alert-bold {
+    font-weight: 500;
+}

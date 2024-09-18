@@ -19,6 +19,9 @@ export function useCareerGame() {
       );
 
       if (response.ok && response.data) {
+        if (response.data.round?.options?.length === 0)
+          throw new Error("InvalidCareerChoice");
+
         setGameId(response.data.conversationId)
         addRound({
           ...response.data.round,
@@ -26,7 +29,7 @@ export function useCareerGame() {
         });
       }
     } catch (error: any) {
-      console.log(error)
+      throw new Error("FailedToStartGame")
     } finally {
       setLoading(false);
     }

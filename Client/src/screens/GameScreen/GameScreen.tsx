@@ -26,11 +26,17 @@ export function GameScreen(): React.ReactElement {
   } = React.useContext<IAppContext>(AppContext);
   const round = rounds[selectedRound];
 
+  React.useEffect(() => {
+    if (!isLoading && !gameId) {
+      navigate("/");
+    }
+  }, [gameId, navigate, isLoading]);
+
   const handlePreviousRoundButtonClicked = () => {
     selectRound(selectedRound - 1);
   };
 
-  const handleNextRoundbuttonClicked = () => {
+  const handleNextRoundButtonClicked = () => {
     selectRound(selectedRound + 1);
   };
 
@@ -86,7 +92,7 @@ export function GameScreen(): React.ReactElement {
 
         {isRoundCompleted && (
           <DefaultButton
-            onClick={handleNextRoundbuttonClicked}
+            onClick={handleNextRoundButtonClicked}
             title="Go to next round"
             label="Next round"
           />
