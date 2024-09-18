@@ -91,5 +91,5 @@ class Rounds(BaseModel):
     )
     scenario: str = Field(description="The scenario that the user is in.")
     options: list[str] = Field(
-        description="The options that the user has to choose from. Do not include list formatting just add the string. Limit to max 10 words."
+        description="The 3 options the user has to choose from. Do not include list formatting just add the string. Limit to max 10 words."
     )
