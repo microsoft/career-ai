@@ -11,16 +11,19 @@
   }
 }
 
+.brand {
+  display: block;
+  margin-bottom: 30px;
+}
+
 .left-nav-items {
   display: flex;
   flex-direction: column;
-  align-items: left;
+  align-items: normal;
   padding: 20px;
 }
 
 .nav-logo {
   max-height: 30px;
   width: auto;
-  margin-right: 10px;
-  margin-bottom: 30px;
 }

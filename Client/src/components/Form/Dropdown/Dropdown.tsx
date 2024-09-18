@@ -16,16 +16,24 @@ export type DropdownProps = {
 
 export function Dropdown(props: DropdownProps): React.ReactElement {
   const handleDropdownChanged = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     props.onChange(props.name, event.target.value);
   };
 
   return (
     <div className="dropdown-container">
-      {props.label && <label className="dropdown-label">{props.label}</label>}
+      {props.label && (
+        <label className="dropdown-label" htmlFor={props.name}>
+          {props.label}
+        </label>
+      )}
 
-      <select className="dropdown-root" onChange={handleDropdownChanged}>
+      <select
+        className="dropdown-root"
+        onChange={handleDropdownChanged}
+        name={props.name}
+      >
         {props.options.map((option) => (
           <option
             key={option.value}

@@ -86,10 +86,10 @@ class Routes:
                 }), 400
 
             try:
-                resposne = career_game.continue_game(
+                response = career_game.continue_game(
                     conversation_id, user_response)
 
-                return jsonify(resposne), 200
+                return jsonify(response), 200
             except Exception as e:
                 return jsonify({
                     "error": "GameError",

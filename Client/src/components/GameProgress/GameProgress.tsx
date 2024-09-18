@@ -8,10 +8,10 @@ export function GameProgress(): React.ReactElement {
     React.useContext<IAppContext>(AppContext);
 
   const completedRounds = rounds.filter(
-    (round) => round.optionSeleted !== null
+    (round) => round.optionSelected !== null
   ).length;
 
-  const progressPercentage = (completedRounds / numberOfRounds) * 100;
+  const progressPercentage = ((completedRounds + 1) / numberOfRounds) * 100;
 
   return (
     <div className="progress-bar-container">

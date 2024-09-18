@@ -1,7 +1,7 @@
+import json
+
 from uuid import uuid4
 from time import time
-import logging
-import json
 
 
 class CareerGame:
@@ -31,13 +31,15 @@ class CareerGame:
         self.message_history.append_user_message(
             conversation_id, self.game_prompts["userResponsePrompt"].format(career_choice))
 
-        self.logger.debug("message history: {}".format(self.message_history))
+        # self.logger.debug("message history: {}".format(self.message_history))
 
         return self.__process_game__(conversation_id)
 
     def continue_game(self, conversation_id, user_choice):
-        self.logger.debug(
-            "Continuing game with user choice: {}".format(user_choice))
+        print(conversation_id, user_choice)
+
+        # self.logger.debug(
+        #     "Continuing game with user choice: {}".format(user_choice))
         self.message_history.append_user_message(
             conversation_id, self.game_prompts["userResponsePrompt"].format(user_choice))
 
@@ -48,7 +50,7 @@ class CareerGame:
 
     def __process_game__(self, conversation_id):
         messages = self.message_history.get_messages(conversation_id)
-        self.logger.debug("Processing game with messages: {}".format(messages))
+        # self.logger.debug("Processing game with messages: {}".format(messages))
         response = None
 
         while response is None:
@@ -58,11 +60,7 @@ class CareerGame:
                 if open_ai_response is None:
                     continue
 
-                self.message_history.append_assistant_message(
-                    conversation_id, open_ai_response)
-
                 response = open_ai_response
-
             except Exception as e:
                 # Can we give it a max retries?
 
@@ -72,4 +70,9 @@ class CareerGame:
                 })
                 time.sleep(5)
 
-        return response
+        self.message_history.append_assistant_message(conversation_id, json.dumps(response))
+
+        return {
+            "conversationId": conversation_id,
+            "round": response
+        }
