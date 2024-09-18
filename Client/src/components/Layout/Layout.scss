@@ -29,11 +29,28 @@
   height: 100%;
 }
 
+.game-screen-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 50px 0;
+}
+
+.game-screen-margin-top {
+  margin-top: 100px;
+}
+
+.game-screen-content-margin {
+  margin: 50px 0;
+}
+
 .footer-container {
   flex-shrink: 0;
 }
 
-.groundhog-start {
+.careercraft-logo-start {
   max-width: 150px;
   height: auto;
   margin-bottom: 100px;
