@@ -36,6 +36,7 @@ button,
 input,
 select,
 textarea,
+.focusable,
 #main {
   &:focus {
     outline: 2px dashed $background-dark;

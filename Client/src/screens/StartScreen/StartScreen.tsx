@@ -1,4 +1,5 @@
 import React from "react";
+import { ErrorAlert } from "../../components/Form/ErrorAlert";
 import { useCareerGame } from "../../hooks/useCareerGame";
 import { IAppContext } from "../../models/IAppContext";
 import { AppContext } from "../../context/AppContext";
@@ -18,10 +19,15 @@ export function StartScreen(): React.ReactElement {
     React.useContext<IAppContext>(AppContext);
   const [title, setTitle] = React.useState<string>("");
   const navigate = useNavigate();
+  const [error, setError] = React.useState<string | null>(null);
 
   const handleStartButtonClicked = async (): Promise<void> => {
-    await startGame(title);
-    navigate(`/career-game`);
+    try {
+      await startGame(title);
+      navigate(`/career-game`);
+    } catch {
+      setError("Please try again with a valid career choice.");
+    }
   };
 
   React.useEffect(() => {
@@ -37,6 +43,8 @@ export function StartScreen(): React.ReactElement {
       />
       <H1>Welcome!</H1>
       <H1>What career would you like to explore?</H1>
+
+      <ErrorAlert message={error} />
 
       <TextField
         label="Career"
