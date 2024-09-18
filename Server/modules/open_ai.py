@@ -1,53 +1,53 @@
 import requests
 import json
+import logging
+import instructor
+from pydantic import BaseModel
+from openai import AzureOpenAI
+
+logger = logging.getLogger(__name__)
+
 
 class OpenAI:
-    def __init__(self, instance, model, key):
-        self.instance = instance
+    def __init__(
+        self,
+        api_version: str,
+        key,
+        openai_endpoint: str,
+        model: str,
+        max_tokens: int,
+        stream: bool,
+        telemetry,
+    ):
         self.model = model
         self.key = key
+        self.max_tokens = max_tokens
+        self.stream = stream
+        self.telemetry = telemetry
+        self.client = instructor.from_openai(
+            AzureOpenAI(
+                api_key=self.key,
+                api_version=api_version,
+                azure_endpoint=openai_endpoint,
+            ),
+        )
 
-    def chat(self, messages, temperature=0.7, top_p=0.95, frequency_penalty=0, presence_penalty=0, max_tokens=2048, number_of_responses=1, stop=None):
-        try:
-            response = requests.post(
-                self.instance,
-                headers={
-                    "Authorization": f"Bearer {self.key}",
-                    "Content-Type": "application/json"
-                },
-                data=json.dumps({
-                    "model": self.model,
-                    "messages": messages,
-                    "temperature": temperature,
-                    "top_p": top_p,
-                    "frequency_penalty": frequency_penalty,
-                    "presence_penalty": presence_penalty,
-                    "max_tokens": max_tokens,
-                    "n": number_of_responses,
-                    "stop": stop
-                })
-            )
-
-            # Print raw response content for debugging
-            print(f"Raw response content: {response.text}")
-
-            # Parse the response as JSON
-            json_obj = response.json()
-
-            if response.status_code != 200:
-                print("Error occurred during OpenAI API call.")
-                print(json_obj)
-                raise Exception(json_obj.get('error', {}).get('message', 'Unknown error'))
-
-            # Return the list of choices from the response
-            choices = json_obj.get('choices', [])
-            print(f"Number of choices received: {len(choices)}")
-            return choices
-
-        except requests.exceptions.RequestException as e:
-            print(f"RequestException: {e}")
-            raise
-
-        except json.JSONDecodeError as e:
-            print(f"JSONDecodeError: {e} - Response content: {response.text}")
-            raise
+    def make_request(
+        self, messages: list[str], response_model: BaseModel, retries: int
+    ):
+        for run in range(retries):
+            try:
+                response = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    max_tokens=self.max_tokens,
+                    stream=self.stream,
+                    response_model=response_model,
+                )
+                return response
+            except Exception as e:
+                error = str(e)
+                logger.info(
+                    f"Encountered exception while making gpt4o request: {error}"
+                )
+                raise
