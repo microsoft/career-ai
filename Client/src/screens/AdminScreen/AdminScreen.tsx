@@ -37,6 +37,14 @@ export function AdminScreen(): React.ReactElement {
         value={prompt.userResponsePrompt || ""}
       />
 
+      <TextField
+        label="Post game prompt"
+        multiline
+        name="postGamePrompt"
+        onChange={handlePromptUpdated}
+        value={prompt.postGamePrompt || ""}
+      />
+
       <ButtonBar>
         <PrimaryButton
           title="Save prompts"

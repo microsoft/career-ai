@@ -1,5 +1,9 @@
 .button-bar {
   margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* or space-around, space-between, etc. */
+  gap: 10px;
 
   & > .button {
     margin-right: 12px;
