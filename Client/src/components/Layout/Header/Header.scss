@@ -1,0 +1,32 @@
+@import "../../../variables.scss";
+
+.header-root {
+  height: 90px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.header-logo {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  max-height: 50px;
+  width: auto;
+}
+
+.nav-container {
+  margin-left: 50px;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.nav-list-item {
+  line-height: 50px;
+  font-weight: 600;
+  margin-left: 50px;
+}

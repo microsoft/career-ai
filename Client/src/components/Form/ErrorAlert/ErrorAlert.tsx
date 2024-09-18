@@ -16,7 +16,5 @@ export function ErrorAlert(props: ErrorAlertProps): React.ReactElement | null {
         return null;
     }
 
-    return <div className="error-alert-root focusable" tabIndex={-1} ref={ref}>
-        <span className="error-alert-bold">Error! </span>
-        {props.message}</div>
+    return <div className="error-alert-root focusable" tabIndex={-1} ref={ref}>{props.message}</div>
 }

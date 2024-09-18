@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Footer } from "./Footer";
-import { LeftNav } from "./LeftNav";
+import { Header } from "./Header";
 import { SkipToMain } from "./SkipToMain";
-import { RightAside } from "./RightAside";
 import "./Layout.scss";
 
 export type LayoutProps = {
@@ -15,8 +14,10 @@ export function Layout(props: LayoutProps): React.ReactElement {
   return (
     <>
       <SkipToMain />
+      <div className="header-container">
+        <Header />
+      </div>
       <div className="content-container">
-        <LeftNav />
         <div className="main-container">
           <main className="main" id="main" tabIndex={-1}>
             {children}
@@ -25,7 +26,6 @@ export function Layout(props: LayoutProps): React.ReactElement {
             <Footer />
           </div>
         </div>
-        <RightAside />
       </div>
     </>
   );
