@@ -5,7 +5,8 @@
 .content-container {
   display: flex;
   flex-direction: row;
-  height: calc(100% - 90px);
+  padding-top: 90px;
+  height: 100%;
 }
 
 .main-container {

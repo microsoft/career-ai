@@ -29,6 +29,9 @@ input {
 
 a {
   color: $primary-color;
+  @media (prefers-color-scheme: dark) {
+    color: $primary-color-dark;
+  }
 }
 
 a,
