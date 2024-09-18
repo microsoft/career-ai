@@ -5,6 +5,9 @@ export interface IAppContext {
   userName: string;
   setUserName: React.Dispatch<React.SetStateAction<string>>;
 
+  finalMessage: string;
+  setFinalMessage: React.Dispatch<React.SetStateAction<string>>;
+
   gameId: string | null;
 
   setGameId(gameId: string | null): void;

@@ -13,6 +13,7 @@ export function usePrompts(): [
   const [prompts, setPrompts] = React.useState<GamePrompts>({
     preGamePrompt: null,
     userResponsePrompt: null,
+    postGamePrompt: null,
   });
 
   const loadGamePrompts = () => {

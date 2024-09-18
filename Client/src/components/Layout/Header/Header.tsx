@@ -3,8 +3,31 @@ import { Link } from "react-router-dom";
 import "./Header.scss";
 
 export function Header(): React.ReactElement {
+  const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
+
+  const handleMobileMenuButtonClicked = () => {
+    setShowMobileMenu(!showMobileMenu);
+  };
+
+  const navContainerClassNames = ["nav-container"];
+  if (showMobileMenu) {
+    navContainerClassNames.push("show-mobile-menu");
+  }
+
   return (
     <header className="header-root">
+      <button
+        className="header-mobile-menu"
+        title="Toggle menu"
+        aria-expanded={showMobileMenu}
+        aria-haspopup="menu"
+        onClick={handleMobileMenuButtonClicked}
+      >
+        <div className="header-mobile-bar"></div>
+        <div className="header-mobile-bar"></div>
+        <div className="header-mobile-bar"></div>
+      </button>
+
       <div className="brand-container">
         <Link to="/" title="Go to CareerCraft Home page" className="brand">
           <img
@@ -15,7 +38,7 @@ export function Header(): React.ReactElement {
         </Link>
       </div>
 
-      <nav className="nav-container">
+      <nav className={navContainerClassNames.join(" ")}>
         <ul className="nav-list">
           <li className="nav-list-item">
             <Link to="/" title="Go to Career game page">

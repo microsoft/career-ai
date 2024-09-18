@@ -3,8 +3,49 @@
 .header-root {
   height: 90px;
   padding: 20px;
+  width: 100%;
   display: flex;
   flex-direction: row;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $default-color;
+  z-index: 10000;
+
+  @media(prefers-color-scheme: dark) {
+    background-color: $background-dark;
+  }
+}
+
+.header-mobile-menu {
+  cursor: pointer;
+  border: 2px solid $background-light;
+  width: 50px;
+  height: 50px;
+  background: none;
+  margin-right: 20px;
+  margin-left: -10px;
+  z-index: 10000;
+
+  @media(min-width: 1070px) {
+    display: none;
+  }
+
+  @media(prefers-color-scheme: dark) {
+    border: 2px solid $background-dark;
+  }
+}
+
+.header-mobile-bar {
+  margin: 7.5px 0;
+  width: 35px;
+  height: 3px;
+  background-color: $font-text-light;
+  transition: 0.4s;
+
+  @media(prefers-color-scheme: dark) {
+    background-color: $font-text-dark;
+  }
 }
 
 .header-logo {
@@ -16,6 +57,38 @@
 
 .nav-container {
   margin-left: 50px;
+  display: none;
+
+  &.show-mobile-menu {
+    display: block;
+    position: fixed;
+    top: 90px;
+    left: 0;
+    margin-left: 0;
+    width: 100%;
+    border-bottom: 1px solid $border-color-light;
+
+    @media(prefers-color-scheme: dark) {
+      border-bottom: 1px solid $border-color-dark;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      background-color: $default-color;
+
+      @media(prefers-color-scheme: dark) {
+        background-color: $background-dark;
+      }
+
+      .nav-list-item {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  @media(min-width: 1070px) {
+    display: block !important;
+  }
 }
 
 .nav-list {

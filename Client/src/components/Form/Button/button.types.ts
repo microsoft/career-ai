@@ -3,4 +3,5 @@ export type ButtonProps = {
   title: string;
   label: string;
   classNames?: string;
+  disabled?: boolean;
 };

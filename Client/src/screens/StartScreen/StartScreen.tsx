@@ -49,9 +49,9 @@ export function StartScreen(): React.ReactElement {
   return (
     <div className="start-screen-center">
       <img
-        src="groundhog.png"
-        alt="Groundhog character"
-        className="groundhog-start"
+        src="CC_Logo.png"
+        alt="Career Craft Logo"
+        className="careercraft-logo-start"
       />
       <H1>Welcome to CareerCraft!</H1>
 

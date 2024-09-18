@@ -40,8 +40,6 @@ class CareerGame:
         return self.__process_game__(conversation_id)
 
     def continue_game(self, conversation_id, user_choice):
-        print(conversation_id, user_choice)
-
         # self.logger.debug(
         #     "Continuing game with user choice: {}".format(user_choice))
         self.message_history.append_user_message(
@@ -50,8 +48,11 @@ class CareerGame:
 
         return self.__process_game__(conversation_id)
 
-    def end_game(self, conversation_id):
-        raise NotImplementedError
+    def complete_game(self, conversation_id, user_choice):
+        self.message_history.append_user_message(
+            conversation_id, self.game_prompts["postGamePrompt"].format(user_choice))
+
+        return self.__process_game__(conversation_id)
 
     def __process_game__(self, conversation_id):
         messages = self.message_history.get_messages(conversation_id)
