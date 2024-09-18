@@ -50,7 +50,8 @@ class CareerGame:
 
     def complete_game(self, conversation_id, user_choice):
         self.message_history.append_user_message(
-            conversation_id, self.game_prompts["postGamePrompt"].format(user_choice))
+            conversation_id, self.game_prompts["postGamePrompt"].format(user_choice)
+        )
 
         return self.__process_game__(conversation_id)
 
@@ -65,11 +66,11 @@ class CareerGame:
                 open_ai_response = self.open_ai.make_request(
                     messages, response_model=Rounds, retries=3
                 )
-                print(f"open_ai_response: {open_ai_response}")
                 if open_ai_response is None:
                     continue
 
-                response = open_ai_response
+                response = json.loads(open_ai_response.model_dump_json())
+                print(f"response: {response}")
             except Exception as e:
                 # Can we give it a max retries?
 
@@ -92,5 +93,5 @@ class Rounds(BaseModel):
     )
     scenario: str = Field(description="The scenario that the user is in.")
     options: list[str] = Field(
-        description="The 3 options the user has to choose from. Do not include list formatting just add the string. Limit to max 10 words."
+        description="The 3 options the user has to choose from. Do not include list formatting just add the string."
     )
