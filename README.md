@@ -4,7 +4,7 @@
 
 ### Pre-requisites
 
-1. Install Azure CLI and authenticate to Azure subscription using `az login`.
+1. Install Azure CLI and authenticate to Azure subscription using `az login`
 2. Install python
 3. Install node.js
 
