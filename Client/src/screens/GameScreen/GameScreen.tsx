@@ -24,7 +24,7 @@ export function GameScreen(): React.ReactElement {
   usePageTracking("GameScreen");
 
   const navigate = useNavigate();
-  const { continueGame, isLoading } = useCareerGame();
+  const { continueGame, completeGame, isLoading } = useCareerGame();
   const {
     rounds,
     selectRound,
@@ -46,7 +46,7 @@ export function GameScreen(): React.ReactElement {
     const cleanedOption = cleanOption(option);
 
     if (optionIndex !== -1) {
-      await completeRound(selectedRound, optionIndex);
+      completeRound(selectedRound, optionIndex);
       await continueGame(gameId!, cleanedOption);
       if (selectedRound < numberOfRounds - 1) {
         selectRound(selectedRound + 1);
@@ -69,8 +69,8 @@ export function GameScreen(): React.ReactElement {
   const handleCompleteGameButtonClicked = async () => {
     const firstOption = round.options[0];
     const cleanedOption = cleanOption(firstOption);
-    await completeRound(selectedRound, 0);
-    await continueGame(gameId!, cleanedOption);
+    completeRound(selectedRound, 0);
+    await completeGame(gameId!, cleanedOption);
     navigate("/career-game/results");
   };
 

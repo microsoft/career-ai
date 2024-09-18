@@ -1,11 +1,12 @@
 import React from "react";
 import { AppContext } from "../context/AppContext";
-import { GameResponse } from "../models/GameResponse";
+import { GameResponse, GameResultResponse } from "../models/GameResponse";
 import { IAppContext } from "../models/IAppContext";
 import { Http } from "../services/Http";
 
 export function useCareerGame() {
-  const { addRound, setGameId } = React.useContext<IAppContext>(AppContext);
+  const { addRound, setGameId, setFinalMessage } =
+    React.useContext<IAppContext>(AppContext);
   const [isLoading, setLoading] = React.useState<boolean>(false);
 
   const startGame = async (career: string): Promise<void> => {
@@ -22,28 +23,31 @@ export function useCareerGame() {
         if (response.data.round?.options?.length === 0)
           throw new Error("InvalidCareerChoice");
 
-        setGameId(response.data.conversationId)
+        setGameId(response.data.conversationId);
         addRound({
           ...response.data.round,
           optionSelected: null,
         });
       }
     } catch (error: any) {
-      throw new Error("FailedToStartGame")
+      throw new Error("FailedToStartGame");
     } finally {
       setLoading(false);
     }
   };
 
-  const continueGame = async (gameId: string, userResponse: string): Promise<void> => {
+  const continueGame = async (
+    gameId: string,
+    userResponse: string,
+  ): Promise<void> => {
     try {
       setLoading(true);
       const response = await Http.getInstance().post<GameResponse>(
-          "/api/career-game/continue",
-          {
-            conversationId: gameId,
-            response: userResponse,
-          },
+        "/api/career-game/continue",
+        {
+          conversationId: gameId,
+          response: userResponse,
+        },
       );
 
       if (response.ok && response.data) {
@@ -53,18 +57,40 @@ export function useCareerGame() {
         });
       }
     } catch (error: any) {
-      console.log(error)
+      console.log(error);
     } finally {
       setLoading(false);
     }
   };
 
-  const completeGame = async (response: string): Promise<void> => {};
+  const completeGame = async (
+    gameId: string,
+    userResponse: string,
+  ): Promise<void> => {
+    try {
+      setLoading(true);
+      const response = await Http.getInstance().post<GameResultResponse>(
+        "/api/career-game/complete",
+        {
+          conversationId: gameId,
+          response: userResponse,
+        },
+      );
+
+      if (response.ok && response.data) {
+        setFinalMessage(response.data.round.outcome);
+      }
+    } catch (error: any) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return {
     startGame,
     continueGame,
     completeGame,
     isLoading,
-  }
+  };
 }

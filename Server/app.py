@@ -28,6 +28,7 @@ def build_game(app, telemetry):
     game_prompts = {
         "preGamePrompt": app.config["preGamePrompt"],
         "userResponsePrompt": app.config["userResponsePrompt"],
+        "postGamePrompt": app.config["postGamePrompt"],
     }
 
     return CareerGame(game_prompts=game_prompts, message_history=message_history, open_ai=open_ai, telemetry=telemetry, logger=app.logger)
