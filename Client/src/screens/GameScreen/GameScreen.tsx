@@ -15,6 +15,7 @@ import { GameProgress } from "../../components/GameProgress";
 const cleanOption = (option: string): string => {
   let cleaned = option.trim();
   cleaned = cleaned.replace(/[-•●○•—]/g, '');
+  // eslint-disable-next-line
   cleaned = cleaned.replace(/^\d+\.?\s?|^\w+\:?\s?/i, '');
   return cleaned.trim();
 };
