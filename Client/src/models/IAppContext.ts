@@ -1,6 +1,10 @@
+import React from "react";
 import { GameRound } from "./GameRound";
 
 export interface IAppContext {
+  userName: string;
+  setUserName: React.Dispatch<React.SetStateAction<string>>;
+
   gameId: string | null;
 
   setGameId(gameId: string | null): void;

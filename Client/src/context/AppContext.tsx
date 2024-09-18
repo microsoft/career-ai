@@ -8,6 +8,7 @@ export const AppContext = React.createContext<IAppContext>({});
 export function AppContextProvider(
   props: React.PropsWithChildren<{}>,
 ): React.ReactElement {
+  const [userName, setUserName] = React.useState<string>("");
   const [numberOfRounds, setNumberOfRounds] = React.useState<number>(5);
   const [gameRounds, setGameRounds] = React.useState<GameRound[]>([]);
   const [selectedRound, setSelectedRound] = React.useState<number>(0);
@@ -52,6 +53,8 @@ export function AppContextProvider(
   return (
     <AppContext.Provider
       value={{
+        userName,
+        setUserName,
         gameId,
         setGameId,
         numberOfRounds,
