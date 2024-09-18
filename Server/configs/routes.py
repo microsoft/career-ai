@@ -65,9 +65,9 @@ class Routes:
                 }), 400
 
             try:
-                resposne = career_game.start_game(career_choice)
+                response = career_game.start_game(career_choice)
 
-                return jsonify(resposne), 200
+                return jsonify(response), 200
             except Exception as e:
                 return jsonify({
                     "error": "GameError",
@@ -98,10 +98,25 @@ class Routes:
 
         @app.route('/api/career-game/complete', methods=['POST'])
         def complete_career_game():
-            return jsonify({
-                "error": "GameError",
-                "message": "Game could not be completed"
-            }), 500
+            request_body = request.json
+            conversation_id = request_body.get('conversationId', "")
+            user_response = request_body.get('response', "")
+            if conversation_id == "" or user_response == "":
+                return jsonify({
+                    "error": "BadRequest",
+                    "message": "conversationId and response are required"
+                }), 400
+
+            try:
+                response = career_game.complete_game(
+                    conversation_id, user_response)
+
+                return jsonify(response), 200
+            except Exception as e:
+                return jsonify({
+                    "error": "GameError",
+                    "message": "Game could not be completed"
+                }), 500
 
         @app.route('/api/career-game/admin/prompts', methods=['GET'])
         def get_career_game_prompts():
@@ -112,21 +127,25 @@ class Routes:
             request_body = request.json
             preGamePrompt = request_body.get('preGamePrompt', "")
             userResponsePrompt = request_body.get('userResponsePrompt', "")
+            postGamePrompt = request_body.get('postGamePrompt', "")
 
-            if preGamePrompt == "" or userResponsePrompt == "":
+            if preGamePrompt == "" or userResponsePrompt == "" or postGamePrompt == "":
                 return jsonify({
                     "error": "BadRequest",
-                    "message": "preGamePrompt and userResponsePrompt are required"
+                    "message": "All prompts are required"
                 }), 400
 
             try:
                 Config.update_configs(app, "preGamePrompt", preGamePrompt)
                 Config.update_configs(
                     app, "userResponsePrompt", userResponsePrompt)
+                Config.update_configs(
+                    app, "postGamePrompt", postGamePrompt)
 
                 game_prompts = {
                     "preGamePrompt": app.config["preGamePrompt"],
                     "userResponsePrompt": app.config["userResponsePrompt"],
+                    "postGamePrompt": app.config["postGamePrompt"],
                 }
                 career_game.update_prompts(game_prompts)
             except:
