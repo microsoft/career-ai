@@ -24,7 +24,7 @@ export function GameScreen(): React.ReactElement {
   usePageTracking("GameScreen");
 
   const navigate = useNavigate();
-  const { continueGame, completeGame, isLoading } = useCareerGame();
+  const { continueGame, isLoading } = useCareerGame();
   const {
     rounds,
     selectRound,
@@ -66,49 +66,46 @@ export function GameScreen(): React.ReactElement {
     selectRound(selectedRound + 1);
   };
 
-  const handleCompleteGameButtonClicked = async () => {
-    const firstOption = round.options[0];
-    const cleanedOption = cleanOption(firstOption);
-    completeRound(selectedRound, 0);
-    await completeGame(gameId!, cleanedOption);
-    navigate("/career-game/results");
-  };
-
   const isRoundCompleted = round?.optionSelected !== null;
-  const isLastRound = selectedRound === numberOfRounds - 1;
 
   return (
     <div className="game-screen-margin-top">
       <H1>Round {selectedRound + 1}</H1>
 
       <GameProgress />
+      <ButtonBar>
+        {selectedRound !== 0 && (
+          <DefaultButton
+            onClick={handlePreviousRoundButtonClicked}
+            title="Go to previous round"
+            label="Previous round"
+          />
+        )}
 
-      <div  className="game-screen-center">
+        {isRoundCompleted && (
+          <DefaultButton
+            onClick={handleNextRoundButtonClicked}
+            title="Go to next round"
+            label="Next round"
+          />
+        )}
+      </ButtonBar>
+
+      <div className="game-screen-margin-top">
         <div>
           <H2>Scenario</H2>
           <p>{round.scenario}</p>
         </div>
 
         <div className="game-screen-content-margin">
+          <H2>Outcome</H2>
+          <p>{round.outcome}</p>
+        </div>
+
+        <div className="game-screen-content-margin">
           <H2>Options</H2>
           <ButtonBar>
-            {selectedRound !== 0 && (
-              <DefaultButton
-                onClick={handlePreviousRoundButtonClicked}
-                title="Go to previous round"
-                label="Previous round"
-              />
-            )}
-
-            {isLastRound && (
-              <PrimaryButton
-                onClick={handleCompleteGameButtonClicked}
-                title="Complete game"
-                label="Complete game"
-              />
-            )}
-
-            {!isLastRound && round.options.map((option, index) => (
+            {round.options.map((option, index) => (
               <PrimaryButton
                 key={index}
                 onClick={() => handleOptionSelected(option)}
@@ -117,14 +114,6 @@ export function GameScreen(): React.ReactElement {
                 disabled={isRoundCompleted}
               />
             ))}
-
-            {isRoundCompleted && (
-              <DefaultButton
-                onClick={handleNextRoundButtonClicked}
-                title="Go to next round"
-                label="Next round"
-              />
-            )}
           </ButtonBar>
         </div>
       </div>
