@@ -24,7 +24,7 @@ export function GameScreen(): React.ReactElement {
   usePageTracking("GameScreen");
 
   const navigate = useNavigate();
-  const { continueGame, isLoading } = useCareerGame();
+  const { continueGame, completeGame, isLoading } = useCareerGame();
   const {
     rounds,
     selectRound,
@@ -47,10 +47,11 @@ export function GameScreen(): React.ReactElement {
 
     if (optionIndex !== -1) {
       completeRound(selectedRound, optionIndex);
-      await continueGame(gameId!, cleanedOption);
       if (selectedRound < numberOfRounds - 1) {
+        await continueGame(gameId!, cleanedOption);
         selectRound(selectedRound + 1);
       } else {
+        await completeGame(gameId!, cleanedOption);
         navigate("/career-game/results");
       }
     } else {
@@ -92,33 +93,33 @@ export function GameScreen(): React.ReactElement {
       </ButtonBar>
 
       <div className="game-screen-margin-top">
+        <div className="game-screen-content-margin">
+          <H2>Outcome</H2>
+          <p>{round.outcome}</p>
+        </div>
+
         <div>
           <H2>Scenario</H2>
           <p>{round.scenario}</p>
         </div>
 
         <div className="game-screen-content-margin">
-          <H2>Outcome</H2>
-          <p>{round.outcome}</p>
-        </div>
-
-        <div className="game-screen-content-margin">
           <H2>Options</H2>
           <ButtonBar>
             {round.options.map((option, index) => (
-              <PrimaryButton
-                key={index}
-                onClick={() => handleOptionSelected(option)}
-                title={`Select ${option}`}
-                label={option}
-                disabled={isRoundCompleted}
-              />
+                <PrimaryButton
+                    key={index}
+                    onClick={() => handleOptionSelected(option)}
+                    title={`Select ${option}`}
+                    label={option}
+                    disabled={isRoundCompleted}
+                />
             ))}
           </ButtonBar>
         </div>
       </div>
 
-      <Spinner show={isLoading} />
+      <Spinner show={isLoading}/>
     </div>
   );
 }
