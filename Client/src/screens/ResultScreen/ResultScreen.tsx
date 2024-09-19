@@ -55,9 +55,9 @@ export function ResultScreen(): React.ReactElement {
         </ul>
         <button
           onClick={() => {
-            const link = document.createElement("a");
-            link.href = "/career_craft_certificate.png";
-            link.download = "career_craft_certificate.png";
+            const link = document.createElement('a');
+            link.href = '/career_craft_certificate_with_logo.png';
+            link.download = 'career_craft_certificate_with_logo.png';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
