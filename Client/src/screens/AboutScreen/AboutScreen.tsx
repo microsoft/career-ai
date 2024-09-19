@@ -33,22 +33,28 @@ export function AboutScreen(): React.ReactElement {
         <H2>The Team</H2>
         <ul className="team-list">
           <li className="team-member">
-            <strong>Augustus Willman</strong> - <span className="team-description">Lead Developer. Augustus has 10 years of experience in full-stack development and is passionate about creating impactful web applications.</span>
+            <strong>Augustus Willman</strong> - <span className="team-description">Team Leader. Augustus is an over-all badass with a natural skill to charm people, which has been key to the conception of this team. Aside from this he is an awesome musician</span>
           </li>
           <li className="team-member">
             <strong>Wong Song</strong> - <span className="team-description">UX/UI Designer. Wong specializes in designing intuitive interfaces that focus on user experience and accessibility.</span>
           </li>
           <li className="team-member">
-            <strong>Ryan Pethel</strong> - <span className="team-description">Backend Engineer. Ryan is a master in database management and building robust server-side logic.</span>
+            <strong>Ryan Pethel</strong> - <span className="team-description">UX/UI Designer. Playing John to Won's Paul, Ryan has provided some cool visuals to Career Craft's Webapp (confetti, anyone?)</span>
           </li>
           <li className="team-member">
-            <strong>David Berquist</strong> - <span className="team-description">Backend Engineer. Ryan is a master in database management and building robust server-side logic.</span>
+            <strong>David Berquist</strong> - <span className="team-description">Backend Engineer. David is a master in database management and building robust server-side logic.</span>
           </li>
           <li className="team-member">
-            <strong>Giovanni Ferioli</strong> - <span className="team-description">Frontend Engineer. Giovanni brings creativity to the team, focusing on dynamic and responsive front-end designs.</span>
+            <strong>Giovanni Ferioli</strong> - <span className="team-description">Backend Engineer. Giovanni is yet another badass who brings mad skills in backend development and git.</span>
           </li>
           <li className="team-member">
-            <strong>Carlos Rodriguez</strong> - <span className="team-description">Product Manager. Carlos ensures that the team’s projects are aligned with user needs and business goals.</span>
+            <strong>Carlos Rodriguez</strong> - <span className="team-description">Fullstack Developer. Carlos is a jack-of-all-trades, messing with both, the fronten and the backend code alike.</span>
+          </li>
+          <li className="team-member">
+            <strong>Michelle</strong> - <span className="team-description"></span>
+          </li>
+          <li className="team-member">
+            <strong>Tricia</strong> - <span className="team-description"></span>
           </li>
         </ul>
 
