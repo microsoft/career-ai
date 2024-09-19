@@ -6,7 +6,6 @@ import "../../Pages.css"; // Importing a new CSS file for custom styling
 
 export function PartnersScreen(): React.ReactElement {
   usePageTracking("PartnersScreen");
-  const [prompt, setPrompt, isLoading] =
     usePrompts();
 
   return (

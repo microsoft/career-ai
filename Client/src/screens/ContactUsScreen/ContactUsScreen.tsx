@@ -6,7 +6,6 @@ import "../../Pages.css"; // Importing a new CSS file for custom styling
 
 export function ContactUsScreen(): React.ReactElement {
   usePageTracking("ContactUsScreen");
-  const [prompt, setPrompt, isLoading] =
     usePrompts();
 
   return (
