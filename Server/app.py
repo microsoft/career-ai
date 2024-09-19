@@ -30,7 +30,7 @@ def build_game(app, telemetry):
         key=app.config["azureOpenAIKey"],
         openai_endpoint="https://careercraft-azureopenai.openai.azure.com",
         model="gpt-4o",
-        max_tokens=4096,
+        max_tokens=500,
         stream=False,
         telemetry=telemetry,
     )
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     Routes.register_system_routes(app, telemetry)
 
     logging.basicConfig(
-        level=logging.DEBUG,  # Change this to logging.INFO for production
+        level=logging.INFO,  # Change this to logging.INFO for production
         format="%(asctime)s %(levelname)s: %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
     )
