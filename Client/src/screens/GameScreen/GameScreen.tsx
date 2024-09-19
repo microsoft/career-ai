@@ -74,48 +74,57 @@ export function GameScreen(): React.ReactElement {
       <H1>Round {selectedRound + 1}</H1>
 
       <GameProgress />
-      <ButtonBar>
-        {selectedRound !== 0 && (
-          <DefaultButton
-            onClick={handlePreviousRoundButtonClicked}
-            title="Go to previous round"
-            label="Previous round"
-          />
-        )}
+      <div className="round-selection-buttons">
+        <ButtonBar>
+          {selectedRound !== 0 && (
+            <DefaultButton
+              onClick={handlePreviousRoundButtonClicked}
+              title="Go to previous round"
+              label="Previous round"
+            />
+          )}
 
-        {isRoundCompleted && (
-          <DefaultButton
-            onClick={handleNextRoundButtonClicked}
-            title="Go to next round"
-            label="Next round"
-          />
-        )}
-      </ButtonBar>
+          {isRoundCompleted && (
+            <DefaultButton
+              onClick={handleNextRoundButtonClicked}
+              title="Go to next round"
+              label="Next round"
+            />
+          )}
+        </ButtonBar>
+      </div>
 
       <div className="game-screen-margin-top">
-        <div className="game-screen-content-margin">
+        <div>
           <H2>Outcome</H2>
           <p>{round.outcome}</p>
         </div>
 
-        <div>
+        <div className="game-screen-content-margin">
           <H2>Scenario</H2>
           <p>{round.scenario}</p>
         </div>
 
         <div className="game-screen-content-margin">
+          <H2>Outcome</H2>
+          <p>{round.outcome}</p>
+        </div>
+
+        <div className="game-screen-content-margin">
           <H2>Options</H2>
-          <ButtonBar>
-            {round.options.map((option, index) => (
+          <div className="options-selection-buttons">
+            <ButtonBar>
+              {round.options.map((option, index) => (
                 <PrimaryButton
-                    key={index}
-                    onClick={() => handleOptionSelected(option)}
-                    title={`Select ${option}`}
-                    label={option}
-                    disabled={isRoundCompleted}
+                  key={index}
+                  onClick={() => handleOptionSelected(option)}
+                  title={`Select ${option}`}
+                  label={option}
+                  disabled={isRoundCompleted}
                 />
-            ))}
-          </ButtonBar>
+              ))}
+            </ButtonBar>
+          </div>
         </div>
       </div>
 
