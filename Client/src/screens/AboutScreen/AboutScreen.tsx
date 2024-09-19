@@ -19,42 +19,57 @@ export function AboutScreen(): React.ReactElement {
       <H1>About Us</H1>
 
       <section className="about-section">
-        <H2>Career Craft</H2>
+        <H2>Mission</H2>
         <p className="section-description">
-          Career Craft provides a safe, simulated environment where users can
-          explore different career paths. For each career chosen, users are
-          presented with scenarios specific to that profession. Each scenario
-          provides three choices, and the user's decisions influence their
-          career trajectory in the app.
+          To empower people with disabilities and the nonprogits that serve them by providing technology, resources and tools that open the door
+          to career exploration and support the journey towards meaningful employment.
+        </p>
+      </section>
+
+      <section className="about-section">
+        <H2>Gamify AI</H2>
+        <p className="section-description">
+          We partnered with NW Works to build and app that provides a safe, low-risk environment for people with disabilities
+          to explore career options and gain valuable skillsets to support their mission to empower individuals with disabilities
+          in securing and sustaining meaningful employment.
         </p>
       </section>
 
       <section className="team-section">
         <H2>The Team</H2>
         <ul className="team-list">
-          <li className="team-member">
-            <strong>Augustus Willman</strong> - <span className="team-description">Team Leader. Augustus is an over-all badass with a natural skill to charm people, which has been key to the conception of this project. Aside from this he is an awesome musician</span>
+        <li className="team-member">
+            <strong>Augustus Willman</strong> - <span className="team-description">Accessibility</span>
           </li>
           <li className="team-member">
-            <strong>Wong Song</strong> - <span className="team-description">UX/UI Designer. Wong specializes in designing intuitive interfaces that focus on user experience and accessibility.</span>
+            <strong>Won Song</strong> - <span className="team-description">Front End Development</span>
           </li>
           <li className="team-member">
-            <strong>Ryan Pethel</strong> - <span className="team-description">UX/UI Designer. Playing John to Won's Paul, Ryan has provided some cool visuals to Career Craft's Webapp (confetti, anyone?)</span>
+            <strong>David Berquist</strong> - <span className="team-description">AI Development</span>
           </li>
           <li className="team-member">
-            <strong>David Berquist</strong> - <span className="team-description">Backend Engineer. David is a master in database management and building robust server-side logic.</span>
+            <strong>Ryan Pethel</strong> - <span className="team-description">Front End Development</span>
           </li>
           <li className="team-member">
-            <strong>Giovanni Ferioli</strong> - <span className="team-description">Backend Engineer. Giovanni is yet another badass who brings mad skills in backend development and git.</span>
+            <strong>Giovanni Ferioli</strong> - <span className="team-description">Back End Development</span>
           </li>
           <li className="team-member">
-            <strong>Carlos Rodriguez</strong> - <span className="team-description">Fullstack Developer. Carlos is a jack-of-all-trades, messing with both, the fronten and the backend code alike.</span>
+            <strong>Carlos Rodriguez</strong> - <span className="team-description">Back End Development</span>
           </li>
           <li className="team-member">
-            <strong>Michelle</strong> - <span className="team-description"></span>
+            <strong>Michelle Jones</strong> - <span className="team-description">Project Support</span>
           </li>
           <li className="team-member">
-            <strong>Tricia</strong> - <span className="team-description"></span>
+            <strong>Teresa Wong</strong> - <span className="team-description">Accessibility</span>
+          </li>
+          <li className="team-member">
+            <strong>Tricia McIntosh</strong> - <span className="team-description">Project Support</span>
+          </li>
+          <li className="team-member">
+            <strong>Balinda Moreland</strong> - <span className="team-description">Product Advisor</span>
+          </li>
+          <li className="team-member">
+            <strong>Ryan Johnson</strong> - <span className="team-description">General Development</span>
           </li>
         </ul>
 
