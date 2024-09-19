@@ -29,10 +29,9 @@ export function StartScreen(): React.ReactElement {
   const handleStartButtonClicked = async (): Promise<void> => {
     setError(null);
     if (!title || !userName) {
-        setError("Name and career are required.");
-        return;
+      setError("Name and career are required.");
+      return;
     }
-
 
     try {
       await startGame(title);
@@ -71,7 +70,9 @@ export function StartScreen(): React.ReactElement {
         label="What career are you interested in?"
         name="title"
         onChange={(name: string, value: string) => {
-          setTitle(value);
+          if (value.length <= 40) {
+            setTitle(value);
+          }
         }}
         value={title}
         placeholder="Enter a career name"
