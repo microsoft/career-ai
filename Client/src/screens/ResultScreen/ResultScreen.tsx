@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { H1 } from "../../components/Typography";
 import { H2 } from "../../components/Typography";
+
 import { AppContext } from "../../context/AppContext";
 import { usePageTracking } from "../../hooks/usePageTracking";
 import { IAppContext } from "../../models/IAppContext";
@@ -10,7 +11,8 @@ import { PrimaryButton } from "../../components/Form/Button";
 
 export function ResultScreen(): React.ReactElement {
   usePageTracking("ResultScreen");
-  const { finalMessage, userName } = React.useContext<IAppContext>(AppContext);
+  const { summary, lessons, userName } =
+    React.useContext<IAppContext>(AppContext);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [showConfetti, setShowConfetti] = useState(true);
@@ -22,7 +24,7 @@ export function ResultScreen(): React.ReactElement {
       setWindowHeight(window.innerHeight);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Set timer to start fading confetti after 6 seconds
     const fadeTimer = setTimeout(() => {
@@ -31,7 +33,7 @@ export function ResultScreen(): React.ReactElement {
     }, 15000);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
       clearTimeout(fadeTimer);
     };
   }, []);
@@ -45,7 +47,12 @@ export function ResultScreen(): React.ReactElement {
           className="careercraft-award-logo"
         />
         <H1>Great work, {userName}!</H1>
-        <H2>{finalMessage}</H2>
+        <H2>{summary}</H2>
+        <ul>
+          {lessons.map((lesson, index) => (
+            <li key={index}>{lesson}</li>
+          ))}
+        </ul>
         <button
           onClick={() => {
             const link = document.createElement('a');
@@ -82,4 +89,3 @@ export function ResultScreen(): React.ReactElement {
     </div>
   );
 }
-

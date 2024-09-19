@@ -5,7 +5,7 @@ import { IAppContext } from "../models/IAppContext";
 import { Http } from "../services/Http";
 
 export function useCareerGame() {
-  const { addRound, setGameId, setFinalMessage } =
+  const { addRound, setGameId, setSummary, setLessons } =
     React.useContext<IAppContext>(AppContext);
   const [isLoading, setLoading] = React.useState<boolean>(false);
 
@@ -78,7 +78,9 @@ export function useCareerGame() {
       );
 
       if (response.ok && response.data) {
-        setFinalMessage(response.data.round.outcome);
+        console.log(response.data);
+        setSummary(response.data.round.summary);
+        setLessons(response.data.round.lessons);
       }
     } catch (error: any) {
       console.log(error);
