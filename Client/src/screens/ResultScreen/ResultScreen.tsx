@@ -39,7 +39,7 @@ export function ResultScreen(): React.ReactElement {
         <img
           src="AwardRibbon.png"
           alt="Award Ribbon"
-          className="careercraft-logo-start"
+          className="careercraft-award-logo"
         />
         <H1>Great work, {userName}!</H1>
         {finalMessage}
