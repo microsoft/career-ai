@@ -124,5 +124,5 @@ class ValidCareerChoice(BaseModel):
 
 
 class Final_page(BaseModel):
-    final_recap: str = Field("A brief summary of the career game just played")
-    lessons_learned: list[str] = Field("All the lessons learned from the career game")
+    summary: str = Field("A brief summary of the career game just played")
+    lessons: list[str] = Field("All the lessons learned from the career game")
