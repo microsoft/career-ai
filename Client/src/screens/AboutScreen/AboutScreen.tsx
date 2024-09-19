@@ -2,17 +2,12 @@ import React from "react";
 import { usePrompts } from "../../hooks/usePrompts";
 import { H1, H2 } from "../../components/Typography";
 import { usePageTracking } from "../../hooks/usePageTracking";
-import { Spinner } from "../../components/Spinner";
 import "../../Pages.css"; // Importing a new CSS file for custom styling
 
 export function AboutScreen(): React.ReactElement {
   usePageTracking("AboutScreen");
-  const [prompt, setPrompt, savePrompts, reloadPrompts, isLoading] =
+  const [prompt, setPrompt, isLoading] =
     usePrompts();
-
-  const handlePromptUpdated = (name: string, value: string) => {
-    setPrompt({ ...prompt, [name]: value });
-  };
 
   return (
     <div className="about-container">
@@ -77,7 +72,6 @@ export function AboutScreen(): React.ReactElement {
 
       </section>
 
-      <Spinner show={isLoading} />
     </div>
   );
 }
