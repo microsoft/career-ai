@@ -19,14 +19,8 @@ export function PartnersScreen(): React.ReactElement {
               Since its founding in 1970, NW Works has been a support system,
               helping adults with disabilities and individuals encountering
               barriers to employment develop skills and find stable, rewarding
-              jobs.
-            </p>
-          </li>
-          <li className="partner-item">
-            <H2>Microsoft</H2>
-            <p className="partner-description">
-              The Hackathon is an annual event at Microsoft where employees
-              collaborate on innovative projects that solve real-world problems.
+              jobs.<br></br>
+              <a href="https://www.nwworks.com/">NWW Web</a>
             </p>
           </li>
         </ul>

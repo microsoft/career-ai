@@ -13,9 +13,7 @@ export function ContactUsScreen(): React.ReactElement {
       <H1>Contact Us</H1>
 
       <div className="contact-info">
-        <p>Email: <a href="mailto:info@nwworks.com">info@nwworks.com</a></p>
-        <p>Phone: <a href="tel:540-667-0809">540-667-0809</a></p>
-        <p>Address: 3085 Shawnee Drive, Winchester, VA 22601</p>
+        <p>Email: <a href="mailto:awillman@microsoft.com">awillman@microsoft.com</a></p>
       </div>
 
     </div>
