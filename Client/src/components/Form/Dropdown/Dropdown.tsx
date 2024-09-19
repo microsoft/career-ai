@@ -32,14 +32,12 @@ export function Dropdown(props: DropdownProps): React.ReactElement {
       <select
         className="dropdown-root"
         onChange={handleDropdownChanged}
+        aria-label={props.label}
         name={props.name}
         value={props.value}
       >
         {props.options.map((option) => (
-          <option
-            key={option.value}
-            value={option.value}
-          >
+          <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
