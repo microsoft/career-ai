@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 99999;
   background-color: rgba(255, 255, 255, 0.8);
 
   @media (prefers-color-scheme: dark) {
@@ -18,17 +18,23 @@
 }
 
 .spinner-root {
+  display: block;
   border: 8px solid $border-color-light;
   border-top: 8px solid $primary-color;
   border-radius: 50%;
   width: 60px;
   height: 60px;
   animation: spin 1s linear infinite;
+  outline: none !important;
 
   @media (prefers-color-scheme: dark) {
     border: 8px solid $border-color-dark;
     border-top: 8px solid $primary-color;
   }
+}
+
+.spinner-accessibility-text {
+  visibility: hidden;
 }
 
 @keyframes spin {

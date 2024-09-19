@@ -7,6 +7,7 @@ import { Spinner } from "../../components/Spinner";
 import { H1 } from "../../components/Typography";
 import { H2 } from "../../components/Typography";
 import { useCareerGame } from "../../hooks/useCareerGame";
+import { useFocusMainOnLoadComplete } from "../../hooks/useFocusMainOnLoadComplete";
 import { IAppContext } from "../../models/IAppContext";
 import { AppContext } from "../../context/AppContext";
 import { usePageTracking } from "../../hooks/usePageTracking";
@@ -14,8 +15,8 @@ import { GameProgress } from "../../components/GameProgress";
 
 const cleanOption = (option: string): string => {
   let cleaned = option.trim();
-  cleaned = cleaned.replace(/[-•●○•—]/g, '');
-  cleaned = cleaned.replace(/^\d+\.?\s?|^\w+:?\s?/i, '');
+  cleaned = cleaned.replace(/[-•●○•—]/g, "");
+  cleaned = cleaned.replace(/^\d+\.?\s?|^\w+:?\s?/i, "");
   return cleaned.trim();
 };
 
@@ -38,6 +39,8 @@ export function GameScreen(): React.ReactElement {
       navigate("/");
     }
   }, [gameId, navigate, isLoading]);
+
+  useFocusMainOnLoadComplete(isLoading);
 
   const handleOptionSelected = async (option: string) => {
     const optionIndex = round.options.indexOf(option);
@@ -91,20 +94,24 @@ export function GameScreen(): React.ReactElement {
       </ButtonBar>
 
       <div className="game-screen-margin-top">
-        <div>
-          <H2>Outcome</H2>
-          <p>{round.outcome}</p>
-        </div>
+        {round?.outcome && (
+          <div>
+            <H2>Outcome</H2>
+            <p>{round.outcome}</p>
+          </div>
+        )}
 
-        <div className="game-screen-content-margin">
-          <H2>Scenario</H2>
-          <p>{round.scenario}</p>
-        </div>
+        {round?.scenario && (
+          <div className="game-screen-content-margin">
+            <H2>Scenario</H2>
+            <p>{round.scenario}</p>
+          </div>
+        )}
 
         <div className="game-screen-content-margin">
           <H2>Options</H2>
           <ButtonBar>
-            {round.options.map((option, index) => (
+            {(round?.options ?? []).map((option, index) => (
               <PrimaryButton
                 key={index}
                 onClick={() => handleOptionSelected(option)}
