@@ -35,34 +35,33 @@ class CareerGame:
             self.game_prompts["userResponsePrompt"].format(career_choice),
         )
 
-        # self.logger.debug("message history: {}".format(self.message_history))
-
-        return self.__process_game__(conversation_id)
+        return self.__process_game__(conversation_id, response_model=Rounds)
 
     def continue_game(self, conversation_id, user_choice):
-        # self.logger.debug(
-        #     "Continuing game with user choice: {}".format(user_choice))
+
         self.message_history.append_user_message(
             conversation_id, self.game_prompts["userResponsePrompt"].format(user_choice)
         )
 
-        return self.__process_game__(conversation_id)
+        return self.__process_game__(
+            conversation_id=conversation_id, response_model=Rounds
+        )
 
     def complete_game(self, conversation_id, user_choice):
         self.message_history.append_user_message(
             conversation_id, self.game_prompts["postGamePrompt"].format(user_choice)
         )
 
-        return self.__process_game__(conversation_id)
+        return self.__process_game__(conversation_id, response_model=Final_page)
 
-    def __process_game__(self, conversation_id):
+    def __process_game__(self, conversation_id, response_model):
         messages = self.message_history.get_messages(conversation_id)
         response = None
 
         while response is None:
             try:
                 open_ai_response = self.open_ai.make_request(
-                    messages, response_model=Rounds, retries=1
+                    messages, response_model=response_model, retries=1
                 )
                 print("open_ai_response: ", open_ai_response)
                 if open_ai_response is None:
@@ -71,7 +70,7 @@ class CareerGame:
                 response = json.loads(open_ai_response.model_dump_json())
                 print(f"response: {response}")
             except Exception as e:
-                # Can we give it a max retries?
+                # TODO: Can we give it a max retries?
 
                 self.telemetry.debug(
                     "RetryingOpenAIChat",
@@ -122,3 +121,8 @@ class ValidCareerChoice(BaseModel):
     isValid: bool = Field(
         description="Whether the career choice is valid or not. NSFW content is not valid."
     )
+
+
+class Final_page(BaseModel):
+    final_recap: str = Field("A brief summary of the career game just played")
+    lessons_learned: list[str] = Field("All the lessons learned from the career game")
