@@ -49,7 +49,7 @@ export function StartScreen(): React.ReactElement {
   return (
     <div className="start-screen-center">
       <img
-        src="CC_Logo.png"
+        src="/CC_Logo.png"
         alt="Career Craft Logo"
         className="careercraft-logo-start"
       />
