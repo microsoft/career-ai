@@ -93,12 +93,12 @@ export function GameScreen(): React.ReactElement {
       </ButtonBar>
 
       <div className="game-screen-margin-top">
-        <div className="game-screen-content-margin">
+        <div>
           <H2>Outcome</H2>
           <p>{round.outcome}</p>
         </div>
 
-        <div>
+        <div className="game-screen-content-margin">
           <H2>Scenario</H2>
           <p>{round.scenario}</p>
         </div>
@@ -107,19 +107,19 @@ export function GameScreen(): React.ReactElement {
           <H2>Options</H2>
           <ButtonBar>
             {round.options.map((option, index) => (
-                <PrimaryButton
-                    key={index}
-                    onClick={() => handleOptionSelected(option)}
-                    title={`Select ${option}`}
-                    label={option}
-                    disabled={isRoundCompleted}
-                />
+              <PrimaryButton
+                key={index}
+                onClick={() => handleOptionSelected(option)}
+                title={`Select ${option}`}
+                label={option}
+                disabled={isRoundCompleted}
+              />
             ))}
           </ButtonBar>
         </div>
       </div>
 
-      <Spinner show={isLoading}/>
+      <Spinner show={isLoading} />
     </div>
   );
 }

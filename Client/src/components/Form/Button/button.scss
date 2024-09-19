@@ -1,7 +1,7 @@
 @import "../../../variables.scss";
 
 @mixin base-button-style {
-  display: block;
+  display: inline-block;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.5rem;
@@ -19,6 +19,8 @@
   background-color: $primary-color;
   border: 2px solid $primary-color;
   color: white;
+  display: block;
+  justify-content: space-between;
 }
 
 .default-button {

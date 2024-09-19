@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Confetti from 'react-confetti';
+import "./Confetti.scss";
 
 interface ConfettiProps {
     width: number;
@@ -9,21 +10,43 @@ interface ConfettiProps {
 
 export const ConfettiComponent: React.FC<ConfettiProps> = ({ width, height, run }) => {
     const [confettiRun, setConfettiRun] = useState(false);
+    const [confettiOpacity, setConfettiOpacity] = useState(1);
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         if (run) {
             setConfettiRun(true);
-            const timer = setTimeout(() => setConfettiRun(false), 5000); // Run confetti for 5 seconds
-            return () => clearTimeout(timer);
+            setConfettiOpacity(1); // Reset opacity to 1 when confetti starts
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+            timeoutRef.current = setTimeout(() => {
+                setConfettiOpacity(0); // Start fading out
+                setTimeout(() => {
+                    setConfettiRun(false);
+                }, 5000); // Wait for the fade to complete before setting confettiRun to false
+            }, 10000); // 3 seconds before starting to fade
         } else {
             setConfettiRun(false);
+            setConfettiOpacity(0); // Ensure confetti is invisible when run is false
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
         }
+
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
     }, [run]);
 
     return confettiRun ? (
-        <Confetti
-            width={width}
-            height={height}
-        />
+        <div className="confetti-fade" style={{ opacity: confettiOpacity }}>
+            <Confetti
+                width={width}
+                height={height}
+            />
+        </div>
     ) : null;
 };
