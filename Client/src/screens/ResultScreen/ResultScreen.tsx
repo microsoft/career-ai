@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { H1 } from "../../components/Typography";
+import { H2 } from "../../components/Typography";
 import { AppContext } from "../../context/AppContext";
 import { usePageTracking } from "../../hooks/usePageTracking";
 import { IAppContext } from "../../models/IAppContext";
 import { ConfettiComponent } from "../../components/Confetti/Confetti";
+import { ButtonBar } from "../../components/Form/Button/ButtonBar";
+import { PrimaryButton } from "../../components/Form/Button";
 
 export function ResultScreen(): React.ReactElement {
   usePageTracking("ResultScreen");
@@ -34,15 +37,37 @@ export function ResultScreen(): React.ReactElement {
   }, []);
 
   return (
-    <div>
+    <div className="start-screen-center">
       <div className="start-screen-center">
         <img
-          src="AwardRibbon.png"
+          src="/AwardRibbon.png"
           alt="Award Ribbon"
           className="careercraft-award-logo"
         />
         <H1>Great work, {userName}!</H1>
-        {finalMessage}
+        <H2>{finalMessage}</H2>
+        <button
+          onClick={() => {
+            const link = document.createElement('a');
+            link.href = '/career_certificate_certificate.png';
+            link.download = 'career_certificate_certificate.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }}
+          className="download-button"
+        >
+          Download Certificate
+        </button>
+        <ButtonBar>
+          <PrimaryButton
+            onClick={() => {
+              window.location.href = "/";
+            }}
+            title="Start game"
+            label="Explore another career!"
+          />
+        </ButtonBar>
       </div>
 
       {showConfetti && (
@@ -57,3 +82,4 @@ export function ResultScreen(): React.ReactElement {
     </div>
   );
 }
+
