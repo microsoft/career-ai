@@ -70,7 +70,7 @@ class CareerGame:
                 response = json.loads(open_ai_response.model_dump_json())
                 print(f"response: {response}")
             except Exception as e:
-                # Can we give it a max retries?
+                # TODO: Can we give it a max retries?
 
                 self.telemetry.debug(
                     "RetryingOpenAIChat",
