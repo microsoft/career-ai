@@ -14,7 +14,7 @@ export function Layout(props: LayoutProps): React.ReactElement {
   return (
     <>
       <SkipToMain />
-      <div className="header-container">
+      <div>
         <Header />
       </div>
       <div className="content-container">

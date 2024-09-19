@@ -74,25 +74,23 @@ export function GameScreen(): React.ReactElement {
       <H1>Round {selectedRound + 1}</H1>
 
       <GameProgress />
-      <div className="round-selection-buttons">
-        <ButtonBar>
-          {selectedRound !== 0 && (
-            <DefaultButton
-              onClick={handlePreviousRoundButtonClicked}
-              title="Go to previous round"
-              label="Previous round"
-            />
-          )}
+      <ButtonBar>
+        {selectedRound !== 0 && (
+          <DefaultButton
+            onClick={handlePreviousRoundButtonClicked}
+            title="Go to previous round"
+            label="Previous round"
+          />
+        )}
 
-          {isRoundCompleted && (
-            <DefaultButton
-              onClick={handleNextRoundButtonClicked}
-              title="Go to next round"
-              label="Next round"
-            />
-          )}
-        </ButtonBar>
-      </div>
+        {isRoundCompleted && (
+          <DefaultButton
+            onClick={handleNextRoundButtonClicked}
+            title="Go to next round"
+            label="Next round"
+          />
+        )}
+      </ButtonBar>
 
       <div className="game-screen-margin-top">
         <div>
@@ -106,29 +104,22 @@ export function GameScreen(): React.ReactElement {
         </div>
 
         <div className="game-screen-content-margin">
-          <H2>Outcome</H2>
-          <p>{round.outcome}</p>
-        </div>
-
-        <div className="game-screen-content-margin">
           <H2>Options</H2>
-          <div className="options-selection-buttons">
-            <ButtonBar>
-              {round.options.map((option, index) => (
-                <PrimaryButton
-                  key={index}
-                  onClick={() => handleOptionSelected(option)}
-                  title={`Select ${option}`}
-                  label={option}
-                  disabled={isRoundCompleted}
-                />
-              ))}
-            </ButtonBar>
-          </div>
+          <ButtonBar>
+            {round.options.map((option, index) => (
+              <PrimaryButton
+                key={index}
+                onClick={() => handleOptionSelected(option)}
+                title={`Select ${option}`}
+                label={option}
+                disabled={isRoundCompleted}
+              />
+            ))}
+          </ButtonBar>
         </div>
       </div>
 
-      <Spinner show={isLoading}/>
+      <Spinner show={isLoading} />
     </div>
   );
 }

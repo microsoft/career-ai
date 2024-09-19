@@ -3,13 +3,15 @@ import { H1 } from "../../components/Typography";
 import { AppContext } from "../../context/AppContext";
 import { usePageTracking } from "../../hooks/usePageTracking";
 import { IAppContext } from "../../models/IAppContext";
-import Confetti from 'react-confetti';
+import { ConfettiComponent } from "../../components/Confetti/Confetti";
 
 export function ResultScreen(): React.ReactElement {
   usePageTracking("ResultScreen");
   const { finalMessage, userName } = React.useContext<IAppContext>(AppContext);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [showConfetti, setShowConfetti] = useState(true);
+  const [confettiOpacity, setConfettiOpacity] = useState(1);
 
   useEffect(() => {
     const handleResize = () => {
@@ -19,17 +21,39 @@ export function ResultScreen(): React.ReactElement {
 
     window.addEventListener('resize', handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
+    // Set timer to start fading confetti after 6 seconds
+    const fadeTimer = setTimeout(() => {
+      setShowConfetti(false);
+      setConfettiOpacity(0); // Start fading out
+    }, 15000);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(fadeTimer);
+    };
   }, []);
 
   return (
     <div>
-      <H1>Great work, {userName}!</H1>
-      {finalMessage}
-      <Confetti
-        width={windowWidth}
-        height={windowHeight}
-      />
+      <div className="start-screen-center">
+        <img
+          src="AwardRibbon.png"
+          alt="Award Ribbon"
+          className="careercraft-logo-start"
+        />
+        <H1>Great work, {userName}!</H1>
+        {finalMessage}
+      </div>
+
+      {showConfetti && (
+        <div style={{ opacity: confettiOpacity }} className="confetti-fade">
+          <ConfettiComponent
+            width={windowWidth}
+            height={windowHeight}
+            run={showConfetti}
+          />
+        </div>
+      )}
     </div>
   );
 }
