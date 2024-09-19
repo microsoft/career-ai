@@ -6,7 +6,7 @@ export function useFocusMainOnLoadComplete(loading: boolean) {
 
   React.useEffect(() => {
     if (!loading && !!prevLoadingValue) {
-      document.querySelector("h1")?.focus();
+      document.getElementById("h1")?.focus();
     }
   }, [loading, prevLoadingValue]);
 }
