@@ -8,6 +8,7 @@ export type GameResponse = {
 export type GameResultResponse = {
   conversationId: string;
   round: {
-    outcome: string;
-  }
-}
+    summary: string;
+    lessons: string[];
+  };
+};

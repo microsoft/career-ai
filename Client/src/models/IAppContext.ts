@@ -5,8 +5,11 @@ export interface IAppContext {
   userName: string;
   setUserName: React.Dispatch<React.SetStateAction<string>>;
 
-  finalMessage: string;
-  setFinalMessage: React.Dispatch<React.SetStateAction<string>>;
+  summary: string;
+  setSummary: React.Dispatch<React.SetStateAction<string>>;
+
+  lessons: string[];
+  setLessons: React.Dispatch<React.SetStateAction<string[]>>;
 
   gameId: string | null;
 
