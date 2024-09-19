@@ -20,7 +20,7 @@ class Telemetry:
         self.connection_string = connection_string
         self.app_name = app_name
         self.logging_level = logging_level
-        # For compaitibility with the rule engine package
+        # For compatibility with the rule engine package
         self.loggerName = app_name
 
         if (custom_props):
