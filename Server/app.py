@@ -30,7 +30,7 @@ def build_game(app, telemetry):
         key=app.config["azureOpenAIKey"],
         openai_endpoint="https://careercraft-azureopenai.openai.azure.com",
         model="gpt-4o",
-        max_tokens=500,
+        max_tokens=200,
         stream=False,
         telemetry=telemetry,
     )
