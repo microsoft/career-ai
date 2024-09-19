@@ -17,8 +17,7 @@ export function Spinner(props: SpinnerProps): React.ReactElement {
 
   return (
     <div className="spinner-full-screen-root">
-      <div className="spinner-root" ref={ref} tabIndex={-1}>
-        <div className="spinner-accessibility-text">Loading...</div>
+      <div className="spinner-root" ref={ref} tabIndex={-1} aria-label="Loading...">
       </div>
     </div>
   );
