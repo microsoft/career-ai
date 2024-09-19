@@ -1,10 +1,11 @@
 flask
 requests
 flask-cors
-openai==0.28
+openai==1.46.0
 speechRecognition
 python-dotenv
 opencensus-ext-logging
 opencensus-ext-azure
 azure-identity
 azure-keyvault-secrets
+instructor
