@@ -33,7 +33,7 @@ export function AboutScreen(): React.ReactElement {
         <H2>The Team</H2>
         <ul className="team-list">
           <li className="team-member">
-            <strong>Augustus Willman</strong> - <span className="team-description">Team Leader. Augustus is an over-all badass with a natural skill to charm people, which has been key to the conception of this team. Aside from this he is an awesome musician</span>
+            <strong>Augustus Willman</strong> - <span className="team-description">Team Leader. Augustus is an over-all badass with a natural skill to charm people, which has been key to the conception of this project. Aside from this he is an awesome musician</span>
           </li>
           <li className="team-member">
             <strong>Wong Song</strong> - <span className="team-description">UX/UI Designer. Wong specializes in designing intuitive interfaces that focus on user experience and accessibility.</span>
