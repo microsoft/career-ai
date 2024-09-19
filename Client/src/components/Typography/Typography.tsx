@@ -6,7 +6,7 @@ type TypographyProps = {};
 export function H1(
   props: PropsWithChildren<TypographyProps>
 ): React.ReactElement {
-  return <h1 className="h1">{props.children}</h1>;
+  return <h1 className="h1" id="h1" tabIndex={-1}>{props.children}</h1>;
 }
 
 export function H2(
