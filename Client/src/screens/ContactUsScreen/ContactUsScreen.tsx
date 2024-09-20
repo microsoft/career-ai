@@ -1,22 +1,17 @@
 import React from "react";
-import { usePrompts } from "../../hooks/usePrompts";
 import { H1 } from "../../components/Typography";
+import { H2 } from "../../components/Typography";
 import { usePageTracking } from "../../hooks/usePageTracking";
-import "../../Pages.css"; // Importing a new CSS file for custom styling
 
 export function ContactUsScreen(): React.ReactElement {
   usePageTracking("ContactUsScreen");
-    usePrompts();
 
   return (
-    <div className="contact-container">
+    <div>
       <H1>Contact Us</H1>
-
-      <div className="contact-info">
-        <p>Email: <a href="mailto:awillman@microsoft.com">awillman@microsoft.com</a></p>
+      <div className="game-screen-margin-top">
+        <H2>Email: <a href="mailto:awillman@microsoft.com">awillman@microsoft.com</a></H2>
       </div>
-
     </div>
   );
 }
-
