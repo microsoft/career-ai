@@ -60,7 +60,9 @@ export function StartScreen(): React.ReactElement {
         label="What should we call you?"
         name="userName"
         onChange={(name: string, value: string) => {
-          setUserName(value);
+          if (value.length <= 40) {
+            setUserName(value);
+          }
         }}
         value={userName}
         placeholder="Enter your name"
