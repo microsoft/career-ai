@@ -14,3 +14,15 @@ export function H2(
 ): React.ReactElement {
   return <h2 className="h2">{props.children}</h2>;
 }
+
+export function UL(
+  props: PropsWithChildren<TypographyProps>
+): React.ReactElement {
+  return <ul className="ul">{props.children}</ul>;
+}
+
+export function LI(
+  props: PropsWithChildren<TypographyProps>
+): React.ReactElement {
+  return <li className="li">{props.children}</li>;
+}

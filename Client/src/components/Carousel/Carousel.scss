@@ -1,0 +1,54 @@
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+  }
+  
+  .carousel-container {
+    flex-grow: 1;
+    overflow: hidden;
+    position: relative;
+    max-width: 600px; 
+    margin: 0 50px;   
+  }
+  
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  button {
+    background-color: #007BFF;
+    border: 2px solid #007BFF;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  
+    &:hover {
+      background-color: #0056b3;
+      color: white;
+    }
+  
+   
+    &.prev, &.next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background-color: rgba(0, 123, 255, 0.7);
+    }
+  
+    &.prev {
+      left: -50px;
+    }
+  
+    &.next {
+      right: -50px; 
+    }
+  }
+  
