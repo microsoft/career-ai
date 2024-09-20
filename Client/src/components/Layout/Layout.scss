@@ -3,6 +3,7 @@
   flex-direction: row;
   padding-top: 90px;
   height: 100%;
+  
 }
 
 .main-container {
@@ -11,6 +12,7 @@
   margin-right: auto;
   display: flex;
   flex-direction: column;
+  line-height: 1.5em;
 }
 
 .main {
@@ -54,4 +56,9 @@
 .team-member {
   padding: 8px 0;
   border-bottom: 1px solid #e0e0e0;
+}
+
+.contact-link {
+  // color: #333;
+  text-decoration:underline;
 }

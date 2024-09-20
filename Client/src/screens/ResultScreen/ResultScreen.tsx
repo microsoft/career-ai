@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { H1 } from "../../components/Typography";
 import { H2 } from "../../components/Typography";
-
+import { UL } from "../../components/Typography";
+import { LI } from "../../components/Typography";
 import { AppContext } from "../../context/AppContext";
 import { usePageTracking } from "../../hooks/usePageTracking";
 import { IAppContext } from "../../models/IAppContext";
@@ -48,11 +49,15 @@ export function ResultScreen(): React.ReactElement {
         />
         <H1>Great work, {userName}!</H1>
         <H2>{summary}</H2>
-        <ul className="game-screen-margin-top">
-          {lessons.map((lesson, index) => (
-            <H2><li key={index}>{lesson}</li></H2>
-          ))}
-        </ul>
+        <div className="game-screen-margin-top">
+          <UL>
+            <H2>Here is a recap of lessons learned</H2>
+            {lessons.map((lesson, index) => (
+              <LI key={index}>{lesson}</LI>
+            ))}
+          </UL>
+        </div>
+
         <button
           onClick={() => {
             const link = document.createElement('a');
