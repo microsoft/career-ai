@@ -39,7 +39,7 @@ export function ResultScreen(): React.ReactElement {
   }, []);
 
   return (
-    <div className="start-screen-center">
+    <div>
       <div className="start-screen-center">
         <img
           src="/AwardRibbon.png"
@@ -48,9 +48,9 @@ export function ResultScreen(): React.ReactElement {
         />
         <H1>Great work, {userName}!</H1>
         <H2>{summary}</H2>
-        <ul>
+        <ul className="game-screen-margin-top">
           {lessons.map((lesson, index) => (
-            <li key={index}>{lesson}</li>
+            <H2><li key={index}>{lesson}</li></H2>
           ))}
         </ul>
         <button
@@ -62,7 +62,7 @@ export function ResultScreen(): React.ReactElement {
             link.click();
             document.body.removeChild(link);
           }}
-          className="download-button"
+          className="game-screen-margin-top"
         >
           Download Certificate
         </button>
