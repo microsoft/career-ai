@@ -65,11 +65,11 @@ export function Header(): React.ReactElement {
               Contact Us
             </Link>
           </li>
-          <li className="nav-list-item">
+          {/* <li className="nav-list-item">
             <Link to="/admin" title="Go to CareerCraft admin page">
               Admin
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </header>

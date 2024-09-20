@@ -98,7 +98,8 @@ class Routes:
                 )
 
             try:
-                response = career_game.continue_game(conversation_id, user_response)
+                response = career_game.continue_game(
+                    conversation_id, user_response)
 
                 return jsonify(response), 200
             except Exception as e:
@@ -126,7 +127,8 @@ class Routes:
                 )
 
             try:
-                response = career_game.complete_game(conversation_id, user_response)
+                response = career_game.complete_game(
+                    conversation_id, user_response)
 
                 return jsonify(response), 200
             except Exception as e:
@@ -163,42 +165,42 @@ class Routes:
                     500,
                 )
 
-        @app.route("/api/career-game/admin/prompts", methods=["GET"])
-        def get_career_game_prompts():
-            return jsonify(career_game.get_current_prompts()), 200
+        # @app.route("/api/career-game/admin/prompts", methods=["GET"])
+        # def get_career_game_prompts():
+        #     return jsonify(career_game.get_current_prompts()), 200
 
-        @app.route("/api/career-game/admin/prompts", methods=["POST"])
-        def update_career_game_prompts():
-            request_body = request.json
-            preGamePrompt = request_body.get("preGamePrompt", "")
-            userResponsePrompt = request_body.get("userResponsePrompt", "")
-            postGamePrompt = request_body.get("postGamePrompt", "")
+        # @app.route("/api/career-game/admin/prompts", methods=["POST"])
+        # def update_career_game_prompts():
+        #     request_body = request.json
+        #     preGamePrompt = request_body.get("preGamePrompt", "")
+        #     userResponsePrompt = request_body.get("userResponsePrompt", "")
+        #     postGamePrompt = request_body.get("postGamePrompt", "")
 
-            if preGamePrompt == "" or userResponsePrompt == "" or postGamePrompt == "":
-                return (
-                    jsonify(
-                        {"error": "BadRequest", "message": "All prompts are required"}
-                    ),
-                    400,
-                )
+        #     if preGamePrompt == "" or userResponsePrompt == "" or postGamePrompt == "":
+        #         return (
+        #             jsonify(
+        #                 {"error": "BadRequest", "message": "All prompts are required"}
+        #             ),
+        #             400,
+        #         )
 
-            try:
-                Config.update_configs(app, "preGamePrompt", preGamePrompt)
-                Config.update_configs(app, "userResponsePrompt", userResponsePrompt)
-                Config.update_configs(app, "postGamePrompt", postGamePrompt)
+        #     try:
+        #         Config.update_configs(app, "preGamePrompt", preGamePrompt)
+        #         Config.update_configs(app, "userResponsePrompt", userResponsePrompt)
+        #         Config.update_configs(app, "postGamePrompt", postGamePrompt)
 
-                game_prompts = {
-                    "preGamePrompt": app.config["preGamePrompt"],
-                    "userResponsePrompt": app.config["userResponsePrompt"],
-                    "postGamePrompt": app.config["postGamePrompt"],
-                }
-                career_game.update_prompts(game_prompts)
-            except:
-                return (
-                    jsonify(
-                        {"error": "GameError", "message": "Game could not be reloaded"}
-                    ),
-                    500,
-                )
+        #         game_prompts = {
+        #             "preGamePrompt": app.config["preGamePrompt"],
+        #             "userResponsePrompt": app.config["userResponsePrompt"],
+        #             "postGamePrompt": app.config["postGamePrompt"],
+        #         }
+        #         career_game.update_prompts(game_prompts)
+        #     except:
+        #         return (
+        #             jsonify(
+        #                 {"error": "GameError", "message": "Game could not be reloaded"}
+        #             ),
+        #             500,
+        #         )
 
-            return "", 204
+        #     return "", 204
