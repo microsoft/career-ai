@@ -46,6 +46,11 @@ export function Header(): React.ReactElement {
             </Link>
           </li>
           <li className="nav-list-item">
+            <Link to="/howToPlay" title="How to play">
+              How to play
+            </Link>
+          </li>
+          <li className="nav-list-item">
             <Link to="/about" title="Go to CareerCraft About Us page">
               About Us
             </Link>
