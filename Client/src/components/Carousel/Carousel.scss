@@ -10,8 +10,8 @@
     flex-grow: 1;
     overflow: hidden;
     position: relative;
-    max-width: 600px; /* Optional: Adjust the size of the carousel */
-    margin: 0 50px;   /* Space between the carousel and buttons */
+    max-width: 600px; 
+    margin: 0 50px;   
   }
   
   .carousel-track {
@@ -34,21 +34,21 @@
       color: white;
     }
   
-    /* Style for the prev/next buttons */
+   
     &.prev, &.next {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       z-index: 10;
-      background-color: rgba(0, 123, 255, 0.7); /* Semi-transparent */
+      background-color: rgba(0, 123, 255, 0.7);
     }
   
     &.prev {
-      left: -50px; /* Push the prev button to the left of the carousel */
+      left: -50px;
     }
   
     &.next {
-      right: -50px; /* Push the next button to the right of the carousel */
+      right: -50px; 
     }
   }
   

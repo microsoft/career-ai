@@ -62,7 +62,7 @@ export const Carousel: React.FC<CarouselProps> = ({ images, interval = 5000 }) =
             }
             document.removeEventListener('keydown', handleKeyDown);
         };
-    }, [prevSlide, nextSlide, interval]); // Include interval, but remove currentIndex
+    }, [prevSlide, nextSlide, interval]);
 
     useEffect(() => {
         if (!intervalRef.current) {
