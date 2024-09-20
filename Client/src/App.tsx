@@ -9,6 +9,7 @@ import { AdminScreen } from "./screens/AdminScreen/AdminScreen";
 import { AboutScreen } from "./screens/AboutScreen/AboutScreen";
 import { PartnersScreen } from "./screens/PartnersScreen/PartnersScreen";
 import { ContactUsScreen } from "./screens/ContactUsScreen/ContactUsScreen";
+import { HowToPlayScreen } from "./screens/HowToPlayScreen";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<StartScreen />} />
         <Route path="/career-game" element={<GameScreen />} />
+        <Route path="/howToPlay" element={<HowToPlayScreen />} />
         <Route
           path="/career-game/results"
           element={<ResultScreen />}
