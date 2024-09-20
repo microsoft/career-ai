@@ -37,13 +37,17 @@ class OpenAI:
     ):
         for run in range(retries):
             try:
-                response = self.client.chat.completions.create(
-                    model=self.model,
-                    messages=messages,
-                    max_tokens=self.max_tokens,
-                    stream=self.stream,
-                    response_model=response_model,
+                response, completion = (
+                    self.client.chat.completions.create_with_completion(
+                        model=self.model,
+                        messages=messages,
+                        max_tokens=self.max_tokens,
+                        stream=self.stream,
+                        response_model=response_model,
+                    )
                 )
+
+                print("Tokens used:", completion.usage)
                 return response
             except Exception as e:
                 error = str(e)
