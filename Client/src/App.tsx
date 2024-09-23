@@ -9,6 +9,7 @@ import { AboutScreen } from "./screens/AboutScreen/AboutScreen";
 import { PartnersScreen } from "./screens/PartnersScreen/PartnersScreen";
 import { ContactUsScreen } from "./screens/ContactUsScreen/ContactUsScreen";
 import { HowToPlayScreen } from "./screens/HowToPlayScreen";
+import { VoteScreen } from "./screens/VoteScreen/VoteScreen";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/about" element={<AboutScreen />} />
         <Route path="/partners" element={<PartnersScreen />} />
         <Route path="/contact" element={<ContactUsScreen />} />
+        <Route path="/vote" element={<VoteScreen />} />
       </Routes>
     </Layout>
   );

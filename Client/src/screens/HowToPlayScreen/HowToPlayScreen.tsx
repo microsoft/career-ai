@@ -16,7 +16,7 @@ export function HowToPlayScreen(): React.ReactElement {
                     This game helps you explore career options and
                     gain valuable skillsets along the way. To get
                     started, please enter your first name, a career
-                    that interests you how many rounds you want to
+                    that interests you and how many rounds you want to
                     play. Each round will consist of a Scenario and
                     3 Options for you to choose from that will lead
                     to the next Scenario. After all the rounds finish,
