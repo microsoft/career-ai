@@ -22,7 +22,7 @@ export function PartnersScreen(): React.ReactElement {
           </div>
           <div className="game-screen-margin-top">
             <H2>Learn More</H2>
-            <a href="https://www.nwworks.com/"><img src="/nw-works-logo.png" alt="NW Works Logo" className="nw-works-logo" /></a>
+            <a href="https://www.nwworks.com/" target="_blank" rel="noreferrer"><img src="/nw-works-logo.png" alt="NW Works Logo" className="nw-works-logo" /></a>
           </div>
       </div>
     </div>

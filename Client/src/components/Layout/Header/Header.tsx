@@ -65,6 +65,11 @@ export function Header(): React.ReactElement {
               Contact Us
             </Link>
           </li>
+          <li className="nav-list-item">
+            <Link to="/vote" title="Go to CareerCraft Vote page">
+              Vote for us
+            </Link>
+          </li>
           {/* <li className="nav-list-item">
             <Link to="/admin" title="Go to CareerCraft admin page">
               Admin
