@@ -26,7 +26,7 @@ export function VoteScreen(): React.ReactElement {
                 <div className="game-screen-margin-top">
                 </div>
                 <div className="game-screen-margin-top">
-                    <a href="https://hackbox.microsoft.com/hackathons/hackathon2024/project/61190" target="_blank"><img src="/Click_to_vote_button.png" alt="CareerCraft Vote Button" className="vote-logo" /></a>
+                    <a href="https://hackbox.microsoft.com/hackathons/hackathon2024/project/61190" target="_blank" rel="noreferrer"><img src="/Click_to_vote_button.png" alt="CareerCraft Vote Button" className="vote-logo" /></a>
                 </div>
             </div>
         </div>
