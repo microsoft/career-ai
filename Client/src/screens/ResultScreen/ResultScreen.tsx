@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { H1 } from "../../components/Typography";
 import { H2 } from "../../components/Typography";
 import { UL } from "../../components/Typography";
@@ -12,12 +12,14 @@ import { PrimaryButton } from "../../components/Form/Button";
 
 export function ResultScreen(): React.ReactElement {
   usePageTracking("ResultScreen");
-  const { summary, lessons, userName } =
+  const { summary, lessons, userName, careerImageURL } =
     React.useContext<IAppContext>(AppContext);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [showConfetti, setShowConfetti] = useState(true);
   const [confettiOpacity, setConfettiOpacity] = useState(1);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const careerImageUrl = careerImageURL ?? undefined;
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,6 +41,39 @@ export function ResultScreen(): React.ReactElement {
     };
   }, []);
 
+  const handleDownloadCertificate = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    const certificateImg = new Image();
+    certificateImg.crossOrigin = "anonymous";
+    certificateImg.src = "/career_craft_certificate_with_image.png";
+    const careerImg = new Image();
+    careerImg.crossOrigin = "anonymous";
+    certificateImg.onload = () => {
+      ctx.drawImage(certificateImg, 0, 0);
+      if (careerImageURL) {
+        careerImg.src = careerImageURL;
+      }
+      careerImg.onload = () => {
+        ctx.drawImage(careerImg, 276, 225, 289, 165);
+
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "custom_certificate.png";
+        link.click();
+      };
+      careerImg.onerror = () => {
+        console.error("Failed to load career image");
+      };
+    };
+    certificateImg.onerror = () => {
+      console.error("Failed to load certificate image");
+    };
+  };
+
   return (
     <div>
       <div className="start-screen-center">
@@ -49,6 +84,11 @@ export function ResultScreen(): React.ReactElement {
         />
         <H1>Great work, {userName}!</H1>
         <H2>{summary}</H2>
+        <img
+          src={careerImageUrl}
+          alt="Career image"
+          className="career-image"
+        />
         <div className="game-screen-margin-top">
           <UL>
             <H2>Here is a recap of lessons learned</H2>
@@ -59,14 +99,7 @@ export function ResultScreen(): React.ReactElement {
         </div>
 
         <button
-          onClick={() => {
-            const link = document.createElement('a');
-            link.href = '/career_craft_certificate_with_logo.png';
-            link.download = 'career_craft_certificate_with_logo.png';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          }}
+          onClick={handleDownloadCertificate}
           className="game-screen-margin-top"
         >
           Download Certificate
@@ -91,6 +124,7 @@ export function ResultScreen(): React.ReactElement {
           />
         </div>
       )}
+      <canvas ref={canvasRef} width={842} height={595} style={{ display: "none" }}></canvas>
     </div>
   );
 }
