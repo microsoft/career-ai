@@ -29,4 +29,8 @@
   background-color: white;
   border: 2px solid $primary-color;
   color: $primary-color;
+  display: inline-block;
+  justify-content: space-between;
+  min-width: 200px;
+  text-align: center;
 }

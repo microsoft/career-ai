@@ -59,28 +59,30 @@ export function ResultScreen(): React.ReactElement {
 
         </div>
 
+        <div className="result-button-center">
+          <ButtonBar>
+            <DefaultButton
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = '/career_craft_certificate_with_logo.png';
+                link.download = 'career_craft_certificate_with_logo.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
+              title="Download Certificate"
+              label="Download Certificate"
+            />
+            <DefaultButton
+              onClick={() => {
+                window.location.href = "/";
+              }}
+              title="Start game"
+              label="Explore another career!"
+            />
+          </ButtonBar>
+        </div>
 
-        <ButtonBar>
-          <DefaultButton
-            onClick={() => {
-              const link = document.createElement('a');
-              link.href = '/career_craft_certificate_with_logo.png';
-              link.download = 'career_craft_certificate_with_logo.png';
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-            }}
-            title="Download Certificate"
-            label="Download Certificate"
-          />
-          <DefaultButton
-            onClick={() => {
-              window.location.href = "/";
-            }}
-            title="Start game"
-            label="Explore another career!"
-          />
-        </ButtonBar>
       </div>
 
       {showConfetti && (
