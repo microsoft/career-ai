@@ -11,6 +11,7 @@ class CareerGame:
         self.game_prompts = game_prompts
         self.message_history = message_history
         self.open_ai = open_ai
+        self.career_image = None
         self.telemetry = telemetry
         self.logger = logger
 
@@ -34,7 +35,7 @@ class CareerGame:
             conversation_id,
             self.game_prompts["userResponsePrompt"].format(career_choice),
         )
-
+        self.career_image = self.open_ai.make_dall_e_request(career_choice)
         return self.__process_game__(conversation_id, response_model=Rounds)
 
     def continue_game(self, conversation_id, user_choice):
@@ -82,7 +83,7 @@ class CareerGame:
             conversation_id, json.dumps(response)
         )
 
-        return {"conversationId": conversation_id, "round": response}
+        return {"conversationId": conversation_id, "round": response, "careerImageURL": self.career_image}
 
     def validate(self, user_choice):
         messages = [

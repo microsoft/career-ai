@@ -3,7 +3,6 @@
   flex-direction: row;
   padding-top: 90px;
   height: 100%;
-  
 }
 
 .main-container {
@@ -51,6 +50,17 @@
   height: auto;
   margin-bottom: 20px;
   margin-top: 50px;
+}
+
+.career-image {
+  display: flex;
+  max-width: 896px;
+  height: auto;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .team-member {

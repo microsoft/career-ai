@@ -1,5 +1,5 @@
 import time
-
+import traceback
 from flask import send_from_directory, request, jsonify
 from .config import Config
 
@@ -74,6 +74,8 @@ class Routes:
 
                 return jsonify(response), 200
             except Exception as e:
+                print(e)
+                traceback.print_exc()
                 return (
                     jsonify(
                         {"error": "GameError", "message": "Game could not be started"}
