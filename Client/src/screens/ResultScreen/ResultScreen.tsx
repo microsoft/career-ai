@@ -8,7 +8,7 @@ import { usePageTracking } from "../../hooks/usePageTracking";
 import { IAppContext } from "../../models/IAppContext";
 import { ConfettiComponent } from "../../components/Confetti/Confetti";
 import { ButtonBar } from "../../components/Form/Button/ButtonBar";
-import { PrimaryButton } from "../../components/Form/Button";
+import { DefaultButton } from "../../components/Form/Button/DefaultButton";
 
 export function ResultScreen(): React.ReactElement {
   usePageTracking("ResultScreen");
@@ -56,23 +56,24 @@ export function ResultScreen(): React.ReactElement {
               <LI key={index}>{lesson}</LI>
             ))}
           </UL>
+
         </div>
 
-        <button
-          onClick={() => {
-            const link = document.createElement('a');
-            link.href = '/career_craft_certificate_with_logo.png';
-            link.download = 'career_craft_certificate_with_logo.png';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          }}
-          className="game-screen-margin-top"
-        >
-          Download Certificate
-        </button>
+
         <ButtonBar>
-          <PrimaryButton
+          <DefaultButton
+            onClick={() => {
+              const link = document.createElement('a');
+              link.href = '/career_craft_certificate_with_logo.png';
+              link.download = 'career_craft_certificate_with_logo.png';
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }}
+            title="Download Certificate"
+            label="Download Certificate"
+          />
+          <DefaultButton
             onClick={() => {
               window.location.href = "/";
             }}
