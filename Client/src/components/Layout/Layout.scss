@@ -28,6 +28,16 @@
   height: 100%;
 }
 
+.result-button-center {
+  margin-left: 100px;
+  margin-right: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .game-screen-margin-top {
   margin-top: 50px;
 }
