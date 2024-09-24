@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { H1 } from "../../components/Typography";
 import { H2 } from "../../components/Typography";
 import { UL } from "../../components/Typography";

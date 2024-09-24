@@ -75,7 +75,7 @@ export function GameScreen(): React.ReactElement {
     <div className="game-screen-margin-top">
       <img
           src={careerImageUrl}
-          alt="Career image"
+          alt="Career"
           className="career-image"
         />
       <H1>Round {selectedRound + 1}</H1>
