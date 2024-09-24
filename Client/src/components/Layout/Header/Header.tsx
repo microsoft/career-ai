@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Header.scss";
 
 export function Header(): React.ReactElement {
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
+  const navRef = useRef<HTMLDivElement>(null);
 
   const handleMobileMenuButtonClicked = () => {
     setShowMobileMenu(!showMobileMenu);
   };
+  
+  const handleClickOutside = (event: MouseEvent) => {
+    if (navRef.current && !navRef.current.contains(event.target as Node)) {
+      setShowMobileMenu(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showMobileMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showMobileMenu]);
 
   const navContainerClassNames = ["nav-container"];
   if (showMobileMenu) {
