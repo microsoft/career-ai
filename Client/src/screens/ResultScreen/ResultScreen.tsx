@@ -86,7 +86,7 @@ export function ResultScreen(): React.ReactElement {
         <H2>{summary}</H2>
         <img
           src={careerImageUrl}
-          alt="Career image"
+          alt="Career"
           className="career-image"
         />
         <div className="game-screen-margin-top">
