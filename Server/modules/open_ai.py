@@ -64,6 +64,8 @@ class OpenAI:
             response = self.open_ai_client.images.generate(
                 model=self.image_model,
                 prompt=prompt,
+                size="1792x1024",
+                quality="hd",
                 n=1
             )
             return json.loads(response.model_dump_json())["data"][0]["url"]
