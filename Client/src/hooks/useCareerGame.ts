@@ -5,7 +5,7 @@ import { IAppContext } from "../models/IAppContext";
 import { Http } from "../services/Http";
 
 export function useCareerGame() {
-  const { addRound, setGameId, setSummary, setLessons } =
+  const { addRound, setGameId, setCareerImageURL, setSummary, setLessons } =
     React.useContext<IAppContext>(AppContext);
   const [isLoading, setLoading] = React.useState<boolean>(false);
 
@@ -24,6 +24,7 @@ export function useCareerGame() {
           throw new Error("InvalidCareerChoice");
 
         setGameId(response.data.conversationId);
+        setCareerImageURL(response.data.careerImageURL);
         addRound({
           ...response.data.round,
           optionSelected: null,

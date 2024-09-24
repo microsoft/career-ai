@@ -15,6 +15,10 @@ export interface IAppContext {
 
   setGameId(gameId: string | null): void;
 
+  careerImageURL: string | null;
+
+  setCareerImageURL(careerImageURL: string | null): void;
+
   selectedRound: number | 0;
 
   selectRound(selectedRound: number): void;

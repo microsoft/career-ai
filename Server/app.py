@@ -32,6 +32,7 @@ def build_game(app, telemetry):
         model="gpt-4o",
         max_tokens=200,
         stream=False,
+        image_model="dall-e-3",
         telemetry=telemetry,
     )
     game_prompts = {

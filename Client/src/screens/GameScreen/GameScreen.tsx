@@ -31,6 +31,7 @@ export function GameScreen(): React.ReactElement {
     completeRound,
     numberOfRounds,
     gameId,
+    careerImageURL
   } = React.useContext<IAppContext>(AppContext);
   const round = rounds[selectedRound];
 
@@ -69,9 +70,14 @@ export function GameScreen(): React.ReactElement {
   };
 
   const isRoundCompleted = round?.optionSelected !== null;
-
+  const careerImageUrl = careerImageURL ?? undefined;
   return (
     <div className="game-screen-margin-top">
+      <img
+          src={careerImageUrl}
+          alt="Career image"
+          className="career-image"
+        />
       <H1>Round {selectedRound + 1}</H1>
 
       <GameProgress />

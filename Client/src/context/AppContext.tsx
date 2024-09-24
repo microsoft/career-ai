@@ -15,6 +15,7 @@ export function AppContextProvider(
   const [gameRounds, setGameRounds] = React.useState<GameRound[]>([]);
   const [selectedRound, setSelectedRound] = React.useState<number>(0);
   const [gameId, setGameId] = React.useState<string | null>(null);
+  const [careerImageURL, setCareerImageURL] = React.useState<string | null>(null);
 
   const updateNumberOfRounds = React.useCallback((numberOfRounds: number) => {
     setNumberOfRounds(numberOfRounds);
@@ -49,6 +50,7 @@ export function AppContextProvider(
   const resetGame = React.useCallback(() => {
     setGameRounds([]);
     setGameId(null);
+    setCareerImageURL(null);
     selectRound(0);
   }, [selectRound]);
 
@@ -63,6 +65,8 @@ export function AppContextProvider(
         setUserName,
         gameId,
         setGameId,
+        careerImageURL,
+        setCareerImageURL,
         numberOfRounds,
         setNumberOfRounds: updateNumberOfRounds,
         rounds: gameRounds,
