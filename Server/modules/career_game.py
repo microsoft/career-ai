@@ -1,7 +1,9 @@
 import json
+from flask import Flask, jsonify
 
 from uuid import uuid4
 from time import time
+import threading
 
 from pydantic import BaseModel, Field
 
@@ -35,8 +37,23 @@ class CareerGame:
             conversation_id,
             self.game_prompts["userResponsePrompt"].format(career_choice),
         )
-        self.career_image = self.open_ai.make_dall_e_request(career_choice)
+        
+        # Start generating the image asynchronously
+        self.telemetry.track_event("StartImageGeneration", {"conversationId": conversation_id})
+        self.generate_career_image_async(career_choice, conversation_id)
+        
         return self.__process_game__(conversation_id, response_model=Rounds)
+
+    def generate_career_image_async(self, career_choice, conversation_id):
+        def generate_image():
+            try:
+                career_image = self.open_ai.make_dall_e_request(career_choice)
+                self.telemetry.track_event("ImageGenerated", {"conversationId": conversation_id})
+                self.message_history.append_system_message(conversation_id, {"careerImageURL": career_image})
+            except Exception as e:
+                self.logger.error(f"Failed to generate career image: {str(e)}")
+        
+        threading.Thread(target=generate_image).start()
 
     def continue_game(self, conversation_id, user_choice):
 
@@ -127,3 +144,17 @@ class ValidCareerChoice(BaseModel):
 class Final_page(BaseModel):
     summary: str = Field("A brief summary of the career game just played")
     lessons: list[str] = Field("All the lessons learned from the career game")
+
+
+app = Flask(__name__)
+
+@app.route('/api/career-game/image/<conversation_id>', methods=['GET'])
+def get_career_image(conversation_id):
+    try:
+        messages = message_history.get_messages(conversation_id)
+        for message in messages:
+            if "careerImageURL" in message:
+                return jsonify({"careerImageURL": message["careerImageURL"]})
+        return jsonify({"careerImageURL": None}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

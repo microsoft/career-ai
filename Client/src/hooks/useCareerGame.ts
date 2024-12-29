@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AppContext } from "../context/AppContext";
 import { GameResponse, GameResultResponse } from "../models/GameResponse";
 import { IAppContext } from "../models/IAppContext";
 import { Http } from "../services/Http";
 
 export function useCareerGame() {
-  const { addRound, setGameId, setCareerImageURL, setSummary, setLessons } =
+  const { addRound, setGameId, setCareerImageURL, setSummary, setLessons, gameId } =
     React.useContext<IAppContext>(AppContext);
   const [isLoading, setLoading] = React.useState<boolean>(false);
 
@@ -24,7 +24,7 @@ export function useCareerGame() {
           throw new Error("InvalidCareerChoice");
 
         setGameId(response.data.conversationId);
-        setCareerImageURL(response.data.careerImageURL);
+        setCareerImageURL("/career_image_placeholder.png"); // Set placeholder image
         addRound({
           ...response.data.round,
           optionSelected: null,
@@ -36,6 +36,25 @@ export function useCareerGame() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const fetchCareerImage = async () => {
+      if (gameId) {
+        try {
+          const response = await Http.getInstance().get<{ careerImageURL: string }>(
+            `/api/career-game/image/${gameId}`
+          );
+          if (response.ok && response.data) {
+            setCareerImageURL(response.data.careerImageURL);
+          }
+        } catch (error: any) {
+          console.error("Failed to fetch career image", error);
+        }
+      }
+    };
+
+    fetchCareerImage();
+  }, [gameId]);
 
   const continueGame = async (
     gameId: string,
